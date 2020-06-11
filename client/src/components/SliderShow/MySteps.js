@@ -2,20 +2,22 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Steps } from 'antd';
 import { Divider } from 'antd';
 import { Drawer, List, Avatar, Col, Row } from 'antd';
+import {ENDPOINT} from '../../config/'
 import io from 'socket.io-client';
 const { Step } = Steps;
 let socket;
-const ENDPOINT = 'http://10.22.17.90:5000/';
 socket = io(ENDPOINT);
+
 const demos = {
-	0: '<iframe width="100%" height="606" scrolling="auto" frameborder="no"  src="https://www.youtube.com/embed/yZvsqm4Jok8"></iframe>',
-	1: '<iframe width="100%" height="606" scrolling="no" scrolling="auto" frameborder="no" src="https://www.bing.com"></iframe>',
-	2: '<iframe width="100%" height="606" scrolling="no" scrolling="auto" frameborder="no" src="https://images.presentationgo.com/2016/02/7Stairs-Steps-Slide-Template.png"></iframe>',
-	3: '<iframe width="100%" height="606" frameborder="no"  src="https://www.youtube.com/embed/gLLl3VbNFXg?autoplay=1"></iframe>'
+	0: '<iframe  width="100%" height="606" scrolling="auto" frameborder="no"  src="https://www.youtube.com/embed/yZvsqm4Jok8"></iframe>',
+	1: '<iframe  width="100%" height="606" scrolling="yes" scrolling="auto" frameborder="no" src="https://zellwk.com/blog/async-await-express/"></iframe>',
+	2: '<iframe  width="100%" height="606" scrolling="auto" scrolling="auto" frameborder="no" src="https://images.presentationgo.com/2016/02/7Stairs-Steps-Slide-Template.png"></iframe>',
+	3: '<iframe width="100%" height="606" scrolling="auto" frameborder="no"  src="https://www.youtube.com/embed/gLLl3VbNFXg?autoplay=1"></iframe>'
 };
 
 function Iframe(props) {
 	return <div dangerouslySetInnerHTML={{ __html: props.iframe ? props.iframe : '' }} />;
+	// return <div dangerouslySetInnerHTML={{ __html: "props.iframe ? props.iframe : ''" }} />;
 }
 
 function MySteps() {

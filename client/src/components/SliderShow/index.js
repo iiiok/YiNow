@@ -8,7 +8,8 @@ import io from 'socket.io-client';
 import Ending from './Ending';
 import MySteps from './MySteps';
 import YoutubeVideo from './YoutubeVideo.js';
-
+import SayHi from '../SayHi/sayhi';
+import {ENDPOINT} from '../../config/'
 const { SubMenu } = Menu;
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -26,7 +27,7 @@ const settings = {
 	slidesToScroll: 1,
 	swipeToSlide: true
 };
-const ENDPOINT = 'http://10.22.17.90:5000/';
+
 socket = io(ENDPOINT);
 
 const text = `
@@ -79,7 +80,7 @@ function SliderParent() {
 					</Content>
 				</Layout>
 			</Content>
-			<Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
+			<Footer style={{ textAlign: 'center' }}>WwNow.com ©2020 Created by EPAM group.</Footer>
 		</Layout>
 	);
 }
@@ -129,6 +130,7 @@ function Slider({ slideIndex }) {
 	}, []);
 	const onAccordionChange = (key) => {
 		console.log('onAccordionChange', key);
+		setAccordionIndex(key);
 		if (key) {
 			socket.emit('updateAccordionIndex', key, () => {});
 		}
@@ -139,9 +141,9 @@ function Slider({ slideIndex }) {
 				<img src="https://wowslider.com/sliders/demo-77/data1/images/road220058.jpg" />
 				<p className="flex-caption">Adventurer Cheesecake Brownie</p>
 			</div>
-			<div>
-				<Collapse onChange={onAccordionChange} activeKey={accordionIndex} destroyInactivePanel={true}>
-					<Panel header="This is panel header 1" key="1">
+			<div>{accordionIndex}
+				<Collapse onChange={onAccordionChange}  activeKey={accordionIndex} destroyInactivePanel={true}>
+					<Panel header="This is panel header 1" key="1" onClick={onAccordionChange}>
 						<p>{text}</p>
 					</Panel>
 					<Panel header="This is panel header 2" key="2">
@@ -151,6 +153,7 @@ function Slider({ slideIndex }) {
 						<p>{text}</p>
 					</Panel>
 				</Collapse>
+				<SayHi />
 			</div>
 			<div>
 				<MySteps />
@@ -171,79 +174,12 @@ function Slider({ slideIndex }) {
 					extra={<Button type="primary">Next</Button>}
 				/>
 			</div>
-			<div />
+
 		</Carousel>
 	);
 }
-Slider.defaultProps = {
-	slideIndex: 0
-};
-
-function SayHi({}) {
-	const [ sayHi, setSayHi ] = useState(false);
-	const [ confirmLoading, justConfirm ] = useState(false);
-	const [ showResult, setShowResult ] = useState(false);
-
-	useEffect(() => {
-		socket.on('sayHi2AllEmit', () => {
-			console.log('got a sayHi message');
-			setSayHi(true);
-		});
-	}, []);
-	const handleOk = () => {
-		justConfirm(true);
-		setTimeout(() => {
-			justConfirm(false);
-			setSayHi(false);
-			setShowResult(true);
-		}, 800);
-	};
-	const justSayHi = () => {
-		console.log('justSayHi');
-		socket.emit('sayHi2All');
-		setSayHi(true);
-	};
-	return (
-		<div>
-			<Divider />
-			<center>
-				<Button type="primary" onClick={justSayHi}>
-					SayHi
-				</Button>
-			</center>
-
-			{showResult ? (
-				<div style={{ width: 170 }}>
-					<Divider plain>Result</Divider>
-					<table style={{ width: '100%' }}>
-						<tr>
-							<td>
-								Bad: <Progress percent={30} size="small" status="exception" />
-							</td>
-						</tr>
-						<tr>
-							<td>
-								Good: <Progress percent={70} size="small" status="success" />
-							</td>
-						</tr>
-					</table>
-				</div>
-			) : null}
-			<Modal
-				title="How are you felling today"
-				visible={sayHi}
-				onOk={handleOk}
-				okText="Good"
-				cancelText="Bad"
-				confirmLoading={confirmLoading}
-				onCancel={() => setSayHi(false)}
-			>
-				<p>
-					<img src="https://resizer.boardmakeronline.com:443/thumbnails/F2575A34772CDDF72ACE3C23AF07031B.png?h=393&amp;w=491" />
-				</p>
-			</Modal>
-		</div>
-	);
-}
+// Slider.defaultProps = {
+// 	slideIndex: 0
+// };
 
 export default SliderParent;

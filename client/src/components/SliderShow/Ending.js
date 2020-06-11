@@ -3,9 +3,9 @@ import { Carousel, Layout, Menu, Breadcrumb } from 'antd';
 import { Result, Button, Divider, Modal } from 'antd';
 import { Drawer, List, Avatar, Col, Row } from 'antd';
 import io from 'socket.io-client';
-
+import {ENDPOINT} from '../../config/'
 let socket;
-const ENDPOINT = 'http://10.22.17.90:5000/';
+
 socket = io(ENDPOINT);
 
 const DescriptionItem = ({ title, content }) => (

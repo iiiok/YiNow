@@ -100,7 +100,7 @@ class YoutubeVideo extends React.Component {
 					</select>
 				</div>
 				<div className="col s8 center-align">
-					<YouTube
+					{/* <YouTube
 						video={video.id}
 						width={'100%'}
 						height={480}
@@ -110,7 +110,7 @@ class YoutubeVideo extends React.Component {
 						paused={paused}
 						onPause={this.handlePlayerPause}
 						onPlaying={this.handlePlayerPlay}
-					/>
+					/> */}
 				</div>
 			</div>
 		);
