@@ -1,3 +1,6 @@
+A ReactJs + NodeJs App for online education and presentation. Main feature is all the clients will sync-up the the presenter‘s move
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
