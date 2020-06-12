@@ -2,11 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Carousel, Layout, Menu, Breadcrumb } from 'antd';
 import { Result, Button, Divider, Modal } from 'antd';
 import { Drawer, List, Avatar, Col, Row } from 'antd';
-import io from 'socket.io-client';
-import {ENDPOINT} from '../../config/'
-let socket;
-
-socket = io(ENDPOINT);
+import { socket } from '../../service/socket';
 
 const DescriptionItem = ({ title, content }) => (
 	<div className="site-description-item-profile-wrapper">
@@ -15,9 +11,10 @@ const DescriptionItem = ({ title, content }) => (
 	</div>
 );
 
-function Ending() {
-	const [ visible, setVisible ] = useState(false);
+const Ending = ({ drawerVisable }) => {
+	console.log('defin Ending', drawerVisable);
 
+	const [ visible, setVisible ] = useState(false);
 	const showDrawer = () => {
 		socket.emit('openDrawer', true);
 		setVisible(true);
@@ -27,12 +24,14 @@ function Ending() {
 		socket.emit('openDrawer', false);
 		setVisible(false);
 	};
-	useEffect(() => {
-		socket.on('openDrawerEmit', (type) => {
-			console.log('openDrawerEmit', type);
-			setVisible(type);
-		});
-	}, []);
+
+	useEffect(
+		() => {
+			console.log('run useEffect -drawerVisable', drawerVisable);
+			setVisible(drawerVisable);
+		},
+		[ drawerVisable ]
+	);
 
 	return (
 		<div>
@@ -149,6 +148,6 @@ function Ending() {
 			</Drawer>
 		</div>
 	);
-}
+};
 
-export default Ending;
+export default React.memo(Ending);

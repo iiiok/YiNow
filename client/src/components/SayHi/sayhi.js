@@ -1,35 +1,32 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Carousel, Layout, Menu, Breadcrumb } from 'antd';
 import { Result, Button, Divider, Progress, Collapse, Modal } from 'antd';
-import {ENDPOINT} from '../../config/'
-import io from 'socket.io-client';
 
-let socket;
-socket = io(ENDPOINT);
+import { socket } from '../../service/socket';
 
 function SayHi() {
-	const [ sayHi, setSayHi ] = useState(false);
+	const [ sayHi, setVisible ] = useState(false);
 	const [ confirmLoading, justConfirm ] = useState(false);
 	const [ showResult, setShowResult ] = useState(false);
 
 	useEffect(() => {
-		socket.on('sayHi2AllEmit', () => {
+		socket.off('sayHiEmit').on('sayHiEmit', () => {
 			console.log('got a sayHi message');
-			setSayHi(true);
+			setVisible(true);
 		});
 	}, []);
 	const handleOk = () => {
 		justConfirm(true);
 		setTimeout(() => {
 			justConfirm(false);
-			setSayHi(false);
+			setVisible(false);
 			setShowResult(true);
 		}, 800);
 	};
 	const justSayHi = () => {
 		console.log('justSayHi');
 		socket.emit('sayHi2All');
-		setSayHi(true);
+		setVisible(true);
 	};
 	return (
 		<div>
@@ -43,11 +40,10 @@ function SayHi() {
 			{showResult ? (
 				<div style={{ width: 170 }}>
 					<Divider plain>Result</Divider>
-	
-								Bad: <br/><Progress percent={30} size="small" status="exception" />
-							
-								Good: <br/><Progress percent={70} size="small" status="success" />
-
+					Bad: <br />
+					<Progress percent={30} size="small" status="exception" />
+					Good: <br />
+					<Progress percent={70} size="small" status="success" />
 				</div>
 			) : null}
 			<Modal
@@ -57,7 +53,7 @@ function SayHi() {
 				okText="Good"
 				cancelText="Bad"
 				confirmLoading={confirmLoading}
-				onCancel={() => setSayHi(false)}
+				onCancel={() => setVisible(false)}
 			>
 				<p>
 					<img src="https://resizer.boardmakeronline.com:443/thumbnails/F2575A34772CDDF72ACE3C23AF07031B.png?h=393&amp;w=491" />
@@ -66,4 +62,4 @@ function SayHi() {
 		</div>
 	);
 }
-export default SayHi
+export default SayHi;

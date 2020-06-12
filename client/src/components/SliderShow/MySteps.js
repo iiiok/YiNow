@@ -1,12 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Steps } from 'antd';
 import { Divider } from 'antd';
-import { Drawer, List, Avatar, Col, Row } from 'antd';
-import {ENDPOINT} from '../../config/'
-import io from 'socket.io-client';
+import { socket } from '../../service/socket';
 const { Step } = Steps;
-let socket;
-socket = io(ENDPOINT);
 
 const demos = {
 	0: '<iframe  width="100%" height="606" scrolling="auto" frameborder="no"  src="https://www.youtube.com/embed/yZvsqm4Jok8"></iframe>',
