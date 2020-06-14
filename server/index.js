@@ -17,7 +17,7 @@ app.use(router);
 io.on('connect', (socket) => {
 	socket.removeAllListeners(); //no use
 	socket.on('join', ({ name, room }, callback) => {
-		const { error, user } = addUser({ id: socket.id, name, room });
+		const { error, user } = addUser({ id: socket.id, userName, room });
 
 		if (error) return callback(error);
 
@@ -48,7 +48,6 @@ io.on('connect', (socket) => {
 	});
 
 	socket.on('updateAccordionIndex', (key, callback) => {
-		// const user = getUser(socket.id);
 		console.log('accordionIndex', key);
 		// io.to('react').emit('message', { user: 'user.name', text: 'message' });
 		io.emit('updateAccordionIndexEmit', { accordionIndex: key });
@@ -56,12 +55,11 @@ io.on('connect', (socket) => {
 		callback();
 	});
 	socket.on('syncScrollPosition', (key, callback) => {
-		// const user = getUser(socket.id);
-		console.log('syncScrollPosition', key);
+		console.log('syncScrollPositionEmit', key, new Date().getTime());
 		// io.to('react').emit('message', { user: 'user.name', text: 'message' });
 		socket.broadcast.emit('syncScrollPositionEmit', { newPosition: key });
 
-		callback();
+		// callback();
 	});
 	socket.on('sayHi2All', () => {
 		console.log('sayHi to Clients');
