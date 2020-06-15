@@ -7,8 +7,7 @@ const { Step } = Steps;
 const demos = {
 	0: '<iframe  width="100%" height="606" scrolling="auto" frameborder="no"  src="https://www.youtube.com/embed/yZvsqm4Jok8"></iframe>',
 	1: '<iframe  width="100%" height="606" scrolling="yes" scrolling="auto" frameborder="no" src="https://zellwk.com/blog/async-await-express/"></iframe>',
-	2: '<iframe  width="100%" height="606" scrolling="auto" scrolling="auto" frameborder="no" src="https://images.presentationgo.com/2016/02/7Stairs-Steps-Slide-Template.png"></iframe>',
-	3: '<iframe width="100%" height="606" scrolling="auto" frameborder="no"  src="https://www.youtube.com/embed/gLLl3VbNFXg?autoplay=1"></iframe>'
+	2: '<iframe  width="100%" height="606" scrolling="auto" scrolling="auto" frameborder="no" src="https://images.presentationgo.com/2016/02/7Stairs-Steps-Slide-Template.png"></iframe>'
 };
 
 function Iframe(props) {

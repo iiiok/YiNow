@@ -1,18 +1,21 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Carousel, Layout, Menu, Breadcrumb } from 'antd';
-import { Result, Button, Divider, Progress, Collapse, Modal } from 'antd';
+import React, { useState, useEffect } from 'react';
+import { Button, Divider, Progress, Modal, Card, Row, Col } from 'antd';
 
 import { socket } from '../../service/socket';
 
-function SayHi() {
+const SayHi = () => {
 	const [ sayHi, setVisible ] = useState(false);
 	const [ confirmLoading, justConfirm ] = useState(false);
 	const [ showResult, setShowResult ] = useState(false);
 
 	useEffect(() => {
-		socket.off('sayHiEmit').on('sayHiEmit', () => {
+		console.log('on(sayHiEmit');
+		socket.on('sayHiEmit', () => {
 			console.log('got a sayHi message');
-			setVisible(true);
+			// setShowResult(true);
+			if (!sayHi) {
+				setVisible(true);
+			}
 		});
 	}, []);
 	const handleOk = () => {
@@ -21,7 +24,8 @@ function SayHi() {
 			justConfirm(false);
 			setVisible(false);
 			setShowResult(true);
-		}, 800);
+			console.log('setShowResult(true)');
+		}, 400);
 	};
 	const justSayHi = () => {
 		console.log('justSayHi');
@@ -30,22 +34,29 @@ function SayHi() {
 	};
 	return (
 		<div>
-			<Divider />
-			<center>
-				<Button type="primary" onClick={justSayHi}>
-					SayHi
-				</Button>
-			</center>
+			<Row justify="space-around" align="middle">
+				<Col span={6}>
+					<Button type="primary" onClick={justSayHi}>
+						Say Hi to every one
+					</Button>
+				</Col>
+				<Col span={18}>
+					{showResult ? (
+						<div>
+							<Divider plain>The result</Divider>
+							It's not my today: <br />
+							<Progress percent={10} size="small" />
+							Just so so: <br />
+							<Progress percent={20} size="small" />
+							Felling Good: <br />
+							<Progress percent={70} size="small" status="success" />
+						</div>
+					) : null}
+				</Col>
+			</Row>
 
-			{showResult ? (
-				<div style={{ width: 170 }}>
-					<Divider plain>Result</Divider>
-					Bad: <br />
-					<Progress percent={30} size="small" status="exception" />
-					Good: <br />
-					<Progress percent={70} size="small" status="success" />
-				</div>
-			) : null}
+			<Divider />
+
 			<Modal
 				title="How are you felling today"
 				visible={sayHi}
@@ -56,10 +67,15 @@ function SayHi() {
 				onCancel={() => setVisible(false)}
 			>
 				<p>
-					<img src="https://resizer.boardmakeronline.com:443/thumbnails/F2575A34772CDDF72ACE3C23AF07031B.png?h=393&amp;w=491" heigh="393" width='491' alt="Loading" />
+					<img
+						src="https://resizer.boardmakeronline.com:443/thumbnails/F2575A34772CDDF72ACE3C23AF07031B.png?h=393&amp;w=491"
+						heigh="393"
+						width="491"
+						alt="Loading"
+					/>
 				</p>
 			</Modal>
 		</div>
 	);
-}
+};
 export default SayHi;

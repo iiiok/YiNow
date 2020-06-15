@@ -37,8 +37,18 @@ td {
 	padding: 10px;
 }
 
-
 .ant-progress-line {
+	margin-bottom: 8px;
+}
 
-    margin-bottom: 8px;
+.ant-carousel .slick-slide {
+	text-align: unset;
+}
+
+.accordion img {
+	max-width: 100%;
+}
+
+.ant-layout-sider {
+	background-color: #fff;
 }

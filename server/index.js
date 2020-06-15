@@ -76,6 +76,11 @@ io.on('connect', (socket) => {
 		// io.to('react').emit('message', { user: 'user.name', text: 'message' });
 		socket.broadcast.emit('setCurrentStepEmit', key);
 	});
+	socket.on('onSwitchiLX', (key) => {
+		console.log('onSwitchiLX:', key);
+		// io.to('react').emit('message', { user: 'user.name', text: 'message' });
+		socket.broadcast.emit('onSwitchiLXEmit', key);
+	});
 
 	socket.on('disconnect', () => {
 		const user = removeUser(socket.id);

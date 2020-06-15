@@ -15,7 +15,7 @@
     </title>
     <!-- Custom CSS -->
     <link
-      href="https://www.wrappixel.com/demos/admin-templates/materialpro-bootstrap-latest/material-pro/dist/css/style.min.css"
+      href="/css/material-pro.min.css"
       rel="stylesheet"
     />
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -177,7 +177,7 @@
         var rand = parseInt(Math.random() * (x - y + 1) + y);
         const isHost = $("#checkbox-asHost").prop("checked");
         const userName = $("#loginform_user").val();
-        window.location.href =
+        top.location.href =
           "/onAir?isHost=" + isHost + "&userName=" + userName + rand;
       });
     </script>
