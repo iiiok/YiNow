@@ -19,7 +19,7 @@ export default class IXLContent extends React.Component {
 					this.setState({
 						iFrameHeight: obj.contentWindow.document.body.scrollHeight + 'px'
 					});
-					console.log('iframe', obj.contentWindow.document.body.scrollHeight);
+					// console.log('iframe', obj.contentWindow.document.body.scrollHeight);
 				}}
 				ref="iframe"
 				src="ixl.html"

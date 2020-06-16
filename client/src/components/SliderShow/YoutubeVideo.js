@@ -1,117 +1,172 @@
 import React from 'react';
 import YouTube from '@u-wave/react-youtube';
+import { Divider } from 'antd';
+import { Tabs, Select, Button, Space, Row, Col, Card } from 'antd';
+import { PoweroffOutlined } from '@ant-design/icons';
+import { socket } from '../../service/socket';
+
+const { TabPane } = Tabs;
+const { Option } = Select;
 
 const videos = [
-	{ id: 'ZuuVjuLNvFY', name: 'JUNNY - kontra (Feat. Lil Gimch, Keeflow)' },
-	{ id: 'PYE7jXNjFWw', name: 'T W L V - Follow' },
-	{ id: 'ld8ugY47cps', name: "SLCHLD - I can't love you anymore" }
+	{ index: 0, id: 'RMN_bkZ1KM0', name: 'JavaScript Best Practices' },
+	{ index: 1, id: 'x7Xzvm0iLCI', name: 'Loops - Code This, Not That' },
+	{ index: 2, id: 'vn3tm0quoqE', name: 'Async Await Episode I Promised' }
 ];
-
-const qualities = [ 'auto', '240', '380', '480', '720', '1080', '1440', '2160' ];
 
 const hashVideoRx = /^#!\/video\/(\d)$/;
 const hash = typeof window.location !== 'undefined' ? window.location.hash : ''; // eslint-disable-line no-undef
-const defaultVideo = hashVideoRx.test(hash) ? parseInt(hash.replace(hashVideoRx, '$1'), 10) : 0;
+// const defaultVideo = hashVideoRx.test(hash) ? parseInt(hash.replace(hashVideoRx, '$1'), 10) : 0;
 
 class YoutubeVideo extends React.Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			videoIndex: defaultVideo,
+			videoIndex: '0',
 			suggestedQuality: 'auto',
 			volume: 1,
+			showControl: false,
 			paused: false
 		};
 
 		this.handlePause = this.handlePause.bind(this);
+		this.handleOnReady = this.handleOnReady.bind(this);
 		this.handlePlayerPause = this.handlePlayerPause.bind(this);
 		this.handlePlayerPlay = this.handlePlayerPlay.bind(this);
 		this.handleVolume = this.handleVolume.bind(this);
-		this.handleQuality = this.handleQuality.bind(this);
 	}
 
 	selectVideo(index) {
+		console.log('syncShowingTab', index);
 		this.setState({ videoIndex: index });
+		socket.emit('syncShowingTab', index);
 	}
 
 	handlePause(event) {
 		this.setState({
-			paused: event.target.checked
+			paused: !this.state.paused
+			// paused: event.target.checked
 		});
+		socket.emit('syncVideoPlay', !this.state.paused);
+	}
+	handleOnReady(event) {
+		setTimeout(() => {
+			this.setState({
+				showControl: true,
+				paused: true
+				// !this.state.paused
+				// paused: event.target.checked
+			});
+		}, 1000);
 	}
 
 	handlePlayerPause() {
 		this.setState({ paused: true });
+		socket.emit('syncVideoPlay', true);
 	}
 
 	handlePlayerPlay() {
 		this.setState({ paused: false });
+		socket.emit('syncVideoPlay', false);
 	}
 
 	handleVolume(event) {
+		const volume = parseFloat(event.target.value);
 		this.setState({
-			volume: parseFloat(event.target.value)
+			volume: volume
 		});
+		socket.emit('syncVideoVolume', volume);
 	}
 
-	handleQuality(event) {
-		this.setState({
-			suggestedQuality: qualities[event.target.selectedIndex]
+	componentDidMount() {
+		console.log('init syncShowingTabEmit');
+		socket.on('syncVideoPlayEmit', (key) => {
+			// console.log('syncVideoPlayEmit', key);
+			this.setState({ paused: key });
+		});
+		socket.on('syncShowingTabEmit', (key) => {
+			// console.log('syncShowingTabEmit', key);
+			this.setState({ videoIndex: key });
+		});
+		socket.on('syncVideoVolumeEmit', (volume) => {
+			// console.log('syncVideoVolumeEmit', syncVideoVolumeEmit);
+			this.setState({
+				volume: volume
+			});
 		});
 	}
 
 	render() {
-		const { videoIndex, volume, paused, suggestedQuality } = this.state;
+		const { videoIndex, volume, paused, showControl } = this.state;
 
 		const video = videos[videoIndex];
 		return (
 			<div className="row">
-				<div className="col s4">
-					<h5>Video</h5>
-					<div className="collection">
+				<Card title={'YouTube Videos'}>
+					<Tabs
+						tabPosition="right"
+						onChange={(TabIndex) => this.selectVideo(TabIndex)}
+						activeKey={videoIndex}
+					>
 						{videos.map((choice, index) => (
-							<a
-								key={choice.id}
-								href={`#!/video/${index}`}
-								className={`collection-item ${video === choice ? 'active' : ''}`}
-								onClick={() => this.selectVideo(index)}
-							>
-								{choice.name}
-							</a>
+							<TabPane tab={choice.name} key={index}>
+								<h1>
+									"{choice.name}" is {paused ? 'on held.' : 'playing.'}
+								</h1>
+
+								{/* {choice.id == index && ( */}
+								<YouTube
+									video={choice.id}
+									height={580}
+									autoplay
+									width="100%"
+									onReady={this.handleOnReady}
+									controls={true}
+									volume={volume}
+									paused={paused}
+									onPause={this.handlePlayerPause}
+									onPlaying={this.handlePlayerPlay}
+								/>
+							</TabPane>
 						))}
-					</div>
-					<h5>Paused</h5>
-					<p>
+					</Tabs>
+					<Divider />
+					{showControl && (
+						<Row>
+							<Col lg={{ span: 3, offset: 1 }}>
+								<Button
+									type="primary"
+									icon={<PoweroffOutlined />}
+									// loading={loadings[1]}
+									onClick={this.handlePause}
+								>
+									{paused ? 'Play' : 'Stop'} video
+								</Button>
+							</Col>
+							<Col lg={{ span: 2, offset: 1 }} />
+							<Col lg={{ span: 10 }}>
+								<input
+									type="range"
+									value={volume}
+									style={{ width: '100%' }}
+									min={0}
+									max={1}
+									step={0.01}
+									onChange={this.handleVolume}
+								/>
+							</Col>
+							<Col lg={{ span: 4 }} />
+						</Row>
+					)}
+
+					{/* <p>
 						<label htmlFor="paused">
 							<input type="checkbox" id="paused" checked={paused} onChange={this.handlePause} />
 							<span>Paused</span>
 						</label>
-					</p>
-					<h5>Volume</h5>
-					<input type="range" value={volume} min={0} max={1} step={0.01} onChange={this.handleVolume} />
-					<h5>Quality</h5>
-					<select className="browser-default" onChange={this.handleQuality}>
-						{qualities.map((quality) => (
-							<option key={quality} value={quality}>
-								{quality}
-							</option>
-						))}
-					</select>
-				</div>
-				<div className="col s8 center-align">
-					<YouTube
-						video={video.id}
-						width={'100%'}
-						height={480}
-						controls={false}
-						suggestedQuality={suggestedQuality}
-						volume={volume}
-						paused={paused}
-						onPause={this.handlePlayerPause}
-						onPlaying={this.handlePlayerPlay}
-					/>
-				</div>
+					</p> */}
+				</Card>
 			</div>
 		);
 	}

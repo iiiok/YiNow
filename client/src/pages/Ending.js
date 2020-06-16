@@ -22,7 +22,7 @@ export default class IXLContent extends React.Component {
 					console.log('iframe', obj.contentWindow.document.body.scrollHeight);
 				}}
 				ref="iframe"
-				src="ixl.html"
+				src="https://www.youtube.com/embed/gLLl3VbNFXg?autoplay=1"
 				width="100%"
 				height={this.state.iFrameHeight}
 				scrolling="no"

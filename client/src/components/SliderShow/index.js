@@ -3,8 +3,7 @@ import { Carousel, Layout, Menu, Breadcrumb, Switch } from 'antd';
 import { Result, Button, Divider, Collapse, Card } from 'antd';
 import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
 import './index.css';
-import { UserOutlined, LaptopOutlined, NotificationOutlined, SmileOutlined } from '@ant-design/icons';
-import io from 'socket.io-client';
+import { UserOutlined, LaptopOutlined, NotificationOutlined, SmileOutlined, YoutubeOutlined } from '@ant-design/icons';
 import Group from './Group';
 import Ending from './Ending';
 import MySteps from './MySteps';
@@ -44,7 +43,6 @@ function SliderParent({ location }) {
 	const { userName, isHost } = queryString.parse(location.search);
 
 	const [ asHost, setHost ] = useState(false);
-	const [ iXlOn, setILX ] = useState(false);
 	useEffect(
 		() => {
 			setHost(isHost === 'true');
@@ -55,34 +53,21 @@ function SliderParent({ location }) {
 	const [ slideIndex, setSlideIndex ] = useState(1);
 	const onSliderClick = (e) => {
 		console.log('object', e.key);
-		setILX(false);
 		setSlideIndex(e.key);
 		if (e.key) {
 			socket.emit('updateSliderIndex', e.key, () => setSlideIndex(e.key));
 		}
 	};
 
-	const onSwitchiLX = (val) => {
-		console.log('object', val);
-		socket.emit('onSwitchiLX', val);
-		setILX(val);
-	};
 	useEffect(
 		() => {
 			socket.on('updateSliderIndexEmit', (key) => {
 				console.log('updateSliderIndexEmit', key.sliderIndex, new Date().getTime());
 				setSlideIndex(key.sliderIndex);
-				setILX(false);
 			});
 		},
 		[ slideIndex ]
 	);
-	useEffect(() => {
-		socket.on('onSwitchiLXEmit', (key) => {
-			console.log('onSwitchiLXEmit', key);
-			setILX(key);
-		});
-	}, []);
 
 	const [ scrollPosition, setSrollPosition ] = useState(0);
 
@@ -161,27 +146,24 @@ function SliderParent({ location }) {
 								</p>
 							</Card>
 
-							<Links
-								onSliderClick={onSliderClick}
-								selectedKeys={[ slideIndex.toString() ]}
-								onSwitchiLX={onSwitchiLX}
-							/>
+							<Links onSliderClick={onSliderClick} selectedKeys={[ slideIndex.toString() ]} />
 
 							{/* scrollPosition: {scrollPosition} */}
 						</Sider>
 						<Content style={{ padding: '0 24px', minHeight: 280 }}>
-							{iXlOn ? (
-								<IXLContent />
-							) : (
+							{slideIndex == 6 && <YoutubeVideo />}
+							{slideIndex == 7 && <IXLContent />}
+							{slideIndex == 8 && <Ending />}
+							{slideIndex < 6 && (
 								<div>
 									<Slider slideIndex={slideIndex} />
 									<Divider />
-									slideIndex {slideIndex}
-									{slideIndex == 1 ? (
+
+									{slideIndex == 1 && (
 										<Card>
 											<SayHi />
 										</Card>
-									) : null}
+									)}
 								</div>
 							)}
 						</Content>
@@ -196,10 +178,9 @@ function SliderParent({ location }) {
 	);
 }
 
-function Links({ onSliderClick, selectedKeys, onSwitchiLX }) {
+function Links({ onSliderClick, selectedKeys }) {
 	console.log('selectedKeys', selectedKeys);
 	const [ currentMenu, setCurrentMent ] = useState(selectedKeys);
-	// const [ iXlOn, setIXlOn ] = useState(false);
 	useEffect(
 		() => {
 			setCurrentMent(selectedKeys);
@@ -218,39 +199,21 @@ function Links({ onSliderClick, selectedKeys, onSwitchiLX }) {
 				defaultOpenKeys={[ 'sub1' ]}
 				// style={{ height: '100%' }}
 			>
-				<SubMenu key="sub1" icon={<UserOutlined />} title="subnav 1">
+				<SubMenu key="sub1" icon={<UserOutlined />} title="PPT Meeting">
 					<Menu.Item key="1">Welcome</Menu.Item>
 					<Menu.Item key="2">JavaScript async</Menu.Item>
-					<Menu.Item key="3">option3</Menu.Item>
-					<Menu.Item key="4">option4</Menu.Item>
-					<Menu.Item key="5">Our Team</Menu.Item>
+					<Menu.Item key="3">Steps</Menu.Item>
+					<Menu.Item key="4">Our Team</Menu.Item>
 				</SubMenu>
-			</Menu>
-			<Menu
-				mode="inline"
-				// onSelect={onSliderClick}
-				defaultOpenKeys={[ 'sub7' ]}
-			>
-				<SubMenu key="sub2" icon={<LaptopOutlined />} title="Load page">
-					<Menu.Item
-						key="7"
-						onClick={() => {
-							onSwitchiLX(true);
-							console.log('onSwitchiLX');
-						}}
-					>
-						i Learning
-					</Menu.Item>
-					<Menu.Item
-						key="8"
-						onClick={() => {
-							onSwitchiLX(true);
-							console.log('onSwitchEnding');
-						}}
-					>
-						The Ending
-					</Menu.Item>
-				</SubMenu>
+				<Menu.Item key="6" icon={<YoutubeOutlined />}>
+					Videos
+				</Menu.Item>
+				<Menu.Item key="7" icon={<LaptopOutlined />}>
+					iLearning
+				</Menu.Item>
+				<Menu.Item key="8" icon={<NotificationOutlined />}>
+					The Ending
+				</Menu.Item>
 			</Menu>
 		</React.Fragment>
 	);
@@ -294,9 +257,9 @@ function Slider({ slideIndex }) {
 				<p className="flex-caption">Adventurer Cheesecake Brownie</p>
 			</div>
 
-			<div>
+			{/* <div>
 				<YoutubeVideo />
-			</div>
+			</div> */}
 			<div>
 				<Group drawerVisable={drawerVisable} />
 				<Result

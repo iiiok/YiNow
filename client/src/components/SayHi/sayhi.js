@@ -67,12 +67,7 @@ const SayHi = () => {
 				onCancel={() => setVisible(false)}
 			>
 				<p>
-					<img
-						src="https://resizer.boardmakeronline.com:443/thumbnails/F2575A34772CDDF72ACE3C23AF07031B.png?h=393&amp;w=491"
-						heigh="393"
-						width="491"
-						alt="Loading"
-					/>
+					<img src="/images/felling.png" heigh="393" width="491" alt="Loading" />
 				</p>
 			</Modal>
 		</div>

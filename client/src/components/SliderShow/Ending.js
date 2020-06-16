@@ -1,24 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Steps } from 'antd';
-import { Divider } from 'antd';
-import { socket } from '../../service/socket';
-const { Step } = Steps;
+import YouTube from '@u-wave/react-youtube';
+import { Divider, Card } from 'antd';
 
-const demos =
-	'<iframe width="100%" height="606" scrolling="auto" frameborder="no"  src="https://www.youtube.com/embed/gLLl3VbNFXg?autoplay=1"></iframe>';
-
-function Iframe(props) {
-	return <div dangerouslySetInnerHTML={{ __html: props.iframe ? props.iframe : '' }} />;
-}
-
-function MySteps() {
+function Ending() {
 	return (
 		<div>
+			<Card title={'Thank you for attending.'}>
+				<YouTube video="gLLl3VbNFXg" height={580} autoplay width="100%" controls={true} volume={0.3} />
+			</Card>
 			<Divider />
-			<Iframe iframe={demos} allow="autoplay" />
+			<p className="flex-caption">Adventurer Cheesecake Brownie</p>
 			<Divider />
 		</div>
 	);
 }
 
-export default MySteps;
+export default Ending;

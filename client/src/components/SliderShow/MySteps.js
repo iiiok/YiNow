@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Steps } from 'antd';
 import { Divider } from 'antd';
 import { socket } from '../../service/socket';
+import ReactDOM from 'react-dom';
 const { Step } = Steps;
 
 const demos = {
@@ -10,9 +11,31 @@ const demos = {
 	2: '<iframe  width="100%" height="606" scrolling="auto" scrolling="auto" frameborder="no" src="https://images.presentationgo.com/2016/02/7Stairs-Steps-Slide-Template.png"></iframe>'
 };
 
+// this.state = {
+// 	iFrameHeight: '100%'
+// };
 function Iframe(props) {
-	return <div dangerouslySetInnerHTML={{ __html: props.iframe ? props.iframe : '' }} />;
+	const [ iFrameHeight, setIFrameHeight ] = useState('100%');
+	const iframX = useRef();
+	// return <div dangerouslySetInnerHTML={{ __html: props.iframe ? props.iframe : '' }} />;
 	// return <div dangerouslySetInnerHTML={{ __html: "props.iframe ? props.iframe : ''" }} />;
+	return (
+		<iframe
+			style={{ width: '100%', height: iFrameHeight, overflow: 'visible' }}
+			onLoad={() => {
+				// const obj = ReactDOM.findDOMNode(iframX);
+				console.log(iframX);
+				// setIFrameHeight(obj.contentWindow.document.body.scrollHeight + 'px');
+				// console.log('iframe', obj.contentWindow.document.body.scrollHeight);
+			}}
+			height={iFrameHeight}
+			ref={iframX}
+			src="https://zellwk.com/blog/async-await-express/"
+			width="100%"
+			scrolling="no"
+			frameBorder="0"
+		/>
+	);
 }
 
 function MySteps() {
@@ -46,10 +69,14 @@ function MySteps() {
 				/>
 				<Step title="Set Clear  Priorities" subTitle="Measurement" description="Decide What To Measure..." />
 				<Step title="Interpret Results" subTitle="images" description=" key questions" />
-				<Step title="The End" subTitle="video" description="Thank you!" />
 			</Steps>
 			<Divider />
-			<Iframe iframe={demos[currentStep]} allow="autoplay" />
+			{currentStep < 2 && <Iframe iframe={demos[currentStep]} allow="autoplay" />}
+			{currentStep == 2 && (
+				<center>
+					<img src="https://images.presentationgo.com/2016/02/7Stairs-Steps-Slide-Template.png" />
+				</center>
+			)}
 			<Divider />
 			{demos[currentStep]}
 		</div>

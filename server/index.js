@@ -81,6 +81,20 @@ io.on('connect', (socket) => {
 		// io.to('react').emit('message', { user: 'user.name', text: 'message' });
 		socket.broadcast.emit('onSwitchiLXEmit', key);
 	});
+	socket.on('syncVideoPlay', (key) => {
+		// console.log('syncVideoPlay:', key);
+		// io.to('react').emit('message', { user: 'user.name', text: 'message' });
+		socket.broadcast.emit('syncVideoPlayEmit', key);
+	});
+	socket.on('syncVideoVolume', (val) => {
+		console.log('syncVideoVolume:', val);
+		socket.broadcast.emit('syncVideoVolumeEmit', val);
+	});
+	socket.on('syncShowingTab', (key) => {
+		console.log('syncShowingTab:', key);
+		// io.to('react').emit('message', { user: 'user.name', text: 'message' });
+		socket.broadcast.emit('syncShowingTabEmit', key);
+	});
 
 	socket.on('disconnect', () => {
 		const user = removeUser(socket.id);
