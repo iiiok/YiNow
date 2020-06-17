@@ -14,3 +14,6 @@ export { ENDPOINT };
 // https://www.ixl.com/membership/administrators/how-it-works
 // https://www.ixl.com/social-studies/
 // https://www.ixl.com/
+
+// Python模拟网页点击(互动)
+// https://blog.csdn.net/www89574622/article/details/87974931?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-10.nonecase&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-10.nonecase
