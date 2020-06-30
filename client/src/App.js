@@ -2,7 +2,8 @@ import React from 'react';
 
 import Chat from './components/Chat/Chat';
 import Join from './components/Join/Join';
-import SliderParent from './components/SliderShow/';
+import { Portal } from './portal/';
+// import SliderParent from './components/SliderShow/';
 import Test from './components/Test/index.js';
 import Login from './pages/login.js';
 
@@ -15,7 +16,7 @@ const App = () => {
 			<Route path="/" exact component={Login} />
 			{/* <Route path="/" exact  render={() =>  <Redirect to="/login.html"/> }/> */}
 			<Route path="/chat" component={Chat} />
-			<Route path="/onAir" component={SliderParent} />
+			<Route path="/onAir" component={Portal} />
 			<Route path="/test" component={Test} />
 		</Router>
 	);

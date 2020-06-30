@@ -1,6 +1,22 @@
 body {
 	background: #f0f2f5;
 }
+.header {
+	display: flex;
+	justify-content: space-between;
+	color: wheat;
+}
+#logo img {
+	position: relative;
+	height: 34px;
+	margin-right: 16px;
+}
+.ant-switch {
+	background-color: rgba(100, 100, 100, 0.85);
+}
+.ant-switch.ant-switch-checked {
+	background-color: #1890ff;
+}
 
 .slider_container {
 	/* width: 1000px; */
