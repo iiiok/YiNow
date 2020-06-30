@@ -104,6 +104,13 @@ io.on('connect', (socket) => {
 			io.to(user.room).emit('roomData', { room: user.room, users: getUsersInRoom(user.room) });
 		}
 	});
+	// let counter = 0;
+	// setInterval(() => {
+	// 	++counter;
+	// 	socket.emit('ping', { counter }); // the object will be serialized for you
+	// }, 6000);
+
+	
 });
 
 server.listen(process.env.PORT || 5000, () => console.log(`Server has started.`));

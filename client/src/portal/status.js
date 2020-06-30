@@ -3,27 +3,39 @@ import { Switch } from 'antd';
 import { socket } from '../service/socket';
 
 function MyStatus({ asHost, onSwitch }) {
-	const [ isOnAir, setIsOnAir ] = useState(false);
+	const [ isOnAir, setIsOnAir ] = useState(true);
 
 	// const onChangeStep = (key) => {
 	// 	socket.emit('setHost', key);
 	// 	setHost(key);
 	// };
-
 	useEffect(() => {
-		socket.on('connection', () => {
+		socket.on("connect",function() {
+			console.log("connect");
 			setIsOnAir(true);
 		});
-		var s = socket;
-		console.dir(socket);
-		console.log('con?', s.id);
+		// socket.on("ping",function() {
+		// 	console.log("send a ping");
+		// 	setIsOnAir(false);
+		// });
+		socket.on("pong",function() {
+			console.log("received pong");
+			setIsOnAir(true);
+		});
+		socket.on("connect_error",function() {
+			console.log("connect_error ");
+			setIsOnAir(false);
+		});
+		socket.on("disconnect",function() {
+			console.log("disconnect ");
+			setIsOnAir(false);
+		});
 	}, []);
 
 	return (
 		<div>
-			I'm {asHost ? 'the ' : 'a '}
 			<Switch
-				checkedChildren="Host"
+				checkedChildren="I'm the Host"
 				unCheckedChildren="Audience"
 				checked={asHost}
 				onChange={() => onSwitch(!asHost)}
