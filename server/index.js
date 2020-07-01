@@ -6,6 +6,7 @@ const cors = require('cors');
 const { addUser, removeUser, getUser, getUsersInRoom } = require('./users');
 
 const router = require('./router');
+var userList = new Set();
 
 const app = express();
 const server = http.createServer(app);
@@ -20,7 +21,6 @@ io.on('connect', (socket) => {
 		const { error, user } = addUser({ id: socket.id, userName, room });
 
 		if (error) return callback(error);
-
 		socket.join(user.room);
 
 		socket.emit('message', { user: 'admin', text: `${user.name}, welcome to room ${user.room}.` });
@@ -31,10 +31,17 @@ io.on('connect', (socket) => {
 		callback();
 	});
 
-	socket.on('sendMessage', (message, callback) => {
-		const user = getUser(socket.id);
+	// socket.on('sendMessage', (message, callback) => {
+	// 	const user = getUser(socket.id);
 
-		io.to(user.room).emit('message', { user: user.name, text: message });
+	// 	io.to(user.room).emit('message', { user: user.name, text: message });
+
+	// 	callback();
+	// });
+	socket.on('sendNotice', (message, callback) => {
+		// console.log(socket.id);
+		console.log(message.userName, 'send message', message.message);
+		socket.broadcast.emit('sendNoticeEmit', { user: message.userName, text: message.message });
 
 		callback();
 	});
@@ -90,6 +97,11 @@ io.on('connect', (socket) => {
 		console.log('syncVideoVolume:', val);
 		socket.broadcast.emit('syncVideoVolumeEmit', val);
 	});
+	socket.on('sayHiLogin', (val) => {
+		userList.add(val);
+		console.log('userList', userList);
+		socket.broadcast.emit('sayHiLoginEmit', userList.size);
+	});
 	socket.on('syncShowingTab', (key) => {
 		console.log('syncShowingTab:', key);
 		// io.to('react').emit('message', { user: 'user.name', text: 'message' });
@@ -109,8 +121,6 @@ io.on('connect', (socket) => {
 	// 	++counter;
 	// 	socket.emit('ping', { counter }); // the object will be serialized for you
 	// }, 6000);
-
-	
 });
 
 server.listen(process.env.PORT || 5000, () => console.log(`Server has started.`));

@@ -22,7 +22,12 @@
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <![endif]-->
-
+<style >
+.social {
+  display: flex;
+    justify-content: space-evenly;
+}
+</style>
     <script>
       var asHost = false;
       var userName = "John";
@@ -145,12 +150,11 @@
                   <div class="form-group mb-0 mt-4">
                     <div class="col-sm-12 justify-content-center d-flex">
                       <p>
-                        Don't have an account?
-                        <a
+                        Just a dummy domo page, input a name and
+                        <a id="join"
                           href="javascript:void(0)"
                           class="text-info font-weight-normal ml-1"
-                          >Sign Up</a
-                        >
+                          >Join</a>
                       </p>
                     </div>
                   </div>
@@ -170,15 +174,18 @@
     <script>
       $('[data-toggle="tooltip"]').tooltip();
       $(".preloader").fadeOut();
-      $("#submit").click(function (e) {
+      $("#submit, #join").click(function (e) {
         e.preventDefault();
         var x = 10; //上限
         var y = 0; //下限
-        var rand = parseInt(Math.random() * (x - y + 1) + y);
         const isHost = $("#checkbox-asHost").prop("checked");
         const userName = $("#loginform_user").val();
+        var rand = parseInt(Math.random() * (x - y + 1) + y);
+        if (userName != "John Smith") {
+rand="";
+        }
         top.location.href =
-          "/onAir?isHost=" + isHost + "&userName=" + userName + rand;
+          "/onAir?userName=" + userName + rand;
       });
     </script>
   </body>

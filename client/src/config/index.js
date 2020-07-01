@@ -3,6 +3,8 @@ const ENDPOINT = 'http://127.0.0.1:5000/';
 
 export { ENDPOINT };
 
+// https://github.com/adrianhajdin/project_chat_application
+
 // https://www.wrappixel.com/demos/admin-templates/materialpro-bootstrap-latest/material-pro/src/horizontal/authentication-login1.html
 // https://www.wrappixel.com/demos/admin-templates/materialpro-bootstrap-latest/material-pro/src/minisidebar/app-notes.html
 // https://www.wrappixel.com/demos/admin-templates/materialpro-bootstrap-latest/material-pro/src/horizontal/app-chats.html

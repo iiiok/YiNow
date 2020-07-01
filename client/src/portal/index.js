@@ -15,13 +15,15 @@ import queryString from 'query-string';
 import MyAccordion from '../components/Accordion/Accordion';
 import IXLContent from '../pages/IXLContent';
 import MyStatus from './status';
+import YiFooter from './footer';
+
 import { observer, useObservable, useLocalStore } from 'mobx-react';
 // import { observer } from 'mobx-react-lite';
 
 import UserStore from '../service/UserStore';
 
 const { SubMenu } = Menu;
-const { Header, Content, Footer, Sider } = Layout;
+const { Header, Content, Sider } = Layout;
 
 const sentScrollUpdate = (position) => {
 	socket.emit('syncScrollPosition', position);
@@ -42,19 +44,12 @@ const settings = {
 
 let positionY = 0;
 
-const UserInfoConText = createContext({ userName: 'ivan' });
+const UserInfoConText = createContext();
 
 export const Portal = observer(({ location }) => {
 	const store = useContext(UserStore);
-	const { userName, isHost } = queryString.parse(location.search);
-
-	// const [ asHost, setHost ] = useState(false);
-	// useEffect(
-	// 	() => {
-	// 		setHost(isHost === 'true');
-	// 	},
-	// 	[ isHost ]
-	// );
+	const { userName } = queryString.parse(location.search);
+	store.userName = userName;
 
 	const [ slideIndex, setSlideIndex ] = useState(1);
 	const onSliderClick = (e) => {
@@ -86,7 +81,6 @@ export const Portal = observer(({ location }) => {
 			// scrollUpdate(position, (value)=> setSrollPosition(value));
 			console.log('positionY - position', positionY, position);
 			positionY = position;
-			// setSrollPosition(98);
 			// console.log('scrollPosition-in', scrollPosition);
 		}
 	}, []);
@@ -132,7 +126,12 @@ export const Portal = observer(({ location }) => {
 						<Menu.Item key="2">nav 2</Menu.Item>
 						<Menu.Item key="3">nav 3</Menu.Item>
 					</Menu>
-					<MyStatus asHost={store.asHost} onSwitch={store.switchAsHost} />
+					<MyStatus
+						asHost={store.asHost}
+						userCount={store.userList.length}
+						userName={userName}
+						onSwitch={store.switchAsHost}
+					/>
 				</Header>
 				<Content style={{ padding: '0 50px' }}>
 					<Breadcrumb style={{ margin: '16px 0' }}>
@@ -142,7 +141,7 @@ export const Portal = observer(({ location }) => {
 					</Breadcrumb>
 					<Layout className="site-layout-background" style={{ padding: '24px 0' }}>
 						<Sider className="site-layout-background" width={200}>
-							<Card size="small" title={showUserName} />
+							<Card size="small" title={userName} />
 
 							<Links onSliderClick={onSliderClick} selectedKeys={[ slideIndex.toString() ]} />
 
@@ -156,7 +155,6 @@ export const Portal = observer(({ location }) => {
 								<div>
 									<Slider slideIndex={slideIndex} />
 									<Divider />
-
 									{slideIndex == 1 && (
 										<Card>
 											<SayHi />
@@ -167,10 +165,7 @@ export const Portal = observer(({ location }) => {
 						</Content>
 					</Layout>
 				</Content>
-				<Footer style={{ textAlign: 'center' }}>
-					{/* <img src="https://images.presentationgo.com/2016/02/7Stairs-Steps-Slide-Template.png" /> */}
-					<br /> WwNow.com ©2020 Created by EPAM System.
-				</Footer>
+				<YiFooter userName={store.userName} />
 			</Layout>
 		</UserInfoConText.Provider>
 	);
@@ -212,6 +207,12 @@ function Links({ onSliderClick, selectedKeys }) {
 				<Menu.Item key="8" icon={<NotificationOutlined />}>
 					The Ending
 				</Menu.Item>
+				<SubMenu key="sub2" icon={<UserOutlined />} title="Page templates">
+					<Menu.Item key="11">Coming Soon</Menu.Item>
+					<Menu.Item key="12">JavaScript async</Menu.Item>
+					<Menu.Item key="13">Steps</Menu.Item>
+					<Menu.Item key="14">Our Team</Menu.Item>
+				</SubMenu>
 			</Menu>
 		</React.Fragment>
 	);
@@ -269,5 +270,3 @@ function Slider({ slideIndex }) {
 		</Carousel>
 	);
 }
-
-// export default Portal;

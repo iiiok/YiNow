@@ -6,14 +6,17 @@ import { Portal } from './portal/';
 // import SliderParent from './components/SliderShow/';
 import Test from './components/Test/index.js';
 import Login from './pages/login.js';
+import ComingSoon from './pages/coming-soon.js';
 
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 
 const App = () => {
 	return (
 		<Router>
-			{/* <Route path="/" exact component={Join} /> */}
 			<Route path="/" exact component={Login} />
+			{/* <Route path="/" exact component={ComingSoon} /> */}
+			<Route path="/Login" exact component={Login} />
+			{/* <Route path="/" exact render={() => <Redirect to="/coming-soon.html" />} /> */}
 			{/* <Route path="/" exact  render={() =>  <Redirect to="/login.html"/> }/> */}
 			<Route path="/chat" component={Chat} />
 			<Route path="/onAir" component={Portal} />
