@@ -16,6 +16,7 @@ import MyAccordion from '../components/Accordion/Accordion';
 import IXLContent from '../pages/IXLContent';
 import MyStatus from './status';
 import YiFooter from './footer';
+import Links from './links';
 
 import { observer, useObservable, useLocalStore } from 'mobx-react';
 // import { observer } from 'mobx-react-lite';
@@ -52,6 +53,7 @@ export const Portal = observer(({ location }) => {
 	store.userName = userName;
 
 	const [ slideIndex, setSlideIndex ] = useState(1);
+	const [ isLinksHide, setLinksHide ] = useState(false);
 	const onSliderClick = (e) => {
 		console.log('object', e.key);
 		setSlideIndex(e.key);
@@ -140,13 +142,16 @@ export const Portal = observer(({ location }) => {
 						<Breadcrumb.Item>OnAir</Breadcrumb.Item>
 					</Breadcrumb>
 					<Layout className="site-layout-background" style={{ padding: '24px 0' }}>
-						<Sider className="site-layout-background" width={200}>
+						{/* <Sider className="site-layout-background" width={200}>
 							<Card size="small" title={userName} />
 
 							<Links onSliderClick={onSliderClick} selectedKeys={[ slideIndex.toString() ]} />
 
-							{/* scrollPosition: {scrollPosition} */}
-						</Sider>
+						</Sider> */}
+						{
+							!store.asHost && isLinksHide && "hide it"
+						}
+						<Links onSliderClick={onSliderClick} selectedKeys={[ slideIndex.toString() ]} />
 						<Content style={{ padding: '0 24px', minHeight: 280 }}>
 							{slideIndex == 6 && <YoutubeVideo />}
 							{slideIndex == 7 && <IXLContent />}
@@ -171,52 +176,6 @@ export const Portal = observer(({ location }) => {
 	);
 });
 
-function Links({ onSliderClick, selectedKeys }) {
-	console.log('selectedKeys', selectedKeys);
-	const [ currentMenu, setCurrentMent ] = useState(selectedKeys);
-	useEffect(
-		() => {
-			setCurrentMent(selectedKeys);
-		},
-		[ selectedKeys ]
-	);
-	console.log(currentMenu);
-	return (
-		<React.Fragment>
-			<Menu
-				mode="inline"
-				onSelect={onSliderClick}
-				//   defaultOpenKeys={currentMenu}
-				//   defaultSelectedKeys={currentMenu}
-				selectedKeys={currentMenu}
-				defaultOpenKeys={[ 'sub1' ]}
-				// style={{ height: '100%' }}
-			>
-				<SubMenu key="sub1" icon={<UserOutlined />} title="PPT Meeting">
-					<Menu.Item key="1">Welcome</Menu.Item>
-					<Menu.Item key="2">JavaScript async</Menu.Item>
-					<Menu.Item key="3">Steps</Menu.Item>
-					<Menu.Item key="4">Our Team</Menu.Item>
-				</SubMenu>
-				<Menu.Item key="6" icon={<YoutubeOutlined />}>
-					Videos
-				</Menu.Item>
-				<Menu.Item key="7" icon={<LaptopOutlined />}>
-					iLearning
-				</Menu.Item>
-				<Menu.Item key="8" icon={<NotificationOutlined />}>
-					The Ending
-				</Menu.Item>
-				<SubMenu key="sub2" icon={<UserOutlined />} title="Page templates">
-					<Menu.Item key="11">Coming Soon</Menu.Item>
-					<Menu.Item key="12">JavaScript async</Menu.Item>
-					<Menu.Item key="13">Steps</Menu.Item>
-					<Menu.Item key="14">Our Team</Menu.Item>
-				</SubMenu>
-			</Menu>
-		</React.Fragment>
-	);
-}
 
 function Slider({ slideIndex }) {
 	const sliderX = useRef();
