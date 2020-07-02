@@ -1,15 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Switch, Button, Badge } from 'antd';
 import { socket } from '../service/socket';
 import { notification } from 'antd';
+import { debounce } from 'lodash';
+let positionY = 0;
+const sentScrollUpdate = (position) => {
+	socket.emit('syncScrollPosition', position);
+};
+const scrollUpdate = debounce(sentScrollUpdate, 1);
 
 function MyStatus({ asHost, userName, onSwitch }) {
 	const [ isOnAir, setIsOnAir ] = useState(true);
 	const [ alreadySayHi, setAlreadySayHi ] = useState(false);
 	const [ userCount, setUserCount ] = useState(1);
+	const [ asScroller, setAsScroller ] = useState(false);
 
 	const key = 'sayHiMsg';
 	const triggerNote = (user, text) => {
+		console.log('triggerNote ');
 		notification.open({
 			key,
 			message: 'Message from (' + user + ')',
@@ -17,6 +25,51 @@ function MyStatus({ asHost, userName, onSwitch }) {
 		});
 	};
 
+	//Receive and response with scrolling
+	const [ scrollPosition, setSrollPosition ] = useState(0);
+	useEffect(() => {
+		socket.off('syncScrollPositionEmit').on('syncScrollPositionEmit', (key) => {
+			console.log('syncScrollPositionEmit', key.newPosition);
+			setSrollPosition(key.newPosition);
+		});
+	}, []);
+	useEffect(
+		() => {
+			console.log('scroll to Position', scrollPosition);
+			window.scrollTo(0, scrollPosition);
+		},
+		[ scrollPosition ]
+	); //End of Receive and response with scrolling
+
+	const handleScroll = useCallback(() => {
+		const position = window.pageYOffset;
+		// console.log('scrollPosition', scrollPosition); //這里讀不了
+
+		if (Math.abs(positionY - position) > 30) {
+			scrollUpdate(position, () => {});
+			// scrollUpdate(position, (value)=> setSrollPosition(value));
+			console.log('positionY - position', positionY, position);
+			positionY = position;
+			// console.log('scrollPosition-in', scrollPosition);
+		}
+	}, []);
+	// useEffect(
+	// 	() => {
+	// 		if (asScroller) {
+	// 			window.addEventListener('scroll', handleScroll, { passive: true });
+	// 		}
+	// 		return () => {
+	// 			window.removeEventListener('scroll', handleScroll);
+	// 		};
+	// 	},
+	// 	[ asScroller ]
+	// );
+	const onSetAsScroller = () => {
+		setAsScroller(!asScroller);
+		!asScroller
+			? window.addEventListener('scroll', handleScroll, { passive: true })
+			: window.removeEventListener('scroll', handleScroll);
+	};
 	useEffect(() => {
 		socket.on('connect', function() {
 			console.log('connect');
@@ -46,7 +99,7 @@ function MyStatus({ asHost, userName, onSwitch }) {
 		socket.on('sayHiLoginEmit', (userCount) => {
 			console.log('sendNoticeEmit ', userCount);
 			setUserCount(userCount);
-			// triggerNote(message.user, message.text);
+			// triggerNote('New joiner');
 		});
 	}, []);
 	const justSayHi = () => {
@@ -62,10 +115,17 @@ function MyStatus({ asHost, userName, onSwitch }) {
 				checked={asHost}
 				onChange={onSwitch}
 			/>&nbsp;&nbsp;
+			{asHost && (
+				<Switch
+					checkedChildren="Scroll Master"
+					unCheckedChildren="Scroll Disable"
+					checked={asScroller}
+					onChange={onSetAsScroller}
+				/>
+			)}&nbsp;&nbsp;
 			<Switch checkedChildren="On Air" unCheckedChildren="Offline" checked={isOnAir} />&nbsp;&nbsp;
-			{alreadySayHi ? (
-				<Badge count={userCount} style={{ backgroundColor: '#52c41a' }} title="Total attendee" />
-			) : (
+			<Badge count={userCount} style={{ backgroundColor: '#52c41a' }} title="Total attendee" />&nbsp;&nbsp;
+			{!alreadySayHi && (
 				<Button type="primary" onClick={justSayHi}>
 					Say Hi
 				</Button>

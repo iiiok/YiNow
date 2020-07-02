@@ -6,27 +6,30 @@ import { socket } from '../service/socket';
 import { notification } from 'antd';
 const { SubMenu } = Menu;
 const { Sider } = Layout;
-var userName="XXX";
 
-function Links({ onSliderClick, selectedKeys }) {
+function Links({ onSliderClick, selectedKeys, userName, swithcMenu, isMenuOn, asHost }) {
 	console.log('selectedKeys', selectedKeys);
 	const [ currentMenu, setCurrentMent ] = useState(selectedKeys);
-	const [ linksSwitch, setLinksSwitch ] = useState(true);
+	// const [ linksSwitch, setLinksSwitch ] = useState(isMenuOn);
 	useEffect(
 		() => {
 			setCurrentMent(selectedKeys);
 		},
 		[ selectedKeys ]
 	);
+
 	console.log(currentMenu);
 	return (
 		<Sider className="site-layout-background" width={200}>
-		<Card size="small" title={userName} >
-		<Switch
-				checkedChildren="Show this"
-				unCheckedChildren="Hide this"
-				checked={linksSwitch}
-				onChange={setLinksSwitch} />
+			<Card size="small" title={userName}>
+				{asHost && (
+					<Switch
+						checkedChildren="Show this"
+						unCheckedChildren="Hide this"
+						checked={isMenuOn}
+						onChange={swithcMenu}
+					/>
+				)}
 			</Card>
 			<Menu
 				mode="inline"
@@ -52,14 +55,20 @@ function Links({ onSliderClick, selectedKeys }) {
 				<Menu.Item key="8" icon={<NotificationOutlined />}>
 					The Ending
 				</Menu.Item>
-				<SubMenu key="sub2" icon={<UserOutlined />} title="Page templates">
-					<Menu.Item key="11">Coming Soon</Menu.Item>
+				<SubMenu key="sub2" icon={<UserOutlined />} title="Business">
+					<Menu.Item key="11">Charts</Menu.Item>
 					<Menu.Item key="12">JavaScript async</Menu.Item>
 					<Menu.Item key="13">Steps</Menu.Item>
 					<Menu.Item key="14">Our Team</Menu.Item>
 				</SubMenu>
+				<SubMenu key="sub3" icon={<UserOutlined />} title="Page templates">
+					<Menu.Item key="31">Coming Soon</Menu.Item>
+					<Menu.Item key="32">JavaScript async</Menu.Item>
+					<Menu.Item key="33">Steps</Menu.Item>
+					<Menu.Item key="34">Our Team</Menu.Item>
+				</SubMenu>
 			</Menu>
-			</Sider>
+		</Sider>
 	);
 }
 

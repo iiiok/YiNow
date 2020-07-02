@@ -78,6 +78,10 @@ io.on('connect', (socket) => {
 		// io.to('react').emit('message', { user: 'user.name', text: 'message' });
 		socket.broadcast.emit('openDrawerEmit', type);
 	});
+	socket.on('swithcMenu', (type) => {
+		console.log('swithcMenu', type);
+		socket.broadcast.emit('swithcMenuEmit', type);
+	});
 	socket.on('setCurrentStep', (key) => {
 		console.log('setCurrentStep');
 		// io.to('react').emit('message', { user: 'user.name', text: 'message' });

@@ -6,11 +6,13 @@ import './index.css';
 import { UserOutlined, LaptopOutlined, NotificationOutlined, SmileOutlined, YoutubeOutlined } from '@ant-design/icons';
 import Group from '../components/SliderShow/Group';
 import Ending from '../pages/Ending';
+import YiChart from '../pages/YiChart';
 import MySteps from '../components/SliderShow/MySteps';
+import HostScript from '../components/TextView/HostScript';
+import { paragraph1 } from '../service/dummyDate';
 import YoutubeVideo from '../components/SliderShow/YoutubeVideo.js';
 import SayHi from '../components/SayHi/sayhi';
 import { socket } from '../service/socket';
-import { debounce } from 'lodash';
 import queryString from 'query-string';
 import MyAccordion from '../components/Accordion/Accordion';
 import IXLContent from '../pages/IXLContent';
@@ -23,13 +25,7 @@ import { observer, useObservable, useLocalStore } from 'mobx-react';
 
 import UserStore from '../service/UserStore';
 
-const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
-
-const sentScrollUpdate = (position) => {
-	socket.emit('syncScrollPosition', position);
-};
-const scrollUpdate = debounce(sentScrollUpdate, 100);
 
 const settings = {
 	dots: true,
@@ -43,8 +39,6 @@ const settings = {
 	swipeToSlide: true
 };
 
-let positionY = 0;
-
 const UserInfoConText = createContext();
 
 export const Portal = observer(({ location }) => {
@@ -53,7 +47,6 @@ export const Portal = observer(({ location }) => {
 	store.userName = userName;
 
 	const [ slideIndex, setSlideIndex ] = useState(1);
-	const [ isLinksHide, setLinksHide ] = useState(false);
 	const onSliderClick = (e) => {
 		console.log('object', e.key);
 		setSlideIndex(e.key);
@@ -72,46 +65,12 @@ export const Portal = observer(({ location }) => {
 		[ slideIndex ]
 	);
 
-	const [ scrollPosition, setSrollPosition ] = useState(0);
-
-	const handleScroll = useCallback(() => {
-		const position = window.pageYOffset;
-		// console.log('scrollPosition', scrollPosition); //這里讀不了
-
-		if (Math.abs(positionY - position) > 30) {
-			scrollUpdate(position, () => {});
-			// scrollUpdate(position, (value)=> setSrollPosition(value));
-			console.log('positionY - position', positionY, position);
-			positionY = position;
-			// console.log('scrollPosition-in', scrollPosition);
-		}
-	}, []);
-
 	useEffect(() => {
-		socket.off('syncScrollPositionEmit').on('syncScrollPositionEmit', (key) => {
-			console.log('syncScrollPositionEmit', key.newPosition);
-			setSrollPosition(key.newPosition);
+		socket.on('swithcMenuEmit', (val) => {
+			console.log('swithcMenu ', val);
+			store.isMenuOn = val;
 		});
 	}, []);
-	useEffect(
-		() => {
-			console.log('scroll to Position', scrollPosition);
-			window.scrollTo(0, scrollPosition);
-		},
-		[ scrollPosition ]
-	);
-	useEffect(
-		() => {
-			if (store.asHost) {
-				window.addEventListener('scroll', handleScroll, { passive: true });
-			}
-			return () => {
-				window.removeEventListener('scroll', handleScroll);
-			};
-		},
-		[ store.asHost ]
-	);
-	const showUserName = 'Hi， ' + userName;
 	return (
 		<UserInfoConText.Provider
 			value={{
@@ -128,6 +87,7 @@ export const Portal = observer(({ location }) => {
 						<Menu.Item key="2">nav 2</Menu.Item>
 						<Menu.Item key="3">nav 3</Menu.Item>
 					</Menu>
+					<div style={{ width: '40%' }} />
 					<MyStatus
 						asHost={store.asHost}
 						userCount={store.userList.length}
@@ -148,12 +108,19 @@ export const Portal = observer(({ location }) => {
 							<Links onSliderClick={onSliderClick} selectedKeys={[ slideIndex.toString() ]} />
 
 						</Sider> */}
-						{
-							!store.asHost && isLinksHide && "hide it"
-						}
-						<Links onSliderClick={onSliderClick} selectedKeys={[ slideIndex.toString() ]} />
+						{(store.asHost || store.isMenuOn) && (
+							<Links
+								onSliderClick={onSliderClick}
+								selectedKeys={[ slideIndex.toString() ]}
+								userName={store.userName}
+								swithcMenu={store.swithcMenu}
+								asHost={store.asHost}
+								isMenuOn={store.isMenuOn}
+							/>
+						)}
 						<Content style={{ padding: '0 24px', minHeight: 280 }}>
 							{slideIndex == 6 && <YoutubeVideo />}
+							{slideIndex == 11 && <YiChart />}
 							{slideIndex == 7 && <IXLContent />}
 							{slideIndex == 8 && <Ending />}
 							{slideIndex < 6 && (
@@ -176,8 +143,8 @@ export const Portal = observer(({ location }) => {
 	);
 });
 
-
 function Slider({ slideIndex }) {
+	const store = useContext(UserStore);
 	const sliderX = useRef();
 
 	const [ drawerVisable, setDrawerVisable ] = useState(false);
@@ -204,6 +171,7 @@ function Slider({ slideIndex }) {
 					<p>
 						<img src="https://wowslider.com/sliders/demo-77/data1/images/road220058.jpg" />
 					</p>
+					<HostScript script={paragraph1} asHost={store.asHost} />
 					<p className="flex-caption">Adventurer Cheesecake Brownie</p>
 				</Card>
 			</div>
