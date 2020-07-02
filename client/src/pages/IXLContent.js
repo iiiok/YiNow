@@ -9,10 +9,13 @@ export default class IXLContent extends React.Component {
 			iFrameHeight: '100%'
 		};
 	}
-
+	onClick = () => {
+		console.log('onClick')
+			}
+		
 	render() {
 		return (
-			<iframe
+			<iframe onClick={this.onClick}
 				style={{ width: '100%', height: this.state.iFrameHeight, overflow: 'visible' }}
 				onLoad={() => {
 					const obj = ReactDOM.findDOMNode(this);
