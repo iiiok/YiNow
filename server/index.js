@@ -6,7 +6,8 @@ const cors = require('cors');
 const { addUser, removeUser, getUser, getUsersInRoom } = require('./users');
 
 const router = require('./router');
-var userList = new Set();
+let userList = new Set();
+let vote1 = { 1: 1, 2: 1, 3: 1, 4: 1, 5: 1, 6: 1, 7: 1, 8: 1, 9: 1, 10: 1 };
 
 const app = express();
 const server = http.createServer(app);
@@ -110,6 +111,12 @@ io.on('connect', (socket) => {
 		console.log('syncShowingTab:', key);
 		// io.to('react').emit('message', { user: 'user.name', text: 'message' });
 		socket.broadcast.emit('syncShowingTabEmit', key);
+	});
+	socket.on('voteFor', (key) => {
+		console.log('voteFor:', key);
+		vote1[key] = vote1[key] + 1;
+		console.log('voteForKey:', vote1);
+		socket.broadcast.emit('voteForEmit', vote1);
 	});
 
 	socket.on('disconnect', () => {

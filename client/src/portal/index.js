@@ -16,6 +16,7 @@ import { socket } from '../service/socket';
 import queryString from 'query-string';
 import MyAccordion from '../components/Accordion/Accordion';
 import IXLContent from '../pages/IXLContent';
+import VotingSample from '../pages/voting-sample';
 import MyStatus from './status';
 import YiFooter from './footer';
 import Links from './links';
@@ -25,7 +26,7 @@ import { observer, useObservable, useLocalStore } from 'mobx-react';
 
 import UserStore from '../service/UserStore';
 
-const { Header, Content, Sider } = Layout;
+const { Header, Content } = Layout;
 
 const settings = {
 	dots: true,
@@ -120,9 +121,10 @@ export const Portal = observer(({ location }) => {
 						)}
 						<Content style={{ padding: '0 24px', minHeight: 280 }}>
 							{slideIndex == 6 && <YoutubeVideo />}
-							{slideIndex == 11 && <YiChart />}
+							{slideIndex == 12 && <YiChart />}
 							{slideIndex == 7 && <IXLContent />}
 							{slideIndex == 8 && <Ending />}
+							{slideIndex == 14 && <VotingSample />}
 							{slideIndex < 6 && (
 								<div>
 									<Slider slideIndex={slideIndex} />
