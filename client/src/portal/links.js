@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Carousel, Layout, Menu } from 'antd';
-import { Result, Button, Divider, Switch, Card } from 'antd';
-import { UserOutlined, LaptopOutlined, NotificationOutlined, SmileOutlined, YoutubeOutlined } from '@ant-design/icons';
+import { Layout, Menu } from 'antd';
+import { Button, Divider, Switch, Card } from 'antd';
+import {
+	UserOutlined,
+	LaptopOutlined,
+	FundProjectionScreenOutlined,
+	NotificationOutlined,
+	ReadOutlined,
+	YoutubeOutlined,
+	LineChartOutlined
+} from '@ant-design/icons';
 import { socket } from '../service/socket';
-import { notification } from 'antd';
 const { SubMenu } = Menu;
 const { Sider } = Layout;
 
@@ -44,7 +51,7 @@ function Links({ onSliderClick, selectedKeys, userName, swithcMenu, isMenuOn, as
 					<Menu.Item key="1">Welcome</Menu.Item>
 					<Menu.Item key="2">JavaScript async</Menu.Item>
 					<Menu.Item key="3">Steps</Menu.Item>
-					<Menu.Item key="4">Our Team</Menu.Item>
+					<Menu.Item key="4">Vote for Best Movice</Menu.Item>
 				</SubMenu>
 				<Menu.Item key="6" icon={<YoutubeOutlined />}>
 					Videos
@@ -56,10 +63,16 @@ function Links({ onSliderClick, selectedKeys, userName, swithcMenu, isMenuOn, as
 					The Ending
 				</Menu.Item>
 				<SubMenu key="sub2" icon={<UserOutlined />} title="Business">
-					<Menu.Item key="11">Charts</Menu.Item>
-					<Menu.Item key="12">JavaScript async</Menu.Item>
-					<Menu.Item key="13">Steps</Menu.Item>
-					<Menu.Item key="14">Our Team</Menu.Item>
+					<Menu.Item key="11" icon={<ReadOutlined />}>
+						Tradition PPT
+					</Menu.Item>
+					<Menu.Item key="12" icon={<LineChartOutlined />}>
+						Charts
+					</Menu.Item>
+					<Menu.Item key="13" icon={<FundProjectionScreenOutlined />}>
+						TV Show
+					</Menu.Item>
+					<Menu.Item key="14">Vote for Best Movice</Menu.Item>
 				</SubMenu>
 				<SubMenu key="sub3" icon={<UserOutlined />} title="Page templates">
 					<Menu.Item key="31">Coming Soon</Menu.Item>
