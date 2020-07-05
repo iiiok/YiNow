@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Layout, Menu } from 'antd';
 import { Button, Divider, Switch, Card } from 'antd';
 import {
-	UserOutlined,
+	UserOutlined,CheckOutlined,SafetyOutlined,EnvironmentOutlined,QuestionCircleOutlined,
 	LaptopOutlined,
-	FundProjectionScreenOutlined,
+	FundProjectionScreenOutlined,IssuesCloseOutlined,FastForwardOutlined,QrcodeOutlined,
 	NotificationOutlined,
 	ReadOutlined,
 	YoutubeOutlined,
@@ -45,13 +45,20 @@ function Links({ onSliderClick, selectedKeys, userName, swithcMenu, isMenuOn, as
 				//   defaultSelectedKeys={currentMenu}
 				selectedKeys={currentMenu}
 				defaultOpenKeys={[ 'sub1' ]}
-				// style={{ height: '100%' }}
 			>
-				<SubMenu key="sub1" icon={<UserOutlined />} title="PPT Meeting">
-					<Menu.Item key="1">Welcome</Menu.Item>
+					<Menu.Item key="1" icon={<EnvironmentOutlined />}>Welcome</Menu.Item>
+					<Menu.Item key="11" icon={<ReadOutlined />}>
+						Simple Example
+					</Menu.Item>
+					<Menu.Item key="22" icon={<QuestionCircleOutlined />}>Reasons Why</Menu.Item>
+								<SubMenu key="sub3" icon={<UserOutlined />} title="Behind the Scene">
+					<Menu.Item key="31">WebSocket & socket.io</Menu.Item>
+					<Menu.Item key="32">Architecture</Menu.Item>
+				</SubMenu>
+				<SubMenu key="sub1" icon={<QrcodeOutlined />} title="Scenarios">
 					<Menu.Item key="2">JavaScript async</Menu.Item>
-					<Menu.Item key="3">Steps</Menu.Item>
-					<Menu.Item key="4">Vote for Best Movice</Menu.Item>
+					<Menu.Item key="93">Steps</Menu.Item>
+					<Menu.Item key="14" icon={<SafetyOutlined />}>Intro & Vote</Menu.Item>
 				</SubMenu>
 				<Menu.Item key="6" icon={<YoutubeOutlined />}>
 					Videos
@@ -59,27 +66,21 @@ function Links({ onSliderClick, selectedKeys, userName, swithcMenu, isMenuOn, as
 				<Menu.Item key="7" icon={<LaptopOutlined />}>
 					iLearning
 				</Menu.Item>
-				<Menu.Item key="8" icon={<NotificationOutlined />}>
-					The Ending
-				</Menu.Item>
 				<SubMenu key="sub2" icon={<UserOutlined />} title="Business">
-					<Menu.Item key="11" icon={<ReadOutlined />}>
-						Tradition PPT
-					</Menu.Item>
+
 					<Menu.Item key="12" icon={<LineChartOutlined />}>
 						Charts
 					</Menu.Item>
 					<Menu.Item key="13" icon={<FundProjectionScreenOutlined />}>
 						TV Show
 					</Menu.Item>
-					<Menu.Item key="14">Vote for Best Movice</Menu.Item>
 				</SubMenu>
-				<SubMenu key="sub3" icon={<UserOutlined />} title="Page templates">
-					<Menu.Item key="31">Coming Soon</Menu.Item>
-					<Menu.Item key="32">JavaScript async</Menu.Item>
-					<Menu.Item key="33">Steps</Menu.Item>
-					<Menu.Item key="34">Our Team</Menu.Item>
-				</SubMenu>
+				
+					<Menu.Item key="34" icon={<FastForwardOutlined />}>What's Next</Menu.Item>
+
+				<Menu.Item key="8" icon={<IssuesCloseOutlined />}>
+					The Ending
+				</Menu.Item>
 			</Menu>
 		</Sider>
 	);

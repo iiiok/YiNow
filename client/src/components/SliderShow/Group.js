@@ -39,7 +39,7 @@ const Group = ({ drawerVisable }) => {
 	);
 
 	return (
-		<div>
+		<div style={{marginTop:"-24px"}}>
 			<List
 				grid={{
 					gutter: 12,
@@ -81,7 +81,7 @@ const Group = ({ drawerVisable }) => {
 					</List.Item>
 				)}
 			/>
-			<Drawer width={640} placement="right" closable={false} onClose={onClose} visible={visible}>
+			<Drawer width={740} placement="right" closable={false} onClose={onClose} visible={visible}>
 				<h1> 功夫 (2004) </h1>
 
 				<Divider />

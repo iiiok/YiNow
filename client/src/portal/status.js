@@ -1,8 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Switch, Button, Badge } from 'antd';
+import { Switch, Button, Badge ,Tag} from 'antd';
 import { socket } from '../service/socket';
 import { notification } from 'antd';
 import { debounce } from 'lodash';
+import {
+	SmileOutlined
+} from '@ant-design/icons';
 let positionY = 0;
 const sentScrollUpdate = (position) => {
 	socket.emit('syncScrollPosition', position);
@@ -126,9 +129,12 @@ function MyStatus({ asHost, userName, onSwitch }) {
 			<Switch checkedChildren="On Air" unCheckedChildren="Offline" checked={isOnAir} />&nbsp;&nbsp;
 			<Badge count={userCount} style={{ backgroundColor: '#52c41a' }} title="Total attendee" />&nbsp;&nbsp;
 			{!alreadySayHi && (
-				<Button type="primary" onClick={justSayHi}>
-					Say Hi
-				</Button>
+				// <Button type="primary" onClick={justSayHi}>
+				// 	Say Hi
+				// </Button>
+				<Tag icon={<SmileOutlined />} color="#55acee" onClick={justSayHi}>
+				Say Hi
+			  </Tag>
 			)}
 		</div>
 	);

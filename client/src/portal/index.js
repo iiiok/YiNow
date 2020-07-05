@@ -20,6 +20,8 @@ import VotingSample from '../pages/voting-sample';
 import MyStatus from './status';
 import YiFooter from './footer';
 import Links from './links';
+import ExamplePPT from '../pages/Example-PPT';
+
 
 import { observer, useObservable, useLocalStore } from 'mobx-react';
 // import { observer } from 'mobx-react-lite';
@@ -121,9 +123,11 @@ export const Portal = observer(({ location }) => {
 						)}
 						<Content style={{ padding: '0 24px', minHeight: 280 }}>
 							{slideIndex == 6 && <YoutubeVideo />}
+							{slideIndex == 11 && <ExamplePPT />}
 							{slideIndex == 12 && <YiChart />}
 							{slideIndex == 7 && <IXLContent />}
 							{slideIndex == 8 && <Ending />}
+							{slideIndex == 22 && <MySteps />}
 							{slideIndex == 14 && <VotingSample />}
 							{slideIndex < 6 && (
 								<div>
@@ -174,7 +178,7 @@ function Slider({ slideIndex }) {
 						<img src="https://wowslider.com/sliders/demo-77/data1/images/road220058.jpg" />
 					</p>
 					<HostScript script={paragraph1} asHost={store.asHost} />
-					<p className="flex-caption">Adventurer Cheesecake Brownie</p>
+					<p className="flex-caption">EPAM SYSTEM 2020</p>
 				</Card>
 			</div>
 			<div>
@@ -182,7 +186,7 @@ function Slider({ slideIndex }) {
 			</div>
 			<div>
 				<MySteps />
-				<p className="flex-caption">Adventurer Cheesecake Brownie</p>
+				<p className="flex-caption">EPAM SYSTEM 2020</p>
 			</div>
 
 			{/* <div>

@@ -23,7 +23,7 @@ const color = [
 	'#000075',
 	'#808080'
 ];
-const data = {
+const MoviceData = {
 	labels: [
 		'Forrest Gump',
 		'无间道',
@@ -49,16 +49,20 @@ const data2 = {
 	labels: [ 'January', 'February', 'March', 'April', 'May', 'June', 'July' ],
 	datasets: [
 		{
-			label: 'My First dataset',
-			backgroundColor: 'rgba(255,99,132,0.2)',
-			borderColor: 'rgba(255,99,132,1)',
+			label: 'Our Businesss Predition in 2021',
+			// backgroundColor: 'rgba(255,99,132,0.2)',
+			// borderColor: 'rgba(255,99,132,1)',
 			borderWidth: 1,
 			hoverBackgroundColor: 'rgba(255,99,132,0.4)',
 			hoverBorderColor: 'rgba(255,99,132,1)',
-			data: [ 65, 59, 80, 81, 56, 55, 40 ]
+			data: [  36, 43,65, 59, 80, 81, 56 ],
+			fill:false,
+			backgroundColor:["rgba(255, 99, 132, 0.2)","rgba(255, 159, 64, 0.2)","rgba(255, 205, 86, 0.2)","rgba(75, 192, 192, 0.2)","rgba(54, 162, 235, 0.2)","rgba(153, 102, 255, 0.2)","rgba(131, 67, 107, 0.2)"],
+			borderColor:["rgb(255, 99, 132)","rgb(255, 159, 64)","rgb(255, 205, 86)","rgb(75, 192, 192)","rgb(54, 162, 235)","rgb(153, 102, 255)","rgb(131, 67, 107)"]
 		}
 	]
 };
+const options2 = {scales:{xAxes:[{ticks:{beginAtZero:true}}]}};
 
 const labels = [ 'January', 'February', 'March', 'April', 'May', 'June', 'July' ];
 const data3 = {
@@ -229,4 +233,4 @@ const paragraph1 =
   level of the speakers, but also shows the importance – even more,\
   the urgency – of the theme of this conference.';
 
-export { data, data2, data3, paragraph1, plugins, options, movice };
+export { MoviceData, data2, options2,data3, paragraph1, plugins, options, movice };

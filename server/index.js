@@ -69,6 +69,13 @@ io.on('connect', (socket) => {
 
 		// callback();
 	});
+	socket.on('syncSlider', (obj) => {
+		// io.to('react').emit('message', { user: 'user.name', text: 'message' });
+		socket.broadcast.emit('syncSliderEmit-' + obj.sliderId, { index: obj.index });
+		console.log('syncSlider', 'syncSliderEmit-' + obj.sliderId, obj.index);
+
+		// callback();
+	});
 	socket.on('sayHi2All', () => {
 		console.log('sayHi to Clients');
 		// io.to('react').emit('message', { user: 'user.name', text: 'message' });
@@ -116,7 +123,21 @@ io.on('connect', (socket) => {
 		console.log('voteFor:', key);
 		vote1[key] = vote1[key] + 1;
 		console.log('voteForKey:', vote1);
-		socket.broadcast.emit('voteForEmit', vote1);
+		socket.emit('voteForEmit', vote1);
+	});
+	socket.on('openALink', (key) => {
+		console.log('openALink:', key);
+		socket.broadcast.emit('openALinkEmit', key);
+	});
+	socket.on('closeALink', () => {
+		console.log('closeALink:' );
+		socket.broadcast.emit('closeALinkEmit');
+	});
+	socket.on('voteFor', (key) => {
+		console.log('voteFor:', key);
+		vote1[key] = vote1[key] + 1;
+		console.log('voteForKey:', vote1);
+		socket.emit('voteForEmit', vote1);
 	});
 
 	socket.on('disconnect', () => {

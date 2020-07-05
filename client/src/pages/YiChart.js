@@ -5,7 +5,7 @@ import { socket } from '../service/socket';
 import { data, data2, data3, plugins, options } from '../service/dummyDate';
 import { Divider } from 'antd';
 import { observer, useObservable, useLocalStore } from 'mobx-react';
-import Voting from '../components/Voting/voting';
+// import Voting from '../components/Voting/voting';
 const { TabPane } = Tabs;
 
 export default observer(({ userName }) => {
