@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Steps } from 'antd';
-import { Divider,Card } from 'antd';
+import { Divider, Card } from 'antd';
 import { socket } from '../../service/socket';
+import MyAccordion from '../Accordion/Accordion';
 const { Step } = Steps;
-
 
 function MySteps() {
 	const [ currentStep, setCurrentStep ] = useState(0);
@@ -20,8 +20,6 @@ function MySteps() {
 		});
 	}, []);
 
-	
-
 	return (
 		<Card title={'Why do we need this new way of sharing PPT?'}>
 			<Steps
@@ -31,29 +29,14 @@ function MySteps() {
 				onChange={onChangeStep}
 				className="site-navigation-steps"
 			>
-				<Step
-					title="Rich Medias"
-					subTitle="Video, Web, Intraction"
-					description="We can do a lot more then a PPT format"
-				/>
-				<Step title="Set Clear  Priorities" subTitle="Measurement" description="Decide What To Measure..." />
-				<Step title="Interpret Results" subTitle="images" description=" key questions" />
+				<Step title="Traditional Online Meeting" />
+				<Step title="Minimum Network Dependency" />
+				<Step title="More than PPT" />
 			</Steps>
 			<Divider />
-			{
-				(currentStep ===0) && (<p>
-					 1. The presentr'll be about to navigate the pages easily. \
-				</p>
-					)
-			}
-			{
-				(currentStep ===1) && (<p>
-					2. 0 pixal transfer lost, the attendees have a clear view as the  presenter. 3.Bandwith \
-That is more..."
-				</p>
-					)
-			}
-
+			{currentStep === 0 && <MyAccordion />}
+			{currentStep === 1 && <MyAccordion />}
+			{currentStep === 2 && <MyAccordion />}
 		</Card>
 	);
 }

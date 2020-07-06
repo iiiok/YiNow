@@ -8,6 +8,7 @@ export class User {
 	isMenuOn = true;
 	userName = '';
 	userList = [];
+	slideIndex = 1;
 	// get remainingTodos() {
 	// 	return this.todos.filter((t) => !t.completed).length;
 	// }

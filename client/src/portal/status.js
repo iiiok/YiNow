@@ -1,11 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Switch, Button, Badge ,Tag} from 'antd';
+import { Switch, Button, Badge, Tag } from 'antd';
 import { socket } from '../service/socket';
 import { notification } from 'antd';
 import { debounce } from 'lodash';
-import {
-	SmileOutlined
-} from '@ant-design/icons';
+import { SmileOutlined } from '@ant-design/icons';
 let positionY = 0;
 const sentScrollUpdate = (position) => {
 	socket.emit('syncScrollPosition', position);
@@ -74,6 +72,7 @@ function MyStatus({ asHost, userName, onSwitch }) {
 			: window.removeEventListener('scroll', handleScroll);
 	};
 	useEffect(() => {
+		socket.emit('sayHiLogin', userName);
 		socket.on('connect', function() {
 			console.log('connect');
 			setIsOnAir(true);
@@ -106,9 +105,9 @@ function MyStatus({ asHost, userName, onSwitch }) {
 		});
 	}, []);
 	const justSayHi = () => {
-		console.log('sayHiLogin', userName);
+		console.log('sendNotice', userName);
 		setAlreadySayHi(true);
-		socket.emit('sayHiLogin', userName);
+		socket.emit('sendNotice', { userName: userName, message: 'Just say hi.' }, () => {});
 	};
 	return (
 		<div>
@@ -133,8 +132,8 @@ function MyStatus({ asHost, userName, onSwitch }) {
 				// 	Say Hi
 				// </Button>
 				<Tag icon={<SmileOutlined />} color="#55acee" onClick={justSayHi}>
-				Say Hi
-			  </Tag>
+					Say Hi
+				</Tag>
 			)}
 		</div>
 	);

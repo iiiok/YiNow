@@ -20,7 +20,7 @@ const SayHi = () => {
 		});
 		// socket.on('openALinkEmit', (url) => {
 		// 	console.log('openALinkEmit',url);
-		// 	window.openedWindow = window.open(url,"wwnow"); 
+		// 	window.openedWindow = window.open(url,"wwnow");
 		// });
 		// socket.on('closeALinkEmit', () => {
 		// 	console.log('closeALinkEmit',);
@@ -34,7 +34,7 @@ const SayHi = () => {
 			setVisible(false);
 			setShowResult(true);
 			console.log('setShowResult(true)');
-		}, 400);
+		}, 200);
 	};
 	const justSayHi = () => {
 		console.log('justSayHi');
@@ -45,7 +45,7 @@ const SayHi = () => {
 	// 	console.log('openALink');
 	// 	const url ='/coming-soon.html';
 	// 	socket.emit('openALink', url);
-	// 	window.openedWindow = window.open(url,"wwnow"); 
+	// 	window.openedWindow = window.open(url,"wwnow");
 	// };
 	// const closeALink = () => {
 	// 	socket.emit('closeALink');
@@ -57,7 +57,9 @@ const SayHi = () => {
 				<Col span={6}>
 					<Button type="primary" onClick={justSayHi}>
 						Say Hi to every one
-					</Button><br/><br/>
+					</Button>
+					<br />
+					<br />
 					{/* <Button type="primary" onClick={openALink}>
 						Open a Link
 					</Button>
@@ -65,7 +67,7 @@ const SayHi = () => {
 					<Button type="primary" onClick={closeALink}>
 						Close The Link
 					</Button> */}
-					<OpenALink url="http://www.qq.com/" />
+					<OpenALink url="http://www.epam.com/" />
 				</Col>
 				<Col span={18}>
 					{showResult ? (

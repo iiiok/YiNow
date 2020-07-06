@@ -8,6 +8,7 @@ const { addUser, removeUser, getUser, getUsersInRoom } = require('./users');
 const router = require('./router');
 let userList = new Set();
 let vote1 = { 1: 1, 2: 1, 3: 1, 4: 1, 5: 1, 6: 1, 7: 1, 8: 1, 9: 1, 10: 1 };
+let sliderIndex = 1;
 
 const app = express();
 const server = http.createServer(app);
@@ -48,19 +49,17 @@ io.on('connect', (socket) => {
 	});
 	socket.on('updateSliderIndex', (key, callback) => {
 		// const user = getUser(socket.id);
-		console.log('object', key, new Date().getTime());
+		// console.log('object', key, new Date().getTime());
 		// io.to('react').emit('message', { user: 'user.name', text: 'message' });
 		socket.broadcast.emit('updateSliderIndexEmit', { sliderIndex: key });
-
+		sliderIndex = key;
 		callback();
 	});
 
-	socket.on('updateAccordionIndex', (key, callback) => {
+	socket.on('updateAccordionIndex', (key) => {
 		console.log('accordionIndex', key);
 		// io.to('react').emit('message', { user: 'user.name', text: 'message' });
 		io.emit('updateAccordionIndexEmit', { accordionIndex: key });
-
-		callback();
 	});
 	socket.on('syncScrollPosition', (key, callback) => {
 		console.log('syncScrollPositionEmit', key, new Date().getTime());
@@ -80,6 +79,10 @@ io.on('connect', (socket) => {
 		console.log('sayHi to Clients');
 		// io.to('react').emit('message', { user: 'user.name', text: 'message' });
 		socket.broadcast.emit('sayHiEmit', {});
+	});
+	socket.on('setShowModal', (value) => {
+		console.log('setShowModal to', value);
+		socket.broadcast.emit('setShowModalEmit', value);
 	});
 	socket.on('openDrawer', (type) => {
 		console.log('openDrawer');
@@ -123,14 +126,14 @@ io.on('connect', (socket) => {
 		console.log('voteFor:', key);
 		vote1[key] = vote1[key] + 1;
 		console.log('voteForKey:', vote1);
-		socket.emit('voteForEmit', vote1);
+		socket.broadcast.emit('voteForEmit', vote1);
 	});
 	socket.on('openALink', (key) => {
 		console.log('openALink:', key);
 		socket.broadcast.emit('openALinkEmit', key);
 	});
 	socket.on('closeALink', () => {
-		console.log('closeALink:' );
+		console.log('closeALink:');
 		socket.broadcast.emit('closeALinkEmit');
 	});
 	socket.on('voteFor', (key) => {
@@ -148,6 +151,10 @@ io.on('connect', (socket) => {
 			io.to(user.room).emit('roomData', { room: user.room, users: getUsersInRoom(user.room) });
 		}
 	});
+	// setInterval(() => {
+	// 	socket.broadcast.emit('updateSliderIndexEmit', { sliderIndex: sliderIndex });
+	// 	// console.log('Broadcast SliderId', sliderIndex);
+	// }, 4000);
 	// let counter = 0;
 	// setInterval(() => {
 	// 	++counter;

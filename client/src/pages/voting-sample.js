@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Doughnut, HorizontalBar, Bar } from 'react-chartjs-2';
-import { Row, Col, Icon, Button,  Tabs, Card, Result } from 'antd';
+import { Row, Col, Icon, Button, Tabs, Card, Result } from 'antd';
 import { socket } from '../service/socket';
 import Group from '../components/SliderShow/Group';
 import { Divider } from 'antd';
@@ -14,7 +14,7 @@ const options = {
 	},
 	layout: {
 		padding: {
-			top: 0,
+			top: 0
 		}
 	}
 };
@@ -51,7 +51,6 @@ export default () => {
 
 	return (
 		<Card title="Top 10 Movices Voting">
-
 			<Group drawerVisable={drawerVisable} />
 			<h2>
 				Great, here is what{' '}
@@ -59,11 +58,17 @@ export default () => {
 					<i>{voteCount}</i>
 				</u>{' '}
 				people think!
-			</h2><Divider />
-			<Row> <Col span={12}><Doughnut data={resulteData} redraw height="160px" options={options2}/></Col>
-			<Col span={12}><Bar data={resulteData} redraw options={options} height="180px"/></Col></Row>
-
-			
-    </Card>
+			</h2>
+			<Divider />
+			<Row>
+				{' '}
+				<Col span={12}>
+					<Doughnut data={resulteData} redraw height={160} options={options2} />
+				</Col>
+				<Col span={12}>
+					<Bar data={resulteData} redraw options={options} height={180} />
+				</Col>
+			</Row>
+		</Card>
 	);
 };

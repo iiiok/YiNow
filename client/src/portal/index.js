@@ -3,10 +3,11 @@ import { Carousel, Layout, Menu, Breadcrumb, Switch } from 'antd';
 import { Result, Button, Divider, Collapse, Card } from 'antd';
 import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
 import './index.css';
-import { UserOutlined, LaptopOutlined, NotificationOutlined, SmileOutlined, YoutubeOutlined } from '@ant-design/icons';
+import { SmileOutlined } from '@ant-design/icons';
 import Group from '../components/SliderShow/Group';
 import Ending from '../pages/Ending';
 import YiChart from '../pages/YiChart';
+import RightList from '../pages/RightList';
 import MySteps from '../components/SliderShow/MySteps';
 import HostScript from '../components/TextView/HostScript';
 import { paragraph1 } from '../service/dummyDate';
@@ -21,7 +22,6 @@ import MyStatus from './status';
 import YiFooter from './footer';
 import Links from './links';
 import ExamplePPT from '../pages/Example-PPT';
-
 
 import { observer, useObservable, useLocalStore } from 'mobx-react';
 // import { observer } from 'mobx-react-lite';
@@ -48,6 +48,7 @@ export const Portal = observer(({ location }) => {
 	const store = useContext(UserStore);
 	const { userName } = queryString.parse(location.search);
 	store.userName = userName;
+	console.log('store.slideIndex', store.slideIndex);
 
 	const [ slideIndex, setSlideIndex ] = useState(1);
 	const onSliderClick = (e) => {
@@ -61,6 +62,7 @@ export const Portal = observer(({ location }) => {
 	useEffect(
 		() => {
 			socket.on('updateSliderIndexEmit', (key) => {
+				store.slideIndex = key.sliderIndex;
 				console.log('updateSliderIndexEmit', key.sliderIndex, new Date().getTime());
 				setSlideIndex(key.sliderIndex);
 			});
@@ -85,10 +87,8 @@ export const Portal = observer(({ location }) => {
 					<div id="logo">
 						<img alt="logo" src="/images/Epam_Logo.png" />
 					</div>
-					<Menu theme="dark" mode="horizontal" defaultSelectedKeys={[ '2' ]}>
-						<Menu.Item key="1">nav 1</Menu.Item>
-						<Menu.Item key="2">nav 2</Menu.Item>
-						<Menu.Item key="3">nav 3</Menu.Item>
+					<Menu theme="dark" mode="horizontal" defaultSelectedKeys={[ '1' ]}>
+						<Menu.Item key="1">Next Genaration of Meeting and Event</Menu.Item>
 					</Menu>
 					<div style={{ width: '40%' }} />
 					<MyStatus
@@ -105,12 +105,6 @@ export const Portal = observer(({ location }) => {
 						<Breadcrumb.Item>OnAir</Breadcrumb.Item>
 					</Breadcrumb>
 					<Layout className="site-layout-background" style={{ padding: '24px 0' }}>
-						{/* <Sider className="site-layout-background" width={200}>
-							<Card size="small" title={userName} />
-
-							<Links onSliderClick={onSliderClick} selectedKeys={[ slideIndex.toString() ]} />
-
-						</Sider> */}
 						{(store.asHost || store.isMenuOn) && (
 							<Links
 								onSliderClick={onSliderClick}
@@ -124,6 +118,7 @@ export const Portal = observer(({ location }) => {
 						<Content style={{ padding: '0 24px', minHeight: 280 }}>
 							{slideIndex == 6 && <YoutubeVideo />}
 							{slideIndex == 11 && <ExamplePPT />}
+							{slideIndex == 31 && <RightList />}
 							{slideIndex == 12 && <YiChart />}
 							{slideIndex == 7 && <IXLContent />}
 							{slideIndex == 8 && <Ending />}
