@@ -7,7 +7,7 @@ import { socket } from '../service/socket';
 
 const { Text, Paragraph } = Typography;
 
-export default ({ url }) => {
+export default ({ url,title }) => {
 	const [ isOpen, setIsOpen ] = useState(false);
 	const asHost = useContext(UserStore).asHost;
 
@@ -41,11 +41,11 @@ export default ({ url }) => {
 		// asHost && (
 		isOpen ? (
 			<Button type="primary" onClick={closeALink}>
-				Close Link
+				Close {title}
 			</Button>
 		) : (
 			<Button type="primary" onClick={openALink}>
-				Open Link
+				Open {title}
 			</Button>
 		)
 

@@ -1,10 +1,8 @@
-import React, { useState, useEffect, useRef, useCallback, useContext, createContext } from 'react';
-import { Carousel, Layout, Menu, Breadcrumb, Switch } from 'antd';
-import { Result, Button, Divider, Collapse, Card } from 'antd';
+import React, { useState, useEffect, useRef,  useContext, createContext } from 'react';
+import { Layout, Menu, Breadcrumb, Switch } from 'antd';
+import {  Button, Divider, Card } from 'antd';
 import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
 import './index.css';
-import { SmileOutlined } from '@ant-design/icons';
-import Group from '../components/SliderShow/Group';
 import Ending from '../pages/Ending';
 import YiChart from '../pages/YiChart';
 import RightList from '../pages/RightList';
@@ -15,7 +13,6 @@ import YoutubeVideo from '../components/SliderShow/YoutubeVideo.js';
 import SayHi from '../components/SayHi/sayhi';
 import { socket } from '../service/socket';
 import queryString from 'query-string';
-import MyAccordion from '../components/Accordion/Accordion';
 import IXLContent from '../pages/IXLContent';
 import VotingSample from '../pages/voting-sample';
 import MyStatus from './status';
@@ -115,7 +112,7 @@ export const Portal = observer(({ location }) => {
 								isMenuOn={store.isMenuOn}
 							/>
 						)}
-						<Content style={{ padding: '0 24px', minHeight: 280 }}>
+						<Content style={{ padding: '0 24px', minHeight: 480 }}>
 							{slideIndex == 6 && <YoutubeVideo />}
 							{slideIndex == 11 && <ExamplePPT />}
 							{slideIndex == 31 && <RightList />}
@@ -124,16 +121,19 @@ export const Portal = observer(({ location }) => {
 							{slideIndex == 8 && <Ending />}
 							{slideIndex == 22 && <MySteps />}
 							{slideIndex == 14 && <VotingSample />}
-							{slideIndex < 6 && (
-								<div>
-									<Slider slideIndex={slideIndex} />
-									<Divider />
-									{slideIndex == 1 && (
+							{slideIndex == 1 && (
+								<Card title={'Hi, ' + store.userName + '. Welcome to the meeting.'}>
+								<p>
+									<img src="https://wowslider.com/sliders/demo-77/data1/images/road220058.jpg" alt="" width="100%"/>
+								</p>
+								<HostScript script={paragraph1} asHost={store.asHost} />
+								<p className="flex-caption">EPAM SYSTEM 2020</p>
+								<Divider />
 										<Card>
 											<SayHi />
 										</Card>
-									)}
-								</div>
+							</Card>
+									
 							)}
 						</Content>
 					</Layout>
@@ -144,57 +144,3 @@ export const Portal = observer(({ location }) => {
 	);
 });
 
-function Slider({ slideIndex }) {
-	const store = useContext(UserStore);
-	const sliderX = useRef();
-
-	const [ drawerVisable, setDrawerVisable ] = useState(false);
-	const { username } = useContext(UserInfoConText);
-	console.log('username', username);
-	useEffect(() => {
-		socket.on('openDrawerEmit', (type) => {
-			console.log('openDrawerEmit outside', type);
-			setDrawerVisable(type);
-		});
-	}, []);
-	useEffect(
-		() => {
-			sliderX.current.slick.slickGoTo(slideIndex - 1);
-			console.log('slideIndex', slideIndex);
-		},
-		[ slideIndex ]
-	);
-
-	return (
-		<Carousel ref={sliderX} {...settings}>
-			<div>
-				<Card title={'Hi, ' + username + '. Welcome to the meeting.'}>
-					<p>
-						<img src="https://wowslider.com/sliders/demo-77/data1/images/road220058.jpg" />
-					</p>
-					<HostScript script={paragraph1} asHost={store.asHost} />
-					<p className="flex-caption">EPAM SYSTEM 2020</p>
-				</Card>
-			</div>
-			<div>
-				<MyAccordion />
-			</div>
-			<div>
-				<MySteps />
-				<p className="flex-caption">EPAM SYSTEM 2020</p>
-			</div>
-
-			{/* <div>
-				<YoutubeVideo />
-			</div> */}
-			<div>
-				<Group drawerVisable={drawerVisable} />
-				<Result
-					icon={<SmileOutlined />}
-					title="Great, we have done all the operations!"
-					extra={<Button type="primary">Next</Button>}
-				/>
-			</div>
-		</Carousel>
-	);
-}

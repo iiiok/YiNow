@@ -5,11 +5,12 @@ import { socket } from '../service/socket';
 import { data, data2, data3, plugins, options } from '../service/dummyDate';
 import { Divider } from 'antd';
 import { observer, useObservable, useLocalStore } from 'mobx-react';
+import OpenALink from '../components/OpenALink';
 // import Voting from '../components/Voting/voting';
 const { TabPane } = Tabs;
 
 export default observer(({ userName }) => {
-	const [ tabIndex, setTabIndex ] = useState(0);
+	const [ tabIndex, setTabIndex ] = useState('1');
 	const selectTab = (index) => {
 		console.log('syncShowingTab', index);
 		socket.emit('syncShowingTab', index);
@@ -25,9 +26,9 @@ export default observer(({ userName }) => {
 	return (
 		<div className="row">
 			<Card title={'This is a business meeting'}>
-				<Tabs tabPosition="right" onChange={(TabIndex) => selectTab(TabIndex)}>
+				<Tabs tabPosition="right" onChange={(TabIndex) => selectTab(TabIndex)} activeKey={tabIndex}>
 					<TabPane tab="Cover pages" key="1">
-						<h2>Cover page</h2>
+						<h2>Cover page{tabIndex}</h2>
 						<img src="/images/1600w-Hy7XLKyWwv0.jpg" width="100%" />
 					</TabPane>
 					<TabPane tab="How is our business doing this year?" key="2">
@@ -38,15 +39,25 @@ export default observer(({ userName }) => {
 						<h2>Mixed data Example</h2>
 						<Bar data={data3} options={options} plugins={plugins} />
 					</TabPane>
-					<TabPane tab="Some Information" key="4">
-						<h3>Links</h3>
+					<TabPane tab="Example from Socket.IO" key="4">
+						<h3>Socket.IO</h3>
 						<Divider />
-						<h3>Videos</h3>
 						<video controls style={{ width: '100%', height: 'auto' }}>
-							<source src="/video/socket_io_1.mp4" type="video/mp4" />
+							<source src="/video/Socket_IO.mp4" type="video/mp4" />
 						</video>
+						<OpenALink url="https://socket.io/" title="socket.io" />
 					</TabPane>
-					<TabPane tab="The Conclusion" key="5">
+					<TabPane tab="Example from Coinbase" key="5">
+						<h3>Socket.IO</h3>
+						<Divider />
+
+						<video controls style={{ width: '100%', height: 'auto' }}>
+							<source src="/video/coinbase.mp4" type="video/mp4" />
+						</video>
+
+						<OpenALink url="https://pro.coinbase.com/" title="Coinbase" />
+					</TabPane>
+					<TabPane tab="The Conclusion" key="6">
 						<h2>That is all, Thanks</h2>
 						<img src="/images/1600w-wl2DiGq9Lj4.jpg" width="100%" />
 					</TabPane>

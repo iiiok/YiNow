@@ -89,56 +89,56 @@ function Slider({ slideIndex }) {
 		<Carousel ref={slider_ab1} {...settings} className="ppt">
 			<div>
 				<p>
-					<img src="/images/1600w-Hy7XLKyWwv0.jpg" />
+					<img src="/images/1600w-Hy7XLKyWwv0.jpg"  alt=""/>
 				</p>
 
 				<p className="flex-caption">Welcome Page</p>
 			</div>
 			<div>
 				<p>
-					<img src="/images/7244-01-business-presentation-16x9-3.jpg" />
+					<img src="/images/7244-01-business-presentation-16x9-3.jpg"  alt=""/>
 				</p>
 
 				<p className="flex-caption">About Us</p>
 			</div>
 			<div>
 				<p>
-					<img src="/images/7244-01-business-presentation-16x9-14.jpg" />
+					<img src="/images/7244-01-business-presentation-16x9-14.jpg"  alt=""/>
 				</p>
 
 				<p className="flex-caption">Our Global Reach</p>
 			</div>
 			<div>
 				<p>
-					<img src="/images/7244-01-business-presentation-16x9-2.jpg" />
+					<img src="/images/7244-01-business-presentation-16x9-2.jpg"  alt=""/>
 				</p>
 
 				<p className="flex-caption">EPAM SYSTEM 2020</p>
 			</div>
 			<div>
 				<p>
-					<img src="/images/7244-01-business-presentation-16x9-13.jpg" />
+					<img src="/images/7244-01-business-presentation-16x9-13.jpg"  alt=""/>
 				</p>
 
 				<p className="flex-caption">EPAM SYSTEM 2020</p>
 			</div>
 			<div>
 				<p>
-					<img src="/images/7244-01-business-presentation-16x9-4.jpg" />
+					<img src="/images/7244-01-business-presentation-16x9-4.jpg"  alt=""/>
 				</p>
 
 				<p className="flex-caption">EPAM SYSTEM 2020</p>
 			</div>
 			<div>
 				<p>
-					<img src="/images/7244-01-business-presentation-16x9-7.jpg" />
+					<img src="/images/7244-01-business-presentation-16x9-7.jpg"  alt=""/>
 				</p>
 
 				<p className="flex-caption">EPAM SYSTEM 2020</p>
 			</div>
 			<div>
 				<p>
-					<img src="/images/7244-01-business-presentation-16x9-8.jpg" />
+					<img src="/images/7244-01-business-presentation-16x9-8.jpg" alt=""/>
 				</p>
 
 				<p className="flex-caption">EPAM SYSTEM 2020</p>
@@ -150,7 +150,7 @@ function Slider({ slideIndex }) {
 			</div>
 			<div>
 				<p>
-					<img src="/images/7244-01-business-presentation-16x9-10.jpg" />
+					<img src="/images/7244-01-business-presentation-16x9-10.jpg"  alt=""/>
 				</p>
 
 				<p className="flex-caption">EPAM SYSTEM 2020</p>
@@ -158,7 +158,7 @@ function Slider({ slideIndex }) {
 
 			<div>
 				<p>
-					<img src="/images/7244-01-business-presentation-16x9-15.jpg" />
+					<img src="/images/7244-01-business-presentation-16x9-15.jpg"  alt=""/>
 				</p>
 
 				<p className="flex-caption">The End， Thank You!</p>
