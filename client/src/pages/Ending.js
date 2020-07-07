@@ -12,6 +12,33 @@ const handleVolumeUpdate = (volume) => {
 };
 const volumnUpdate = debounce(handleVolumeUpdate, 50);
 
+const opts = {
+	// height: '100%',
+	// width: '100%',
+	playerVars: {
+		controls: 0,
+		showinfo: 0,
+		mute:1
+	},
+};
+const _makeFullscreen = () => {
+	// if (this.props.videoOpts.fullscreen === 1) {
+	  const playerElement = document.getElementById('widget2');
+	  const requestFullScreen =			playerElement.requestFullScreen ||			playerElement.mozRequestFullScreen ||			playerElement.webkitRequestFullScreen;
+	  if (requestFullScreen) {
+		// requestFullScreen.bind(playerElement)();
+		requestFullScreen.call(playerElement);
+	  }
+	// }
+  };
+const _makeFullscreen2 = () => {
+	  const playerElement = document.getElementById('widget2');
+	  const requestFullScreen =			playerElement.requestFullScreen ||			playerElement.mozRequestFullScreen ||			playerElement.webkitRequestFullScreen;
+	  if (requestFullScreen) {
+		// requestFullScreen.bind(playerElement)();
+		requestFullScreen.call(playerElement);
+	  }
+  };
 export default () => {
 	const [ isPlaying, setIsPlaying ] = useState(false);
 	const [ player, setPlayer ] = useState(null);
@@ -25,6 +52,7 @@ export default () => {
 		if (player) {
 			isPlaying ? player.pauseVideo() : player.playVideo();
 		}
+		// _makeFullscreen();
 		setIsPlaying(!isPlaying);
 		socket.emit('syncVideoPlay', !isPlaying);
 	};
@@ -41,8 +69,10 @@ export default () => {
 			if (player) {
 				socket.off('syncVideoPlayEmit').on('syncVideoPlayEmit', (key) => {
 					console.log('syncVideoPlayEmit', key);
+					// _makeFullscreen();
 					setIsPlaying(key);
 					isPlaying ? player.pauseVideo() : player.playVideo();
+					
 				});
 				socket.off('syncVideoVolumeEmit').on('syncVideoVolumeEmit', (volume) => {
 					console.log('syncVideoVolumeEmit', volume);
@@ -57,7 +87,7 @@ export default () => {
 	return (
 		<div className="row">
 			<Card title={'YouTube Videos'}>
-				<YouTube containerClassName={'youtubeContainer'} videoId={'gLLl3VbNFXg'} onReady={onReady} />
+				<YouTube containerClassName={'youtubeContainer'} videoId={'gLLl3VbNFXg'} onReady={onReady} opts={opts} id="widget2" onPlay={_makeFullscreen}/>
 
 				<Divider />
 				{showControl && (
