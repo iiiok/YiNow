@@ -104,7 +104,7 @@ io.on('connect', (socket) => {
 		socket.broadcast.emit('onSwitchiLXEmit', key);
 	});
 	socket.on('syncVideoPlay', (key) => {
-		// console.log('syncVideoPlay:', key);
+		console.log('syncVideoPlay:', key);
 		// io.to('react').emit('message', { user: 'user.name', text: 'message' });
 		socket.broadcast.emit('syncVideoPlayEmit', key);
 	});

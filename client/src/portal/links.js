@@ -2,8 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Layout, Menu } from 'antd';
 import { Button, Divider, Switch, Card } from 'antd';
 import {
-	UserOutlined,ClusterOutlined,ExperimentOutlined,
-	CheckOutlined,ToolOutlined,
+	UserOutlined,
+	ClusterOutlined,
+	ExperimentOutlined,
+	CheckOutlined,
+	ToolOutlined,
 	SafetyOutlined,
 	EnvironmentOutlined,
 	QuestionCircleOutlined,
@@ -39,8 +42,8 @@ function Links({ onSliderClick, selectedKeys, userName, swithcMenu, isMenuOn, as
 			<Card size="small" title={userName}>
 				{asHost && (
 					<Switch
-						checkedChildren="Show this"
-						unCheckedChildren="Hide this"
+						checkedChildren="Showing"
+						unCheckedChildren="Hiding"
 						checked={isMenuOn}
 						onChange={swithcMenu}
 					/>
@@ -64,11 +67,15 @@ function Links({ onSliderClick, selectedKeys, userName, swithcMenu, isMenuOn, as
 					Reasons Why
 				</Menu.Item>
 				<SubMenu key="sub3" icon={<ExperimentOutlined />} title="Behind the Scene">
-					<Menu.Item key="31" icon={<ToolOutlined />}>WebSocket & socket.io</Menu.Item>
-				<Menu.Item key="32" icon={<ClusterOutlined />}>Architecture</Menu.Item>
+					<Menu.Item key="31" icon={<ToolOutlined />}>
+						WebSocket & socket.io
+					</Menu.Item>
+					<Menu.Item key="32" icon={<ClusterOutlined />}>
+						Architecture
+					</Menu.Item>
 					<Menu.Item key="34" icon={<FastForwardOutlined />}>
-					What's Next
-				</Menu.Item>
+						What's Next
+					</Menu.Item>
 				</SubMenu>
 				<SubMenu key="sub1" icon={<QrcodeOutlined />} title="Business Scenarios">
 					<Menu.Item key="2">JavaScript async</Menu.Item>
@@ -91,8 +98,6 @@ function Links({ onSliderClick, selectedKeys, userName, swithcMenu, isMenuOn, as
 				<Menu.Item key="6" icon={<YoutubeOutlined />}>
 					Videos
 				</Menu.Item>
-
-
 
 				<Menu.Item key="8" icon={<IssuesCloseOutlined />}>
 					The Ending

@@ -1,9 +1,10 @@
-import React from 'react';
-import YouTube from '@u-wave/react-youtube';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import YouTube from 'react-youtube';
 import { Divider } from 'antd';
-import { Tabs, Select, Button, Space, Row, Col, Card } from 'antd';
+import { Tabs, Select, Button, Row, Col, Card } from 'antd';
 import { PoweroffOutlined } from '@ant-design/icons';
 import { socket } from '../../service/socket';
+import { debounce } from 'lodash';
 
 const { TabPane } = Tabs;
 const { Option } = Select;
@@ -13,163 +14,129 @@ const videos = [
 	{ index: 1, id: 'x7Xzvm0iLCI', name: 'Loops - Code This, Not That' },
 	{ index: 2, id: 'vn3tm0quoqE', name: 'Async Await Episode I Promised' }
 ];
+const handleVolumeUpdate = (volume) => {
+	console.log('handleVolumeUpdate', volume);
+	socket.emit('syncVideoVolume', volume);
+};
+const volumnUpdate = debounce(handleVolumeUpdate, 50);
 
-const hashVideoRx = /^#!\/video\/(\d)$/;
-const hash = typeof window.location !== 'undefined' ? window.location.hash : ''; // eslint-disable-line no-undef
-// const defaultVideo = hashVideoRx.test(hash) ? parseInt(hash.replace(hashVideoRx, '$1'), 10) : 0;
+export default () => {
+	const [ videoIndex, setVideoIndex ] = useState('0');
+	const [ isPlaying, setIsPlaying ] = useState(false);
+	const [ player, setPlayer ] = useState(null);
+	const [ volume, setvolume ] = useState(0.8);
+	const [ showControl, setShowControl ] = useState(true);
+	const onReady = (event) => {
+		setPlayer(event.target);
+	};
 
-class YoutubeVideo extends React.Component {
-	constructor(props) {
-		super(props);
+	const onPlayVideo = () => {
+		if (player) {
+			isPlaying ? player.pauseVideo() : player.playVideo();
+		}
+		setIsPlaying(!isPlaying);
+		socket.emit('syncVideoPlay', !isPlaying);
+	};
+	// const onPlayVideoFun = (value) => {
+	// 	console.log('onPlayVideoFun', value);
+	// 	if (value !== isPlaying) {
+	// 		socket.emit('syncVideoPlay', value);
+	// 		setIsPlaying(value);
+	// 	}
+	// };
 
-		this.state = {
-			videoIndex: '0',
-			suggestedQuality: 'auto',
-			volume: 1,
-			showControl: false,
-			paused: false
-		};
-
-		this.handlePause = this.handlePause.bind(this);
-		this.handleOnReady = this.handleOnReady.bind(this);
-		this.handlePlayerPause = this.handlePlayerPause.bind(this);
-		this.handlePlayerPlay = this.handlePlayerPlay.bind(this);
-		this.handleVolume = this.handleVolume.bind(this);
-	}
-
-	selectVideo(index) {
+	const selectVideo = (index) => {
 		console.log('syncShowingTab', index);
-		this.setState({ videoIndex: index });
+		console.log('videoIndex', videoIndex);
+
+		setVideoIndex(index);
 		socket.emit('syncShowingTab', index);
-	}
+	};
 
-	handlePause(event) {
-		this.setState({
-			paused: !this.state.paused
-			// paused: event.target.checked
-		});
-		socket.emit('syncVideoPlay', !this.state.paused);
-	}
-	handleOnReady(event) {
-		setTimeout(() => {
-			this.setState({
-				showControl: true,
-				paused: true
-				// !this.state.paused
-				// paused: event.target.checked
-			});
-		}, 1000);
-	}
-
-	handlePlayerPause() {
-		this.setState({ paused: true });
-		socket.emit('syncVideoPlay', true);
-	}
-
-	handlePlayerPlay() {
-		this.setState({ paused: false });
-		socket.emit('syncVideoPlay', false);
-	}
-
-	handleVolume(event) {
+	const handleVolume = (event) => {
 		const volume = parseFloat(event.target.value);
-		this.setState({
-			volume: volume
-		});
-		socket.emit('syncVideoVolume', volume);
-	}
+		volumnUpdate(volume);
+		setvolume(volume);
+		player.setVolume(volume * 100);
+	};
 
-	componentDidMount() {
-		console.log('init syncShowingTabEmit');
-		socket.on('syncVideoPlayEmit', (key) => {
-			// console.log('syncVideoPlayEmit', key);
-			this.setState({ paused: key });
-		});
-		socket.on('syncShowingTabEmit', (key) => {
-			// console.log('syncShowingTabEmit', key);
-			this.setState({ videoIndex: key });
-		});
-		socket.on('syncVideoVolumeEmit', (volume) => {
-			// console.log('syncVideoVolumeEmit', syncVideoVolumeEmit);
-			this.setState({
-				volume: volume
+	useEffect(
+		() => {
+			if (player) {
+				socket.off('syncVideoPlayEmit').on('syncVideoPlayEmit', (key) => {
+					console.log('syncVideoPlayEmit', key);
+					setIsPlaying(key);
+					isPlaying ? player.pauseVideo() : player.playVideo();
+				});
+				socket.off('syncVideoVolumeEmit').on('syncVideoVolumeEmit', (volume) => {
+					console.log('syncVideoVolumeEmit', volume);
+					setvolume(volume);
+					player && player.setVolume(volume * 100);
+				});
+			}
+			socket.on('syncShowingTabEmit', (key) => {
+				console.log('syncShowingTabEmit', key);
+				setVideoIndex(key);
 			});
-		});
-	}
+		},
+		[ player, isPlaying ]
+	);
 
-	render() {
-		const { videoIndex, volume, paused, showControl } = this.state;
+	return (
+		<div className="row">
+			<Card title={'YouTube Videos'}>
+				<Tabs tabPosition="right" onChange={(TabIndex) => selectVideo(TabIndex)} activeKey={videoIndex}>
+					{videos.map((choice, index) => (
+						<TabPane tab={choice.name} key={index}>
+							<h1>
+								"{choice.name}" is {!isPlaying ? 'on held.' : 'playing.'}
+							</h1>
+							<YouTube
+								containerClassName={'youtubeContainer'}
+								videoId={choice.id}
+								onReady={onReady}
+								// onPlay={() => onPlayVideoFun(true)}
+								// onPause={() => onPlayVideoFun(false)}
 
-		const video = videos[videoIndex];
-		return (
-			<div className="row">
-				<Card title={'YouTube Videos'}>
-					<Tabs
-						tabPosition="right"
-						onChange={(TabIndex) => this.selectVideo(TabIndex)}
-						activeKey={videoIndex}
-					>
-						{videos.map((choice, index) => (
-							<TabPane tab={choice.name} key={index}>
-								<h1>
-									"{choice.name}" is {paused ? 'on held.' : 'playing.'}
-								</h1>
-
-								{/* {choice.id == index && ( */}
-								<YouTube
-									video={choice.id}
-									height={580}
-									autoplay
-									width="100%"
-									onReady={this.handleOnReady}
-									controls={true}
-									volume={volume}
-									paused={paused}
-									onPause={this.handlePlayerPause}
-									onPlaying={this.handlePlayerPlay}
-								/>
-							</TabPane>
-						))}
-					</Tabs>
-					<Divider />
-					{showControl && (
-						<Row>
-							<Col lg={{ span: 3, offset: 1 }}>
-								<Button
-									type="primary"
-									icon={<PoweroffOutlined />}
-									// loading={loadings[1]}
-									onClick={this.handlePause}
-								>
-									{paused ? 'Play' : 'Stop'} video
-								</Button>
-							</Col>
-							<Col lg={{ span: 2, offset: 1 }} />
-							<Col lg={{ span: 10 }}>
-								<input
-									type="range"
-									value={volume}
-									style={{ width: '100%' }}
-									min={0}
-									max={1}
-									step={0.01}
-									onChange={this.handleVolume}
-								/>
-							</Col>
-							<Col lg={{ span: 4 }} />
-						</Row>
-					)}
-
-					{/* <p>
-						<label htmlFor="paused">
-							<input type="checkbox" id="paused" checked={paused} onChange={this.handlePause} />
-							<span>Paused</span>
-						</label>
-					</p> */}
-				</Card>
-			</div>
-		);
-	}
-}
-
-export default YoutubeVideo;
+								// controls={true}
+								// volume={volume}
+								// paused={paused}
+								// allowFullscreen
+								// onPause={this.handlePlayerPause}
+								// onPlaying={this.handlePlayerPlay}
+							/>
+						</TabPane>
+					))}
+				</Tabs>
+				<Divider />
+				{showControl && (
+					<Row>
+						<Col lg={{ span: 3, offset: 1 }}>
+							<Button
+								type="primary"
+								icon={<PoweroffOutlined />}
+								// loading={loadings[1]}
+								onClick={onPlayVideo}
+							>
+								{!isPlaying ? 'Play' : 'Stop'} video
+							</Button>
+						</Col>
+						<Col lg={{ span: 2, offset: 1 }} />
+						<Col lg={{ span: 10 }}>
+							<input
+								type="range"
+								value={volume}
+								style={{ width: '100%' }}
+								min={0}
+								max={1}
+								step={0.01}
+								onChange={handleVolume}
+							/>
+						</Col>
+						<Col lg={{ span: 4 }} />
+					</Row>
+				)}
+			</Card>
+		</div>
+	);
+};
