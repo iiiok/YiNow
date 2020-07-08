@@ -9,6 +9,7 @@ import {
 	ToolOutlined,
 	SafetyOutlined,
 	EnvironmentOutlined,
+	GlobalOutlined,
 	QuestionCircleOutlined,
 	LaptopOutlined,
 	FundProjectionScreenOutlined,
@@ -72,6 +73,9 @@ function Links({ onSliderClick, selectedKeys, userName, swithcMenu, isMenuOn, as
 					</Menu.Item>
 					<Menu.Item key="32" icon={<ClusterOutlined />}>
 						Architecture
+					</Menu.Item>
+					<Menu.Item key="35" icon={<GlobalOutlined />}>
+						Iframe Pages
 					</Menu.Item>
 					<Menu.Item key="34" icon={<FastForwardOutlined />}>
 						What's Next

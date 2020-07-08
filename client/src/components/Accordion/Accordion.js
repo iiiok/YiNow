@@ -1,24 +1,44 @@
 import React, { useState, useEffect } from 'react';
-import { Collapse, Button, Divider, Card, Modal, Row, Col, PageHeader } from 'antd';
+import { Collapse, Button, Divider, Card, Row, Col, PageHeader, Modal } from 'antd';
+import { Doughnut, HorizontalBar, Bar } from 'react-chartjs-2';
 import OpenALink from '../OpenALink';
 import { socket } from '../../service/socket';
+import { data3, options, data4, data5 } from '../../service/dummyDate';
 const { Panel } = Collapse;
 
 const MyAccordion = () => {
 	const [ accordionIndex, setAccordionIndex ] = useState([]);
-
+	const [ showModal, setShowModal ] = useState(false);
+	const [ pic, setPic ] = useState('/images/lecture_laptop.jpg');
 	useEffect(() => {
 		socket.on('updateAccordionIndexEmit', (key) => {
 			console.log('updateAccordionIndexEmit', key.accordionIndex);
 			setAccordionIndex(key.accordionIndex);
 		});
 	}, []);
+	const openModal = (n) => {
+		n === 1 && setPic('/images/lecture_laptop.jpg');
+		n === 2 && setPic('/images/lecture_laptop2.jpg');
+		setShowModal(true);
+		socket.emit('setShowModal', true);
+	};
 	const onAccordionChange = (key) => {
 		setAccordionIndex(key);
 		if (key) {
 			socket.emit('updateAccordionIndex', key);
 		}
 	};
+	const handleOk = () => {
+		setShowModal(false);
+		socket.emit('setShowModal', false);
+	};
+	useEffect(() => {
+		console.log('on(setShowModal)');
+		socket.on('setShowModalEmit', (value) => {
+			console.log('got a setShowModal Emit');
+			setShowModal(value);
+		});
+	}, []);
 	return (
 		<div className="accordion">
 			<PageHeader
@@ -69,19 +89,26 @@ const MyAccordion = () => {
 				<Panel header="Main issues" key="2">
 					<h2> Network Nightmare </h2>
 					<p>
-						But it is difficult to find how on your own just reading those two lines. So we have to find on
-						our own with given information and we can do that by reading source code.
+						Let's say, we have 2 people to have a online meeting, and supposed that the "Desktop Sharing
+						Video" comsumes 2M's network traffic and 0.2M for audio + web meeting
 					</p>
+					<Bar data={data3} options={options} />
 					<p>
-						We are not sure what to do with those two lines but it seems that we have to understand how
-						markdownPreview component for our purpose.
-					</p>
-					<p>
-						So you might visit the page and found that there are option for <br />
+						What about 100 attendees? <br />
 						langPreifx: "hljs" and it does something inside if statements like the image below.
 					</p>
-					<img src="images/code3.png" />
-					<p>Comparing it from the official documentation about options below</p>
+					<Bar data={data4} options={options} />
+					<h3>Comparing it from the official documentation about options below</h3>
+					<Row gutter={16}>
+						<Col onClick={() => openModal(1)}>
+							<img src="/images/lecture_laptop.jpg" width="500px" />
+						</Col>
+						<Col onClick={() => openModal(2)}>
+							<img src="/images/lecture_laptop2.jpg" width="500px" />
+						</Col>
+					</Row>
+					<h3>Here is the traffic</h3>
+					<Bar data={data5} options={options} />
 				</Panel>
 				<Panel header="Conclusion" key="3">
 					<p>
@@ -93,6 +120,11 @@ const MyAccordion = () => {
 					<img src="images/code2.png" />
 				</Panel>
 			</Collapse>
+			<Modal visible={showModal} onOk={handleOk} onCancel={handleOk} width="86%">
+				<p>
+					<img src={pic} width="100%" />
+				</p>
+			</Modal>
 		</div>
 	);
 };

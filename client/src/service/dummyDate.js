@@ -55,35 +55,52 @@ const data2 = {
 			borderWidth: 1,
 			hoverBackgroundColor: 'rgba(255,99,132,0.4)',
 			hoverBorderColor: 'rgba(255,99,132,1)',
-			data: [  36, 43,65, 59, 80, 81, 56 ],
-			fill:false,
-			backgroundColor:["rgba(255, 99, 132, 0.2)","rgba(255, 159, 64, 0.2)","rgba(255, 205, 86, 0.2)","rgba(75, 192, 192, 0.2)","rgba(54, 162, 235, 0.2)","rgba(153, 102, 255, 0.2)","rgba(131, 67, 107, 0.2)"],
-			borderColor:["rgb(255, 99, 132)","rgb(255, 159, 64)","rgb(255, 205, 86)","rgb(75, 192, 192)","rgb(54, 162, 235)","rgb(153, 102, 255)","rgb(131, 67, 107)"]
+			data: [ 36, 43, 65, 59, 80, 81, 56 ],
+			fill: false,
+			backgroundColor: [
+				'rgba(255, 99, 132, 0.2)',
+				'rgba(255, 159, 64, 0.2)',
+				'rgba(255, 205, 86, 0.2)',
+				'rgba(75, 192, 192, 0.2)',
+				'rgba(54, 162, 235, 0.2)',
+				'rgba(153, 102, 255, 0.2)',
+				'rgba(131, 67, 107, 0.2)'
+			],
+			borderColor: [
+				'rgb(255, 99, 132)',
+				'rgb(255, 159, 64)',
+				'rgb(255, 205, 86)',
+				'rgb(75, 192, 192)',
+				'rgb(54, 162, 235)',
+				'rgb(153, 102, 255)',
+				'rgb(131, 67, 107)'
+			]
 		}
 	]
 };
-const options2 = {scales:{xAxes:[{ticks:{beginAtZero:true}}]}};
+const options2 = { scales: { xAxes: [ { ticks: { beginAtZero: true } } ] } };
 
-const labels = [ 'January', 'February', 'March', 'April', 'May', 'June', 'July' ];
+const labels = [ '5 second', '10 second', '30 second', '1 min', '5 min', '10 min', '30 min', '1 hour' ];
+
 const data3 = {
 	datasets: [
 		{
-			label: 'Sales',
 			type: 'line',
-			data: [ 51, 65, 40, 49, 60, 37, 40 ],
+			label: 'WebSocket + WebPage',
+			data: [ 7.5, 10, 20, 35, 155, 305, 905, 1802 ],
 			fill: false,
 			borderColor: '#EC932F',
 			backgroundColor: '#EC932F',
 			pointBorderColor: '#EC932F',
 			pointBackgroundColor: '#EC932F',
 			pointHoverBackgroundColor: '#EC932F',
-			pointHoverBorderColor: '#EC932F',
-			yAxisID: 'y-axis-2'
+			pointHoverBorderColor: '#EC932F'
+			// yAxisID: 'y-axis-2'
 		},
 		{
 			type: 'bar',
-			label: 'Visitor',
-			data: [ 200, 185, 590, 621, 250, 400, 95 ],
+			label: 'RealTime Desktop Sharing Video',
+			data: [ 10, 20, 60, 120, 600, 1200, 3600, 7200 ],
 			fill: false,
 			backgroundColor: '#71B37C',
 			borderColor: '#71B37C',
@@ -93,7 +110,64 @@ const data3 = {
 		}
 	]
 };
-
+const data4 = {
+	datasets: [
+		{
+			type: 'line',
+			label: 'WebSocket + WebPage',
+			data: [ 625, 750, 1250, 2000, 8000, 15500, 45500, 90500 ],
+			fill: false,
+			borderColor: '#EC932F',
+			backgroundColor: '#EC932F',
+			pointBorderColor: '#EC932F',
+			pointBackgroundColor: '#EC932F',
+			pointHoverBackgroundColor: '#EC932F',
+			pointHoverBorderColor: '#EC932F'
+			// yAxisID: 'y-axis-2'
+		},
+		{
+			type: 'bar',
+			label: 'RealTime Desktop Sharing Video',
+			data: [ 625, 1250, 3750, 7500, 37500, 75000, 225000, 450000 ],
+			fill: false,
+			backgroundColor: '#71B37C',
+			borderColor: '#71B37C',
+			hoverBackgroundColor: '#71B37C',
+			hoverBorderColor: '#71B37C',
+			yAxisID: 'y-axis-1',
+			hidden: true
+		}
+	]
+};
+const data5 = {
+	datasets: [
+		{
+			type: 'line',
+			label: 'WebSocket + WebPage',
+			data: [ 5, 6, 8, 10, 25, 42, 60, 120 ],
+			fill: false,
+			borderColor: '#EC932F',
+			backgroundColor: '#EC932F',
+			pointBorderColor: '#EC932F',
+			pointBackgroundColor: '#EC932F',
+			pointHoverBackgroundColor: '#EC932F',
+			pointHoverBorderColor: '#EC932F'
+			// yAxisID: 'y-axis-2'
+		},
+		{
+			type: 'bar',
+			label: 'RealTime Desktop Sharing Video',
+			data: [ 625, 1250, 3750, 7500, 37500, 75000, 225000, 450000 ],
+			fill: false,
+			backgroundColor: '#71B37C',
+			borderColor: '#71B37C',
+			hoverBackgroundColor: '#71B37C',
+			hoverBorderColor: '#71B37C',
+			yAxisID: 'y-axis-1',
+			hidden: true
+		}
+	]
+};
 const options = {
 	responsive: true,
 	tooltips: {
@@ -120,18 +194,6 @@ const options = {
 				display: true,
 				position: 'left',
 				id: 'y-axis-1',
-				gridLines: {
-					display: false
-				},
-				labels: {
-					show: true
-				}
-			},
-			{
-				type: 'linear',
-				display: true,
-				position: 'right',
-				id: 'y-axis-2',
 				gridLines: {
 					display: false
 				},
@@ -233,4 +295,4 @@ const paragraph1 =
   level of the speakers, but also shows the importance – even more,\
   the urgency – of the theme of this conference.';
 
-export { MoviceData, data2, options2,data3, paragraph1, plugins, options, movice };
+export { MoviceData, data2, options2, data3, data4, data5, paragraph1, plugins, options, movice };
