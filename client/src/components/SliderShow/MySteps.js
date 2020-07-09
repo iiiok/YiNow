@@ -3,6 +3,8 @@ import { Steps } from 'antd';
 import { Divider, Card } from 'antd';
 import { socket } from '../../service/socket';
 import MyAccordion from '../Accordion/Accordion';
+import MyAccordionWhy from '../Accordion/Accordion_why';
+import MyAccordionFuture from '../Accordion/Accordion_future';
 const { Step } = Steps;
 
 function MySteps() {
@@ -30,13 +32,13 @@ function MySteps() {
 				className="site-navigation-steps"
 			>
 				<Step title="Traditional Online Meeting" />
-				<Step title="Minimum Network Dependency" />
+				<Step title="Why webSocket?" />
 				<Step title="More than PPT" />
 			</Steps>
 			<Divider />
 			{currentStep === 0 && <MyAccordion />}
-			{currentStep === 1 && <MyAccordion />}
-			{currentStep === 2 && <MyAccordion />}
+			{currentStep === 1 && <MyAccordionWhy />}
+			{currentStep === 2 && <MyAccordionFuture />}
 		</Card>
 	);
 }

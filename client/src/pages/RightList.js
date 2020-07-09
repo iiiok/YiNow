@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Doughnut, HorizontalBar, Bar } from 'react-chartjs-2';
-import { Row, Col, Icon, Button, Layout, Tabs, Card } from 'antd';
+import { Row, Col, Icon, Button, List, Tabs, Card } from 'antd';
 import { socket } from '../service/socket';
 import { data, data2, data3, options } from '../service/dummyDate';
 import { Divider } from 'antd';
 import { observer, useObservable, useLocalStore } from 'mobx-react';
 import OpenALink from '../components/OpenALink';
+import HighLight from '../components/TextView/HighLight';
 // import Voting from '../components/Voting/voting';
 const { TabPane } = Tabs;
-
+const bulletPoint = [ 9, 10, 11, 12, 13 ];
 export default observer(({ userName }) => {
 	const [ tabIndex, setTabIndex ] = useState('1');
 	const selectTab = (index) => {
@@ -31,12 +32,22 @@ export default observer(({ userName }) => {
 						<h2>Cover page{tabIndex}</h2>
 						<img src="/images/1600w-Hy7XLKyWwv0.jpg" width="100%" />
 					</TabPane>
+					<TabPane tab="HTTP & webSocket" key="2">
+						<p>Our plan</p>
+						<HighLight scriptId={1} />
+						<HighLight scriptId={2} />
+						<List
+							grid={{ gutter: 16, column: 2 }}
+							dataSource={bulletPoint}
+							renderItem={(item) => (
+								<List.Item>
+									<HighLight scriptId={item} />
+								</List.Item>
+							)}
+						/>
+					</TabPane>
 					<TabPane tab="[FE] - ReactJs + MobX + AntD" key="7">
 						<p>[FE] - ReactJs + MobX + AntD</p>
-						<HorizontalBar data={data2} />
-					</TabPane>
-					<TabPane tab="How is our business doing this year?" key="2">
-						<p>Our plan</p>
 						<HorizontalBar data={data2} />
 					</TabPane>
 					<TabPane tab="Predition" key="3">

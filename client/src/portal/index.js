@@ -81,7 +81,7 @@ export const Portal = observer(({ location }) => {
 				username: userName
 			}}
 		>
-			<Layout>
+			<Layout id="withBlackGround">
 				<Header className="header">
 					<div id="logo">
 						<img alt="logo" src="/images/Epam_Logo.png" />

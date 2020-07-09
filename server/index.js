@@ -108,6 +108,11 @@ io.on('connect', (socket) => {
 		// io.to('react').emit('message', { user: 'user.name', text: 'message' });
 		socket.broadcast.emit('syncVideoPlayEmit', key);
 	});
+	socket.on('highLightScript', ({ _isHighLined, _scriptId }) => {
+		console.log('highLightScript:', _scriptId);
+		console.log('isHighLined:', _isHighLined);
+		socket.broadcast.emit('highLightScriptEmit', { _isHighLined, _scriptId });
+	});
 	socket.on('syncVideoVolume', (val) => {
 		console.log('syncVideoVolume:', val);
 		socket.broadcast.emit('syncVideoVolumeEmit', val);
