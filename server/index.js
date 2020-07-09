@@ -141,6 +141,10 @@ io.on('connect', (socket) => {
 		console.log('closeALink:');
 		socket.broadcast.emit('closeALinkEmit');
 	});
+	socket.on('changeBackground', () => {
+		console.log('changeBackground:');
+		socket.broadcast.emit('changeBackgroundEmit');
+	});
 	socket.on('voteFor', (key) => {
 		console.log('voteFor:', key);
 		vote1[key] = vote1[key] + 1;

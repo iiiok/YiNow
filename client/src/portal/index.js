@@ -24,6 +24,7 @@ import ExamplePPT from '../pages/Example-PPT';
 
 import { observer, useObservable, useLocalStore } from 'mobx-react';
 // import { observer } from 'mobx-react-lite';
+import { random } from 'lodash';
 
 import UserStore from '../service/UserStore';
 
@@ -50,6 +51,7 @@ export const Portal = observer(({ location }) => {
 	console.log('store.slideIndex', store.slideIndex);
 
 	const [ slideIndex, setSlideIndex ] = useState(1);
+	const [ BGImage, setBGImage ] = useState(0);
 	const onSliderClick = (e) => {
 		console.log('object', e.key);
 		setSlideIndex(e.key);
@@ -64,6 +66,10 @@ export const Portal = observer(({ location }) => {
 				store.slideIndex = key.sliderIndex;
 				console.log('updateSliderIndexEmit', key.sliderIndex, new Date().getTime());
 				setSlideIndex(key.sliderIndex);
+			});
+			socket.off('changeBackgroundEmit').on('changeBackgroundEmit', () => {
+				// store.slideIndex = key.sliderIndex;
+				setBGImage(random(1, 6));
 			});
 		},
 		[ slideIndex ]
@@ -81,7 +87,7 @@ export const Portal = observer(({ location }) => {
 				username: userName
 			}}
 		>
-			<Layout id="withBlackGround">
+			<Layout id="withBlackGround" className={'BGImage'+BGImage}>
 				<Header className="header">
 					<div id="logo">
 						<img alt="logo" src="/images/Epam_Logo.png" />

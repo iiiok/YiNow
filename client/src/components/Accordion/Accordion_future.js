@@ -39,7 +39,9 @@ const PPTFuture = () => {
 			setShowModal(value);
 		});
 	}, []);
-	const changeBackground = () => {};
+	const changeBackground = () => {
+		socket.emit('changeBackground');
+	};
 	return (
 		<div className="accordion">
 			<PageHeader
@@ -49,7 +51,12 @@ const PPTFuture = () => {
 			/>
 
 			<Collapse onChange={onAccordionChange} activeKey={accordionIndex} destroyInactivePanel={true}>
-				<Panel header="Support all Web-base Media Resource" key="1">
+				<Panel header="Support most Web-base Media, Resource and widget" key="1">
+					Video, Audio, image, Web Link, Chart, Voting, Bidding,Game,...
+					Two-ways interaction,
+					(Mostly one way [Client]) As a Remote Control (Public LED, Vending Machine)
+					(Mostly one way [Host]) Real Time Web-Broadcast ,as a Information Synchronous System, able to support 1M (Televisions, Concerts, Movice theater,Sport Events, Press Conference, On-site Promotion, Seminar)
+
 					<div className="site-card-wrapper">
 						<Button onClick={changeBackground}>Change Background</Button>
 					</div>
