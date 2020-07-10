@@ -68,36 +68,44 @@ const MyAccordion = () => {
 								</Card>
 							</Col>
 							<Col span={8}>
-								<Card title="Zoom">Zoom</Card>
+								<Card title="Zoom">
+									<img src="images/zoom.png" width="180px" />
+								</Card>
 							</Col>
 							<Col span={8}>
-								<Card title="Team">Team</Card>
+								<Card title="Team">
+									<img src="images/team.jpg" />
+								</Card>
 							</Col>
 						</Row>
 					</div>
 
-					<p>
-						Note: What all of them have in commom are:{' '}
-						<ul>
-							<li>Need specific software</li>
-							<li>Audience need accout and software installed</li>
-							<li>Heavy Network Traffic</li>
-							<li>The more the attendees, the more it cost, the poorer the service</li>
-						</ul>
-					</p>
+					<h2>What do they have in commom:</h2>
+					<ul>
+						<li>Need specific software</li>
+						<li>Audience need accout to join</li>
+						<li>Heavy Network Traffic</li>
+					</ul>
 				</Panel>
-				<Panel header="Main issues" key="2">
+				<Panel header="Main Issues - network" key="2">
 					<h2> Network Nightmare </h2>
-					<p>
-						Let's say, we have 2 people to have a online meeting, and supposed that the "Desktop Sharing
-						Video" comsumes 2M's network traffic and 0.2M for audio + web meeting
-					</p>
-					<Bar data={data3} options={options} />
-					<p>
-						What about 100 attendees? <br />
-						langPreifx: "hljs" and it does something inside if statements like the image below.
-					</p>
-					<Bar data={data4} options={options} />
+					<ul>
+						<li>Let's say, we have 2 people to have a online meeting</li>
+						<li>
+							and supposed that the "Desktop Sharing Video" will consumes 2M's network traffic for every
+							second
+						</li>
+						<li>and 0.2M for audio + web meeting</li>
+					</ul>
+
+					<Row>
+						<Col spna={12}>
+							<Bar data={data3} options={options} />
+						</Col>
+						<Col spna={12}>
+							<Bar data={data4} options={options} />
+						</Col>
+					</Row>
 					<h3>Comparing it from the official documentation about options below</h3>
 					<Row gutter={16}>
 						<Col onClick={() => openModal(1)}>
@@ -110,6 +118,18 @@ const MyAccordion = () => {
 					<h3>Here is the traffic</h3>
 					<Bar data={data5} options={options} />
 				</Panel>
+				<Panel header="Other shortcommings" key="3">
+					<p>
+						So we found that everything is working fine and what we have to do would be styling each “hljs”
+						prefixed html elements with CSS files. Maybe we shouldn’t have to understand this details about
+						highlight.js and how it works. But we always have to find how to integrate pacakges from others,
+						if wedecide to include it on your own project like this case for React.
+					</p>
+					<ul>
+						<li>The more the attendees, the more it cost, the poorer the service</li>
+						<li>I'll se</li>
+					</ul>
+				</Panel>
 				<Panel header="Conclusion" key="3">
 					<p>
 						So we found that everything is working fine and what we have to do would be styling each “hljs”
@@ -117,7 +137,6 @@ const MyAccordion = () => {
 						highlight.js and how it works. But we always have to find how to integrate pacakges from others,
 						if wedecide to include it on your own project like this case for React.
 					</p>
-					<img src="images/code2.png" />
 				</Panel>
 			</Collapse>
 			<Modal visible={showModal} onOk={handleOk} onCancel={handleOk} width="86%">

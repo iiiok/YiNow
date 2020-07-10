@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Layout, Menu } from 'antd';
 import { Button, Divider, Switch, Card } from 'antd';
+import { socket } from '../service/socket';
 import {
 	UserOutlined,
 	ClusterOutlined,
@@ -9,6 +10,7 @@ import {
 	ToolOutlined,
 	SafetyOutlined,
 	EnvironmentOutlined,
+	WechatOutlined,
 	GlobalOutlined,
 	QuestionCircleOutlined,
 	LaptopOutlined,
@@ -16,19 +18,18 @@ import {
 	IssuesCloseOutlined,
 	FastForwardOutlined,
 	QrcodeOutlined,
-	NotificationOutlined,
 	ReadOutlined,
 	AudioOutlined,
 	YoutubeOutlined,
 	LineChartOutlined
 } from '@ant-design/icons';
-import { socket } from '../service/socket';
 const { SubMenu } = Menu;
 const { Sider } = Layout;
 
-function Links({ onSliderClick, selectedKeys, userName, swithcMenu, isMenuOn, asHost }) {
+function Links({ onMenuChange, selectedKeys, userName, swithcMenu, isMenuOn, asHost }) {
 	console.log('selectedKeys', selectedKeys);
 	const [ currentMenu, setCurrentMent ] = useState(selectedKeys);
+	const [ openKeys, setOpenKeys ] = useState([ '' ]);
 	// const [ linksSwitch, setLinksSwitch ] = useState(isMenuOn);
 	useEffect(
 		() => {
@@ -36,8 +37,18 @@ function Links({ onSliderClick, selectedKeys, userName, swithcMenu, isMenuOn, as
 		},
 		[ selectedKeys ]
 	);
-
+	useEffect(() => {
+		socket.on('updateSubmenuOpenEmit', (key) => {
+			console.log('updateSliderIndexEmit', key);
+			setOpenKeys(key);
+		});
+	}, []);
 	console.log(currentMenu);
+	const onSubmenuChange = (openKeys) => {
+		console.log('updateSubmenuOpen', openKeys);
+		socket.emit('updateSubmenuOpen', openKeys, () => {});
+		setOpenKeys(openKeys);
+	};
 	return (
 		<Sider className="site-layout-background" width={200}>
 			<Card size="small" title={userName}>
@@ -52,11 +63,13 @@ function Links({ onSliderClick, selectedKeys, userName, swithcMenu, isMenuOn, as
 			</Card>
 			<Menu
 				mode="inline"
-				onSelect={onSliderClick}
+				openKeys={openKeys}
+				onSelect={onMenuChange}
+				onOpenChange={onSubmenuChange}
 				//   defaultOpenKeys={currentMenu}
 				//   defaultSelectedKeys={currentMenu}
 				selectedKeys={currentMenu}
-				defaultOpenKeys={[ 'sub1' ]}
+				// defaultOpenKeys={[ 'sub1' ]}
 			>
 				<Menu.Item key="1" icon={<EnvironmentOutlined />}>
 					Welcome
@@ -82,7 +95,9 @@ function Links({ onSliderClick, selectedKeys, userName, swithcMenu, isMenuOn, as
 					</Menu.Item>
 				</SubMenu>
 				<SubMenu key="sub1" icon={<QrcodeOutlined />} title="Business Scenarios">
-					<Menu.Item key="2">JavaScript async</Menu.Item>
+					<Menu.Item key="2" icon={<WechatOutlined />}>
+						Chat Room
+					</Menu.Item>
 					<Menu.Item key="12" icon={<LineChartOutlined />}>
 						Business Meeting
 					</Menu.Item>

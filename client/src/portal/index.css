@@ -93,7 +93,7 @@ td {
 blockquote {
 	font-style: italic;
 	font-size: 110%;
-	padding: 20px;
+	padding: 16px;
 	border: 1px solid rgba(0, 0, 0, 0.2);
 	margin-bottom: 15px;
 	cursor: pointer;
@@ -103,7 +103,7 @@ blockquote.isHighlighted {
 	background-image: linear-gradient(to right, #ffe359 0%, #fff2ac 100%);
 	color: navy;
 	font-weight: bold;
-	font-size: 130%;
+	font-size: 125%;
 	font-style: normal;
 }
 #withBlackGround {
@@ -130,4 +130,10 @@ blockquote.isHighlighted {
 }
 #withBlackGround.BGImage6 {
 	background-image: url(/ppt/bg6.jpg);
+}
+#withBlackGround.BGImage7 {
+	background-image: url(/ppt/bg7.jpg);
+}
+#withBlackGround.BGImage8 {
+	background-image: url(/ppt/bg8.jpg);
 }

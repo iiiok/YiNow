@@ -4,6 +4,7 @@ import { Doughnut, HorizontalBar, Bar } from 'react-chartjs-2';
 import OpenALink from '../OpenALink';
 import { socket } from '../../service/socket';
 import { data3, options, data4, data5 } from '../../service/dummyDate';
+import HighLight from '../../components/TextView/HighLight';
 const { Panel } = Collapse;
 
 const PPTFuture = () => {
@@ -52,24 +53,20 @@ const PPTFuture = () => {
 
 			<Collapse onChange={onAccordionChange} activeKey={accordionIndex} destroyInactivePanel={true}>
 				<Panel header="Support most Web-base Media, Resource and widget" key="1">
-					Video, Audio, image, Web Link, Chart, Voting, Bidding,Game,...
-					Two-ways interaction,
-					(Mostly one way [Client]) As a Remote Control (Public LED, Vending Machine)
-					(Mostly one way [Host]) Real Time Web-Broadcast ,as a Information Synchronous System, able to support 1M (Televisions, Concerts, Movice theater,Sport Events, Press Conference, On-site Promotion, Seminar)
-
+					Video, Audio, image, Web Link, Chart, Voting, Bidding,Game,... Two-ways interaction, (Mostly one way
+					[Client]) As a Remote Control (Public LED, Vending Machine) (Mostly one way [Host]) Real Time
+					Web-Broadcast ,as a Information Synchronous System, able to support 1M (Televisions, Concerts,
+					Movice theater,Sport Events, Press Conference, On-site Promotion, Seminar)
 					<div className="site-card-wrapper">
 						<Button onClick={changeBackground}>Change Background</Button>
 					</div>
-
-					<p>
-						Note: What all of them have in commom are:{' '}
-						<ul>
-							<li>Need specific software</li>
-							<li>Audience need accout and software installed</li>
-							<li>Heavy Network Traffic</li>
-							<li>The more the attendees, the more it cost, the poorer the service</li>
-						</ul>
-					</p>
+					<p>Note: What all of them have in commom are:</p>
+					<ul>
+						<li>Need specific software</li>
+						<li>Audience need accout and software installed</li>
+						<li>Heavy Network Traffic</li>
+						<li>The more the attendees, the more it cost, the poorer the service</li>
+					</ul>
 				</Panel>
 				<Panel header="It's a Before, During and After the 'Meeting' Seminar" key="2">
 					<h2> Network Nightmare </h2>
@@ -95,14 +92,27 @@ const PPTFuture = () => {
 					<h3>Here is the traffic</h3>
 					<Bar data={data5} options={options} />
 				</Panel>
-				<Panel header="More The Just Meeting-assistant System" key="3">
-					<p>
-						So we found that everything is working fine and what we have to do would be styling each “hljs”
-						prefixed html elements with CSS files. Maybe we shouldn’t have to understand this details about
-						highlight.js and how it works. But we always have to find how to integrate pacakges from others,
-						if wedecide to include it on your own project like this case for React.
-					</p>
-					<img src="images/code2.png" />
+				<Panel header="More Than Just a Meeting-assistant System" key="3">
+					<h3>
+						With this full-duplex communication protocol, we can do a a lot more than just a
+						meeting-sidekick system
+					</h3>
+					<h4>
+						It's a web-base, that means @Every one is ready to participate, no addictional App, not even
+						need to register
+					</h4>
+					<ul>
+						<li>
+							<HighLight scriptId={18} header={'Two-ways interaction '} />{' '}
+						</li>
+						<li>
+							<HighLight scriptId={17} header={'Mostly one way - [Client dominate] '} />{' '}
+						</li>
+						<li>
+							<HighLight scriptId={16} header={'Mostly one way - [Host dominate] '} />
+						</li>
+					</ul>
+					<p />
 				</Panel>
 			</Collapse>
 			<Modal visible={showModal} onOk={handleOk} onCancel={handleOk} width="86%">

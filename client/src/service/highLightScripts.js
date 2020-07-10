@@ -14,7 +14,11 @@ const script = {
 	12: '4.Both the server and the client can initiate the data transmission ==> enable the real server-side push.',
 	13: '5.Disconnect by both sides.',
 	15: '7 URL schemes: [ws] & [wss]-Encrypted',
-	15: 'HTML5 Web Sockets can provide a 500:1 or—depending on the size of the HTTP headers—even a 1000:1 reduction in unnecessary HTTP header traffic and 3:1 reduction in latency. '
+	15: 'HTML5 Web Sockets can provide a 500:1 or—depending on the size of the HTTP headers—even a 1000:1 reduction in unnecessary HTTP header traffic and 3:1 reduction in latency. ',
+	16: 'As a Synchronous Information system, It can support up to 1M users for some on-going events (Television, Concerts, Movice, Sport Events/Olympics, Press Conference, On-site Promotion. )',
+	17: 'As a Remote Control (Public LED, Vending Machine) ',
+	18: 'PPT-like shareing, Online Education, Online Bidding, Selling, Tour Guide Service, A Wedding',
+	19: ''
 };
 
 export default script;

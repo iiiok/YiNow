@@ -33,7 +33,7 @@ function MySteps() {
 			>
 				<Step title="Traditional Online Meeting" />
 				<Step title="Why webSocket?" />
-				<Step title="More than PPT" />
+				<Step title="More than a PPT" />
 			</Steps>
 			<Divider />
 			{currentStep === 0 && <MyAccordion />}

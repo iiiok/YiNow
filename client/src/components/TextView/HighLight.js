@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { socket } from '../../service/socket';
-import highLineScripts from '../../service/highLineScripts';
+import highLightScripts from '../../service/highLightScripts';
 
-export default ({ scriptId }) => {
+export default ({ scriptId, header }) => {
 	const [ isHighLined, setIsHighLined ] = useState(false);
 	const changeStyle = () => {
 		if (scriptId) {
@@ -19,7 +19,8 @@ export default ({ scriptId }) => {
 
 	return (
 		<blockquote onClick={changeStyle} className={isHighLined ? 'isHighlighted' : ''}>
-			{highLineScripts[scriptId]}
+			{header && <h3>{header}</h3>}
+			{highLightScripts[scriptId]}
 		</blockquote>
 	);
 };

@@ -77,15 +77,13 @@ const WhyWebSocket = () => {
 						</Row>
 					</div>
 
-					<p>
-						Note: What all of them have in commom are:{' '}
-						<ul>
-							<li>Need specific software</li>
-							<li>Audience need accout and software installed</li>
-							<li>Heavy Network Traffic</li>
-							<li>The more the attendees, the more it cost, the poorer the service</li>
-						</ul>
-					</p>
+					<p>Note: What all of them have in commom are:  </p>
+					<ul>
+						<li>Need specific software</li>
+						<li>Audience need accout and software installed</li>
+						<li>Heavy Network Traffic</li>
+						<li>The more the attendees, the more it cost, the poorer the service</li>
+					</ul>
 				</Panel>
 				<Panel header="Best Clarity" key="2">
 					<h2> Network Nightmare </h2>

@@ -27,6 +27,7 @@ import { observer, useObservable, useLocalStore } from 'mobx-react';
 import { random } from 'lodash';
 
 import UserStore from '../service/UserStore';
+import Chat from '../components/Chat/Chat';
 
 const { Header, Content } = Layout;
 
@@ -52,13 +53,20 @@ export const Portal = observer(({ location }) => {
 
 	const [ slideIndex, setSlideIndex ] = useState(1);
 	const [ BGImage, setBGImage ] = useState(0);
-	const onSliderClick = (e) => {
+	const onMenuChange = (e) => {
 		console.log('object', e.key);
 		setSlideIndex(e.key);
 		if (e.key) {
 			socket.emit('updateSliderIndex', e.key, () => setSlideIndex(e.key));
 		}
 	};
+	// const onSubmenuChange = (openKeys) => {
+	// console.log('object', openKeys);
+	// socket.emit('upSubmenuOpen', openKeys, () => setSlideIndex(e.key));
+	// setSlideIndex(e.key);
+	// if (e.key) {
+	// }
+	// };
 
 	useEffect(
 		() => {
@@ -69,7 +77,7 @@ export const Portal = observer(({ location }) => {
 			});
 			socket.off('changeBackgroundEmit').on('changeBackgroundEmit', () => {
 				// store.slideIndex = key.sliderIndex;
-				setBGImage(random(1, 6));
+				setBGImage(random(1, 8));
 			});
 		},
 		[ slideIndex ]
@@ -87,7 +95,7 @@ export const Portal = observer(({ location }) => {
 				username: userName
 			}}
 		>
-			<Layout id="withBlackGround" className={'BGImage'+BGImage}>
+			<Layout id="withBlackGround" className={'BGImage' + BGImage}>
 				<Header className="header">
 					<div id="logo">
 						<img alt="logo" src="/images/Epam_Logo.png" />
@@ -112,7 +120,7 @@ export const Portal = observer(({ location }) => {
 					<Layout className="site-layout-background" style={{ padding: '24px 0' }}>
 						{(store.asHost || store.isMenuOn) && (
 							<Links
-								onSliderClick={onSliderClick}
+								onMenuChange={onMenuChange}
 								selectedKeys={[ slideIndex.toString() ]}
 								userName={store.userName}
 								swithcMenu={store.swithcMenu}
@@ -128,6 +136,7 @@ export const Portal = observer(({ location }) => {
 							{slideIndex == 7 && <IXLContent />}
 							{slideIndex == 8 && <Ending />}
 							{slideIndex == 22 && <MySteps />}
+							{slideIndex == 2 && <Chat name={userName} />}
 							{slideIndex == 35 && <My_Ifram />}
 							{slideIndex == 14 && <VotingSample />}
 							{slideIndex == 1 && (
