@@ -3,17 +3,16 @@ const express = require('express');
 const socketio = require('socket.io');
 const cors = require('cors');
 
+const app = express();
+const server = http.createServer(app);
+const io = socketio(server);
+
 const { addUser, removeUser, getUser, getUsersInRoom } = require('./users');
 
 const router = require('./router');
 let userList = new Set();
 let vote1 = { 1: 1, 2: 1, 3: 1, 4: 1, 5: 1, 6: 1, 7: 1, 8: 1, 9: 1, 10: 1 };
 let sliderIndex = 1;
-
-const app = express();
-const server = http.createServer(app);
-const io = socketio(server);
-
 app.use(cors());
 app.use(router);
 
@@ -91,6 +90,10 @@ io.on('connect', (socket) => {
 		console.log('setShowModal to', value);
 		socket.broadcast.emit('setShowModalEmit', value);
 	});
+	socket.on('setShowPicModal', ({ url, setVisible }) => {
+		console.log('setShowPicModal to', url, setVisible);
+		socket.broadcast.emit('setShowPicModalEmit', { url, setVisible });
+	});
 	socket.on('openDrawer', (type) => {
 		console.log('openDrawer');
 		// io.to('react').emit('message', { user: 'user.name', text: 'message' });
@@ -138,7 +141,7 @@ io.on('connect', (socket) => {
 		console.log('voteFor:', key);
 		vote1[key] = vote1[key] + 1;
 		console.log('voteForKey:', vote1);
-		socket.broadcast.emit('voteForEmit', vote1);
+		io.emit('voteForEmit', vote1);
 	});
 	socket.on('openALink', (key) => {
 		console.log('openALink:', key);
@@ -151,12 +154,6 @@ io.on('connect', (socket) => {
 	socket.on('changeBackground', () => {
 		console.log('changeBackground:');
 		socket.broadcast.emit('changeBackgroundEmit');
-	});
-	socket.on('voteFor', (key) => {
-		console.log('voteFor:', key);
-		vote1[key] = vote1[key] + 1;
-		console.log('voteForKey:', vote1);
-		socket.emit('voteForEmit', vote1);
 	});
 
 	socket.on('disconnect', () => {
