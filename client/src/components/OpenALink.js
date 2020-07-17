@@ -7,7 +7,7 @@ import { socket } from '../service/socket';
 
 const { Text, Paragraph } = Typography;
 
-export default ({ url,title }) => {
+export default ({ url, title }) => {
 	const [ isOpen, setIsOpen ] = useState(false);
 	const asHost = useContext(UserStore).asHost;
 
@@ -37,18 +37,13 @@ export default ({ url,title }) => {
 		socket.emit('closeALink');
 		// window.openedWindow.close();
 	};
-	return (
-		// asHost && (
-		isOpen ? (
-			<Button type="primary" onClick={closeALink}>
-				Close {title}
-			</Button>
-		) : (
-			<Button type="primary" onClick={openALink}>
-				Open {title}
-			</Button>
-		)
-
-		// )
+	return isOpen ? (
+		<Button type="primary" onClick={closeALink}>
+			Close {title}
+		</Button>
+	) : (
+		<Button type="primary" onClick={openALink}>
+			Open {title}
+		</Button>
 	);
 };

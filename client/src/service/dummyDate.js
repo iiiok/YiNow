@@ -86,7 +86,7 @@ const data3 = {
 	datasets: [
 		{
 			type: 'line',
-			label: 'WebSocket + WebPage',
+			label: 'Audio + WebSocket + WebPage',
 			data: [ 7.5, 10, 20, 35, 155, 305, 905, 1802 ],
 			fill: false,
 			borderColor: '#EC932F',
@@ -114,7 +114,7 @@ const data4 = {
 	datasets: [
 		{
 			type: 'line',
-			label: 'WebSocket + WebPage',
+			label: 'Audio + WebSocket + WebPage',
 			data: [ 625, 750, 1250, 2000, 8000, 15500, 45500, 90500 ],
 			fill: false,
 			borderColor: '#EC932F',

@@ -15,10 +15,23 @@ const script = {
 	13: '5.Disconnect by both sides.',
 	15: '7 URL schemes: [ws] & [wss]-Encrypted',
 	15: 'HTML5 Web Sockets can provide a 500:1 or—depending on the size of the HTTP headers—even a 1000:1 reduction in unnecessary HTTP header traffic and 3:1 reduction in latency. ',
-	16: 'As a Synchronous Information system, It can support up to 1M users for some on-going events (Television, Concerts, Movice, Sport Events/Olympics, Press Conference, On-site Promotion. )',
-	17: 'As a Remote Control (Public LED, Vending Machine) ',
-	18: 'PPT-like shareing, Online Education, Online Bidding, Selling, Tour Guide Service, A Wedding',
-	19: ''
+	16: 'As a Synchronous Information system, It can support up to 1M users for some on-going events (Television, Concerts, Movice, Press Conference, Tour Guide Service, Sport Events/Olympics. )',
+	17: 'As a Remote Control (Public LED, Smart TV, Vending Machine, Food Ordering ) ',
+	18: 'PPT-like shareing, Online Education, Online Bidding/Selling, On-site Promotion, A theme party(Annual party)',
+	19: 'The most common protocol of internet',
+	20: "Http is equipped with lot of headers to actually reach it's destination over the internet.",
+	21: 'Every http-request makes a connection and closes it after the response.',
+	22: 'Except the typical initial handshake which will be in http, the rest of communication is headerless and lightweight.',
+	23: 'Unlike http, it is a duplex connection that allows client and server push frames from either side. Hence allowing the client and server to communicate in more real-time.',
+	24: 'A full-duplex communication channel that operates.',
+	25: 'Difficult to Scale Up (2, 10, 100 ...)',
+	26: 'Difficult to Scale Out (more functionalities) ',
+	27: 'User Experience -- poor video quality, It may cause the whole network breakdown ',
+	28: "Poor Outcome (Before and after the meeting, I'll send you the PPT? Recorded-video?)",
+	29: 'Lack of interactions',
+	30: 'Specific softwares are needed (Skype, team)',
+	31: 'Cost - The more the attendees, the more it cost, the poorer the service',
+	32: 'Hard to check involvement (What are the students doing)'
 };
 
 export default script;

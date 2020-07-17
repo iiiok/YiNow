@@ -1,45 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { Collapse, Button, Divider, Card, Row, Col, PageHeader, Modal } from 'antd';
-import { Doughnut, HorizontalBar, Bar } from 'react-chartjs-2';
 import OpenALink from '../OpenALink';
 import { socket } from '../../service/socket';
-import { data3, options, data4, data5 } from '../../service/dummyDate';
 import SayHi from '../../components/SayHi/sayhi';
+import PopImage from '../PopImage';
+
 const { Panel } = Collapse;
 
 const WhyWebSocket = () => {
 	const [ accordionIndex, setAccordionIndex ] = useState([]);
-	const [ showModal, setShowModal ] = useState(false);
-	const [ pic, setPic ] = useState('/images/lecture_laptop.jpg');
 	useEffect(() => {
 		socket.on('updateAccordionIndexEmit', (key) => {
 			console.log('updateAccordionIndexEmit', key.accordionIndex);
 			setAccordionIndex(key.accordionIndex);
 		});
 	}, []);
-	const openModal = (n) => {
-		n === 1 && setPic('/images/lecture_laptop.jpg');
-		n === 2 && setPic('/images/lecture_laptop2.jpg');
-		setShowModal(true);
-		socket.emit('setShowModal', true);
-	};
+
 	const onAccordionChange = (key) => {
 		setAccordionIndex(key);
 		if (key) {
 			socket.emit('updateAccordionIndex', key);
 		}
 	};
-	const handleOk = () => {
-		setShowModal(false);
-		socket.emit('setShowModal', false);
-	};
-	useEffect(() => {
-		console.log('on(setShowModal)');
-		socket.on('setShowModalEmit', (value) => {
-			console.log('got a setShowModal Emit');
-			setShowModal(value);
-		});
-	}, []);
+
 	return (
 		<div className="accordion">
 			<PageHeader
@@ -51,92 +34,55 @@ const WhyWebSocket = () => {
 			<Collapse onChange={onAccordionChange} activeKey={accordionIndex} destroyInactivePanel={true}>
 				<Panel header="Much Less Network Burden" key="1">
 					<div className="site-card-wrapper">
-						<Row gutter={16}>
-							<Col span={8}>
-								<Card title="Webinars">
-									<p>
-										<strong>A webinar</strong> is an online meeting or presentation held via the
-										Internet in real-time. To put it simply, it is an <strong>online event</strong>,
-										which connects individuals with viewers across the world.
-									</p>
-									<a
-										href="https://myownconference.com/blog/en/index.php/what-is-a-webinar/"
-										target="wwnow"
-									>
-										What is a Webinar and How Does it Work?
-									</a>
-									<OpenALink url="https://myownconference.com/blog/en/index.php/what-is-a-webinar/" />
-								</Card>
-							</Col>
-							<Col span={8}>
-								<Card title="Zoom">Zoom</Card>
-							</Col>
-							<Col span={8}>
-								<Card title="Team">Team</Card>
-							</Col>
-						</Row>
-					</div>
+						<h2>
+							Dramatic reduction in unnecessary network traffic that is obtained for the polling solution
+							with 1,000, 10,000, and 100,000 concurrently connected clients and compares it to what that
+							would look like with WebSocket instead.
+						</h2>
 
-					<p>Note: What all of them have in commom are:  </p>
-					<ul>
-						<li>Need specific software</li>
-						<li>Audience need accout and software installed</li>
-						<li>Heavy Network Traffic</li>
-						<li>The more the attendees, the more it cost, the poorer the service</li>
-					</ul>
+						<PopImage
+							picUrl="/images/dramatic_reduction.png"
+							title="Dramatic reduction in unnecessary network traffic"
+						/>
+						<h2>
+							WebSocket can provide a 500:1 or—depending on the size of the HTTP headers—even a 1000:1
+							reduction in unnecessary HTTP header traffic and a 3:1 reduction in latency.
+						</h2>
+					</div>
 				</Panel>
-				<Panel header="Best Clarity" key="2">
-					<h2> Network Nightmare </h2>
-					<p>
-						Let's say, we have 2 people to have a online meeting, and supposed that the "Desktop Sharing
-						Video" comsumes 2M's network traffic and 0.2M for audio + web meeting
-					</p>
-					<Bar data={data3} options={options} />
-					<p>
-						What about 100 attendees? <br />
-						langPreifx: "hljs" and it does something inside if statements like the image below.
-					</p>
-					<Bar data={data4} options={options} />
-					<h3>Comparing it from the official documentation about options below</h3>
-					<Row gutter={16}>
-						<Col onClick={() => openModal(1)}>
-							<img src="/images/lecture_laptop.jpg" width="500px" />
-						</Col>
-						<Col onClick={() => openModal(2)}>
-							<img src="/images/lecture_laptop2.jpg" width="500px" />
-						</Col>
-					</Row>
-					<h3>Here is the traffic</h3>
-					<Bar data={data5} options={options} />
+				<Panel header="Display in the best Clarity" key="2">
+					<h2> One bigger screen? </h2>
+					<img src="/images/big_screen.jpg" title="Even bigger screen?" />
+
+					<h2>Or, Lots of small screens!</h2>
+					<img src="/images/screen-time-iOS-12-02.jpg" title="Small but with best clarity" />
 				</Panel>
 				<Panel header="Interaction & Participation" key="3">
-					<p>
-						So we found that everything is working fine and what we have to do would be styling each “hljs”
-						prefixed html elements with CSS files. Maybe we shouldn’t have to understand this details about
-						highlight.js and how it works. But we always have to find how to integrate pacakges from others,
-						if wedecide to include it on your own project like this case for React.
-					</p>
+					<h2>Such a system could support all kinds of web-base interactions</h2>
+					<ul>
+						<li>Video,Audio, Image,Chart</li>
+						<li>Pop-up message, Answer Sheet, Voting, Chat, Game,Message Board etc. </li>
+						<li>Shopping (A direction link to shop while the product is showing on TV)</li>
+					</ul>
+					<Divider />
 					<Card>
 						<SayHi />
 					</Card>
+					<h2>Interaction lead to Participation </h2>
+					<ul>
+						<li>The tutor need to keep the audience awake and know they are not sleepping</li>
+						<li>High involvement is the key outcome of most events</li>
+					</ul>
 				</Panel>
 				<Panel header="No Need for Additional Software" key="4">
-					<p>
-						So we found that everything is working fine and what we have to do would be styling each “hljs”
-						prefixed html elements with CSS files. Maybe we shouldn’t have to understand this details about
-						highlight.js and how it works. But we always have to find how to integrate pacakges from others,
-						if wedecide to include it on your own project like this case for React.
-					</p>
-					<Card>
-						<SayHi />
-					</Card>
+					<h2>An extra software hinders new user</h2>
+					<ul>
+						<li>Skype, Zoom, Team, Webinars, some time you need more than one software</li>
+						<li>Almost everyone's carring a web-browser today</li>
+						<li>Anonymous user means a big market</li>
+					</ul>
 				</Panel>
 			</Collapse>
-			<Modal visible={showModal} onOk={handleOk} onCancel={handleOk} width="86%">
-				<p>
-					<img src={pic} width="100%" />
-				</p>
-			</Modal>
 		</div>
 	);
 };

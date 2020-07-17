@@ -71,8 +71,8 @@ const PPTFuture = () => {
 				<Panel header="It's a Before, During and After the 'Meeting' Seminar" key="2">
 					<h2> Network Nightmare </h2>
 					<p>
-						Let's say, we have 2 people to have a online meeting, and supposed that the "Desktop Sharing
-						Video" comsumes 2M's network traffic and 0.2M for audio + web meeting
+						Let's say, for a one-to-one video conference / "Desktop Sharing" comsumes 2Mbps's network
+						traffic， while 0.2Mbps for audio + 5M's web meeting
 					</p>
 					<Bar data={data3} options={options} />
 					<p>
@@ -98,8 +98,8 @@ const PPTFuture = () => {
 						meeting-sidekick system
 					</h3>
 					<h4>
-						It's a web-base, that means @Every one is ready to participate, no addictional App, not even
-						need to register
+						It's a web-base, that means @Every one is ready to participate, no addictional App. In some
+						case, login is not required.
 					</h4>
 					<ul>
 						<li>
@@ -109,7 +109,7 @@ const PPTFuture = () => {
 							<HighLight scriptId={17} header={'Mostly one way - [Client dominate] '} />{' '}
 						</li>
 						<li>
-							<HighLight scriptId={16} header={'Mostly one way - [Host dominate] '} />
+							<HighLight scriptId={16} header={'Mostly one way - [Synchronous Web Broadcast] '} />
 						</li>
 					</ul>
 					<p />

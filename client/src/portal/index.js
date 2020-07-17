@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useContext, createContext } from 'react';
 import { Layout, Menu, Breadcrumb, Switch } from 'antd';
-import { Button, Divider, Card } from 'antd';
+import { Card } from 'antd';
 import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
 import './index.css';
 import Ending from '../pages/Ending';
@@ -10,17 +10,21 @@ import MySteps from '../components/SliderShow/MySteps';
 import HostScript from '../components/TextView/HostScript';
 import { paragraph1 } from '../service/dummyDate';
 import YoutubeVideo from '../components/SliderShow/YoutubeVideo.js';
-import SayHi from '../components/SayHi/sayhi';
+
 import { socket } from '../service/socket';
 import queryString from 'query-string';
 import IXLContent from '../pages/IXLContent';
-import IFrame from '../pages/IFrame';
+import RightList_next from '../pages/RightList_next';
+import RightList_arch from '../pages/RightList_arch';
 import My_Ifram from '../components/SliderShow/My_Ifram';
 import VotingSample from '../pages/voting-sample';
+import WebSocketAccordion from '../components/Accordion/Accordion_websocket';
 import MyStatus from './status';
 import YiFooter from './footer';
 import Links from './links';
 import ExamplePPT from '../pages/Example-PPT';
+import ExampleEventSync from '../pages/Example-EventSync';
+import Resource from '../pages/Resource';
 
 import { observer, useObservable, useLocalStore } from 'mobx-react';
 // import { observer } from 'mobx-react-lite';
@@ -131,14 +135,19 @@ export const Portal = observer(({ location }) => {
 						<Content style={{ padding: '0 24px', minHeight: 480 }}>
 							{slideIndex == 6 && <YoutubeVideo />}
 							{slideIndex == 11 && <ExamplePPT />}
+							{slideIndex == 13 && <ExampleEventSync />}
 							{slideIndex == 31 && <RightList />}
 							{slideIndex == 12 && <YiChart />}
 							{slideIndex == 7 && <IXLContent />}
 							{slideIndex == 8 && <Ending />}
 							{slideIndex == 22 && <MySteps />}
 							{slideIndex == 2 && <Chat name={userName} />}
+							{slideIndex == 32 && <RightList_arch />}
+							{slideIndex == 34 && <RightList_next />}
 							{slideIndex == 35 && <My_Ifram />}
+							{slideIndex == 36 && <WebSocketAccordion />}
 							{slideIndex == 14 && <VotingSample />}
+							{slideIndex == 15 && <Resource />}
 							{slideIndex == 1 && (
 								<Card title={'Hi, ' + store.userName + '. Welcome to the meeting.'}>
 									<p>
@@ -150,10 +159,6 @@ export const Portal = observer(({ location }) => {
 									</p>
 									<HostScript script={paragraph1} asHost={store.asHost} />
 									<p className="flex-caption">EPAM SYSTEM 2020</p>
-									<Divider />
-									<Card>
-										<SayHi />
-									</Card>
 								</Card>
 							)}
 						</Content>

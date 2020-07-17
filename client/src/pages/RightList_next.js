@@ -26,11 +26,25 @@ export default observer(({ userName }) => {
 	}, []);
 	return (
 		<div className="row">
-			<Card title={'How does this system works?'}>
+			<Card title={'What is Next'}>
 				<Tabs tabPosition="right" onChange={(TabIndex) => selectTab(TabIndex)} activeKey={tabIndex}>
 					<TabPane tab="Real-time full-duplex communication " key="1">
 						<h2>Cover page</h2>
-						<img src="/images/1600w-Hy7XLKyWwv0.jpg" width="100%" />
+						<video
+							muted=""
+							preload="auto"
+							poster="//www.zohowebstatic.com/sites/default/files/show/consistency.jpg"
+							width="100%"
+							autoPlay
+							loop="loop"
+							playsInline
+							id="zs_import_video"
+						>
+							<source
+								type="video/mp4"
+								src="//www.zohowebstatic.com/sites/default/files/show/consistency.mp4"
+							/>
+						</video>
 					</TabPane>
 					<TabPane tab="Real-time " key="2">
 						<h3>What's sepcial about HTTTP?</h3>

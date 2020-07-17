@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Divider, Progress, Modal, Card, Row, Col } from 'antd';
+import { Button, Divider, Progress, Modal, Row, Col } from 'antd';
 
 import { socket } from '../../service/socket';
 import OpenALink from '../OpenALink';
@@ -18,14 +18,6 @@ const SayHi = () => {
 				setVisible(true);
 			}
 		});
-		// socket.on('openALinkEmit', (url) => {
-		// 	console.log('openALinkEmit',url);
-		// 	window.openedWindow = window.open(url,"wwnow");
-		// });
-		// socket.on('closeALinkEmit', () => {
-		// 	console.log('closeALinkEmit',);
-		// 	window.openedWindow && window.openedWindow.close();
-		// });
 	}, []);
 	const handleOk = () => {
 		justConfirm(true);
@@ -41,16 +33,7 @@ const SayHi = () => {
 		socket.emit('sayHi2All');
 		setVisible(true);
 	};
-	// const openALink = () => {
-	// 	console.log('openALink');
-	// 	const url ='/coming-soon.html';
-	// 	socket.emit('openALink', url);
-	// 	window.openedWindow = window.open(url,"wwnow");
-	// };
-	// const closeALink = () => {
-	// 	socket.emit('closeALink');
-	// 	// window.openedWindow.close();
-	// };
+
 	return (
 		<div>
 			<Row justify="space-around" align="middle">
@@ -60,14 +43,8 @@ const SayHi = () => {
 					</Button>
 					<br />
 					<br />
-					{/* <Button type="primary" onClick={openALink}>
-						Open a Link
-					</Button>
-					<br/><br/>
-					<Button type="primary" onClick={closeALink}>
-						Close The Link
-					</Button> */}
-					<OpenALink url="http://www.epam.com/" />
+
+					<OpenALink url="http://www.epam.com/" title="a ordinary website" />
 				</Col>
 				<Col span={18}>
 					{showResult ? (

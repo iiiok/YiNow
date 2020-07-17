@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Doughnut, HorizontalBar, Bar } from 'react-chartjs-2';
-import { Row, Col, Icon, Button, Tabs, Card, Result } from 'antd';
+import { Row, Col, Icon, Button, Card } from 'antd';
 import { socket } from '../service/socket';
 import Group from '../components/SliderShow/Group';
 import { Divider } from 'antd';
 import { observer, useObservable, useLocalStore } from 'mobx-react';
 
 import { MoviceData } from '../service/dummyDate';
-const { TabPane } = Tabs;
 const options = {
 	legend: {
 		display: false
@@ -16,7 +15,8 @@ const options = {
 		padding: {
 			top: 0
 		}
-	}
+	},
+	scales: { xAxes: [ { ticks: { beginAtZero: true } } ] }
 };
 const options2 = {
 	legend: {
@@ -53,15 +53,15 @@ export default () => {
 		<Card title="Top 10 Movices Voting">
 			<Group drawerVisable={drawerVisable} />
 			<h2>
-				Great, here is what{' '}
+				Great, here is what{'  '}
 				<u>
 					<i>{voteCount}</i>
-				</u>{' '}
+				</u>
+				{'  '}
 				people think!
 			</h2>
 			<Divider />
 			<Row>
-				{' '}
 				<Col span={12}>
 					<Doughnut data={resulteData} redraw height={160} options={options2} />
 				</Col>

@@ -4,7 +4,7 @@ import { Card, Tabs } from 'antd';
 import {
 	LineChartOutlined,
 	LaptopOutlined,
-	ConsoleSqlOutlined,
+	AudioOutlined,
 	LoadingOutlined,
 	SmileOutlined,
 	GlobalOutlined,
@@ -89,24 +89,24 @@ function Slider({ slideIndex }) {
 		<Carousel ref={slider_ab1} {...settings} className="ppt">
 			<div>
 				<p>
-					<img src="/images/1600w-Hy7XLKyWwv0.jpg" alt="" />
+					<img src="/ppt/long-roads-of-new-zealand.jpg" alt="" />
 				</p>
 
 				<p className="flex-caption">Welcome Page</p>
 			</div>
 			<div>
 				<p>
-					<img src="/images/7244-01-business-presentation-16x9-3.jpg" alt="" />
+					<img src="/images/smartphone-to-tv.jpg" alt="" />
 				</p>
 
-				<p className="flex-caption">About Us</p>
+				<p className="flex-caption">As a TV controller</p>
 			</div>
 			<div>
 				<p>
-					<img src="/images/7244-01-business-presentation-16x9-14.jpg" alt="" />
+					<img src="/images/7244-01-business-presentation-16x9-3.jpg" alt="" />
 				</p>
 
-				<p className="flex-caption">Our Global Reach</p>
+				<p className="flex-caption">As a TV controller</p>
 			</div>
 			<div>
 				<p>
@@ -180,53 +180,43 @@ function YiTab({ slideIndex, selectTab }) {
 						Intro
 					</span>
 				}
-			>
-				{' '}
-			</TabPane>
+			/>
 			<TabPane
 				tab={
 					<span>
 						<AndroidOutlined />
-						About Us
+						As a TV controller
 					</span>
 				}
 				key="2"
-			>
-				{' '}
-			</TabPane>
+			/>
 			<TabPane
 				tab={
 					<span>
 						<GlobalOutlined />
-						Our Global Reach
+						TV Sync
 					</span>
 				}
 				key="3"
-			>
-				{' '}
-			</TabPane>
+			/>
 			<TabPane
 				tab={
 					<span>
-						<ConsoleSqlOutlined />
-						Our Developer Team
+						<AudioOutlined />
+						Concert Sync
 					</span>
 				}
 				key="4"
-			>
-				{' '}
-			</TabPane>
+			/>
 			<TabPane
 				tab={
 					<span>
 						<TeamOutlined />
-						Our Business Team
+						Sport Event Sync
 					</span>
 				}
 				key="5"
-			>
-				{' '}
-			</TabPane>
+			/>
 			<TabPane tab="Indiviual Skill" key="6">
 				{' '}
 			</TabPane>

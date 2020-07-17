@@ -119,6 +119,7 @@ function MyStatus({ asHost, userName, onSwitch }) {
 			/>&nbsp;&nbsp;
 			{asHost && (
 				<Switch
+					className="scroll_master"
 					checkedChildren="Scroll Master"
 					unCheckedChildren="Scroll Disable"
 					checked={asScroller}

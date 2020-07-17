@@ -137,3 +137,17 @@ blockquote.isHighlighted {
 #withBlackGround.BGImage8 {
 	background-image: url(/ppt/bg8.jpg);
 }
+
+.popup_image {
+	max-width: 1700px;
+	max-height: 800px;
+	width: 100%;
+}
+.scroll_master {
+	position: fixed;
+	top: 66px;
+	z-index: 99;
+}
+.ant-modal {
+	top: 40px;
+}

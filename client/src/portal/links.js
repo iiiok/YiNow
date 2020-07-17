@@ -7,9 +7,12 @@ import {
 	ClusterOutlined,
 	ExperimentOutlined,
 	CheckOutlined,
+	SplitCellsOutlined,
+	RadarChartOutlined,
 	ToolOutlined,
 	SafetyOutlined,
 	EnvironmentOutlined,
+	BarcodeOutlined,
 	WechatOutlined,
 	GlobalOutlined,
 	QuestionCircleOutlined,
@@ -17,7 +20,7 @@ import {
 	FundProjectionScreenOutlined,
 	IssuesCloseOutlined,
 	FastForwardOutlined,
-	QrcodeOutlined,
+	CarryOutOutlined,
 	ReadOutlined,
 	AudioOutlined,
 	YoutubeOutlined,
@@ -81,6 +84,9 @@ function Links({ onMenuChange, selectedKeys, userName, swithcMenu, isMenuOn, asH
 					Reasons Why
 				</Menu.Item>
 				<SubMenu key="sub3" icon={<ExperimentOutlined />} title="Behind the Scene">
+					<Menu.Item key="36" icon={<SplitCellsOutlined />}>
+						Real-time Communication
+					</Menu.Item>
 					<Menu.Item key="31" icon={<ToolOutlined />}>
 						WebSocket & socket.io
 					</Menu.Item>
@@ -90,34 +96,33 @@ function Links({ onMenuChange, selectedKeys, userName, swithcMenu, isMenuOn, asH
 					<Menu.Item key="35" icon={<GlobalOutlined />}>
 						Iframe Pages
 					</Menu.Item>
-					<Menu.Item key="34" icon={<FastForwardOutlined />}>
-						What's Next
-					</Menu.Item>
 				</SubMenu>
-				<SubMenu key="sub1" icon={<QrcodeOutlined />} title="Business Scenarios">
+				<SubMenu key="sub1" icon={<CarryOutOutlined />} title="Playground">
+					<Menu.Item key="14" icon={<SafetyOutlined />}>
+						Intro & Vote
+					</Menu.Item>
+					<Menu.Item key="7" icon={<LaptopOutlined />}>
+						iLearning
+					</Menu.Item>
 					<Menu.Item key="2" icon={<WechatOutlined />}>
 						Chat Room
 					</Menu.Item>
 					<Menu.Item key="12" icon={<LineChartOutlined />}>
 						Business Meeting
 					</Menu.Item>
-					<Menu.Item key="14" icon={<SafetyOutlined />}>
-						Intro & Vote
-					</Menu.Item>
-					<Menu.Item key="15" icon={<AudioOutlined />}>
-						Concert Sync
-					</Menu.Item>
-					<Menu.Item key="13" icon={<FundProjectionScreenOutlined />}>
-						TV Sync
-					</Menu.Item>
-					<Menu.Item key="7" icon={<LaptopOutlined />}>
-						iLearning
+					<Menu.Item key="6" icon={<YoutubeOutlined />}>
+						Videos
 					</Menu.Item>
 				</SubMenu>
-				<Menu.Item key="6" icon={<YoutubeOutlined />}>
-					Videos
+				<Menu.Item key="13" icon={<FundProjectionScreenOutlined />}>
+					Business Scenarios Event Syncing
 				</Menu.Item>
-
+				<Menu.Item key="34" icon={<FastForwardOutlined />}>
+					What's Next
+				</Menu.Item>
+				<Menu.Item key="15" icon={<BarcodeOutlined />}>
+					Resource
+				</Menu.Item>
 				<Menu.Item key="8" icon={<IssuesCloseOutlined />}>
 					The Ending
 				</Menu.Item>
