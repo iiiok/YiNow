@@ -1,153 +1,214 @@
 body {
-	background: #f0f2f5;
+  background: #f0f2f5;
 }
 .header {
-	display: flex;
-	justify-content: space-between;
-	color: wheat;
+  display: flex;
+  justify-content: space-between;
+  color: wheat;
+}
+.header_left {
+  display: flex;
+  justify-content: space-between;
 }
 #logo img {
-	position: relative;
-	height: 34px;
-	margin-right: 16px;
+  position: relative;
+  height: 34px;
+  margin-right: 16px;
 }
 .ant-switch {
-	background-color: rgba(100, 100, 100, 0.85);
+  background-color: rgba(100, 100, 100, 0.85);
 }
 .ant-switch.ant-switch-checked {
-	background-color: #1890ff;
+  background-color: #1890ff;
 }
 
 .slider_container {
-	/* width: 1000px; */
-	margin: 0 auto;
+  /* width: 1000px; */
+  margin: 0 auto;
 }
 
-/* For demo */
-/* .slick-list {
-	margin: 0 -10px;
-} */
 .ant-carousel .slick-slide {
-	text-align: center;
-	min-height: 600px;
-	line-height: 16px;
-	background: #f9f9f9;
-	/* background: #364d79; */
-	overflow: hidden;
-	/* padding: 10px 20px; */
-	/* margin: 0 -10px; */
-	width: 100%;
+  text-align: center;
+  min-height: 600px;
+  line-height: 16px;
+  background: #f9f9f9;
+  /* background: #364d79; */
+  overflow: hidden;
+  /* padding: 10px 20px; */
+  /* margin: 0 -10px; */
+  width: 100%;
 }
 .ant-carousel .slick-slide img {
-	/* max-width: 900px; */
+  /* max-width: 900px; */
 }
 .ant-carousel .slick-slide h3 {
-	color: #fff;
+  color: #fff;
 }
 .slick-dots li {
-	background: #364d79;
-	/* height: 20px !important; */
+  background: #364d79;
+  /* height: 20px !important; */
 }
 
 td {
-	padding: 10px;
+  padding: 10px;
 }
 
 .ant-progress-line {
-	margin-bottom: 8px;
+  margin-bottom: 8px;
 }
 
 .ant-carousel .slick-slide {
-	text-align: unset;
+  text-align: unset;
 }
 
 .accordion img {
-	max-width: 100%;
+  max-width: 100%;
 }
 .ant-layout {
-	background-color: transparent;
+  background-color: transparent;
 }
 .ant-layout-sider {
-	background-color: #fff;
+  background-color: #fff;
 }
 .ppt img {
-	width: 100%;
+  width: 100%;
 }
 
 .youtubeContainer {
-	position: relative;
-	width: 100%;
-	height: 0;
-	padding-bottom: 56.25%;
-	overflow: hidden;
-	margin-bottom: 50px;
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%;
+  overflow: hidden;
+  margin-bottom: 50px;
 }
 
 .youtubeContainer iframe {
-	width: 100%;
-	height: 100%;
-	position: absolute;
-	top: 0;
-	left: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 blockquote {
-	font-style: italic;
-	font-size: 110%;
-	padding: 16px;
-	border: 1px solid rgba(0, 0, 0, 0.2);
-	margin-bottom: 15px;
-	cursor: pointer;
+  font-style: italic;
+  font-size: 110%;
+  padding: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  margin-bottom: 15px;
+  cursor: pointer;
 }
 blockquote.isHighlighted {
-	background-color: #fff2ac;
-	background-image: linear-gradient(to right, #ffe359 0%, #fff2ac 100%);
-	color: navy;
-	font-weight: bold;
-	font-size: 125%;
-	font-style: normal;
+  background-color: #fff2ac;
+  background-image: linear-gradient(to right, #ffe359 0%, #fff2ac 100%);
+  color: navy;
+  font-weight: bold;
+  font-size: 125%;
+  font-style: normal;
 }
 #withBlackGround {
-	/* background: url(/ppt/bg1.jpg)no-repeat; */
-	/* width: 100%;
+  /* background: url(/ppt/bg1.jpg)no-repeat; */
+  /* width: 100%;
 	height: 100%; */
-	background-size: 100% 100%;
-	/* position: fixed; */
+  background-size: 100% 100%;
+  /* position: fixed; */
 }
 #withBlackGround.BGImage1 {
-	background-image: url(/ppt/bg1.jpg);
+  background-image: url(/ppt/bg1.jpg);
 }
 #withBlackGround.BGImage2 {
-	background-image: url(/ppt/bg2.jpg);
+  background-image: url(/ppt/bg2.jpg);
 }
 #withBlackGround.BGImage3 {
-	background-image: url(/ppt/bg3.jpg);
+  background-image: url(/ppt/bg3.jpg);
 }
 #withBlackGround.BGImage4 {
-	background-image: url(/images/car-long-road-field-sky-clouds.jpg);
+  background-image: url(/images/car-long-road-field-sky-clouds.jpg);
 }
 #withBlackGround.BGImage5 {
-	background-image: url(/ppt/bg5.png);
+  background-image: url(/ppt/bg5.png);
 }
 #withBlackGround.BGImage6 {
-	background-image: url(/ppt/bg6.jpg);
+  background-image: url(/ppt/bg6.jpg);
 }
 #withBlackGround.BGImage7 {
-	background-image: url(/ppt/bg7.jpg);
+  background-image: url(/ppt/bg7.jpg);
 }
 #withBlackGround.BGImage8 {
-	background-image: url(/ppt/bg8.jpg);
+  background-image: url(/ppt/bg8.jpg);
+}
+#withBlackGround.BGImage9 {
+  background-image: url(/ppt/bg9.jpg);
+}
+#withBlackGround.BGImage10 {
+  background-image: url(/ppt/bg10.jpg);
 }
 
 .popup_image {
-	max-width: 1700px;
-	max-height: 800px;
-	width: 100%;
+  max-width: 1700px;
+  max-height: 800px;
+  width: 100%;
 }
 .scroll_master {
-	position: fixed;
-	top: 66px;
-	z-index: 99;
+  position: fixed;
+  top: 66px;
+  z-index: 99;
 }
 .ant-modal {
-	top: 40px;
+  top: 40px;
+}
+/* @media only screen and (max-width: 768px) { */
+.main-content {
+  padding: 0 10px;
+  height: 90vh;
+}
+.main-content__left {
+  padding: 0 0 0 1%;
+  /* min-height: 480px; */
+}
+/* } */
+@media only screen and (min-width: 1024px) {
+  .main-content {
+    padding: 0 50px;
+    /* min-height: 780px; */
+  }
+  .main-content__left {
+    padding: 0 0 0 5%;
+  }
+}
+
+.ant-layout-header {
+  padding: 0 10px 0 30px;
+}
+.centered_image {
+  border: 1px solid #ccc;
+  display: flex;
+  margin: 0 auto;
+}
+.current_focus {
+  text-decoration: underline;
+  -webkit-text-decoration-color: salmon;
+  text-decoration-color: salmon;
+  -webkit-text-decoration-style: wavy;
+  text-decoration-style: wavy;
+  text-underline-position: under;
+  background: #fff6ea;
+  padding-bottom: 4px;
+  color: rgb(85, 172, 238);
+  font-size: 120%;
+}
+
+.ws_ul {
+  cursor: pointer;
+}
+.ant-layout-footer {
+  padding: 18px 50px;
+}
+.main_footer {
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #4f82a7;
+  color: white;
 }

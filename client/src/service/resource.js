@@ -29,8 +29,8 @@ const resource = [
 		url: 'https://websocket.org/quantum.html'
 	},
 	{
-		title: 'WebSocket vs. Long polling HTTP',
-		url: 'https://dev.to/moz5691/websocket-vs-long-polling-http-412f'
+		title: 'Socket.IO, React and Node.js: Going Real-Time',
+		url: 'https://www.valentinog.com/blog/socket-react/'
 	}
 ];
 
