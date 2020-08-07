@@ -47,6 +47,13 @@ io.on('connect', (socket) => {
 
     callback();
   });
+  socket.on('sendAImage', (message, callback) => {
+    // console.log(socket.id);
+    console.log(message.userName, 'send a picture', message.imgUrl);
+    socket.broadcast.emit('sendAImageEmit', { user: message.userName, imgUrl: message.imgUrl });
+
+    callback();
+  });
   socket.on('updateSliderIndex', (key, callback) => {
     // const user = getUser(socket.id);
     // console.log('object', key, new Date().getTime());
@@ -150,6 +157,10 @@ io.on('connect', (socket) => {
     console.log('openALink:', key);
     socket.broadcast.emit('openALinkEmit', key);
   });
+  socket.on('dataShowntoggle', (key) => {
+    console.log('dataShowntoggle:', key);
+    socket.broadcast.emit('dataShowntoggleEmit', key);
+  });
   socket.on('closeALink', () => {
     console.log('closeALink:');
     socket.broadcast.emit('closeALinkEmit');
@@ -169,9 +180,11 @@ io.on('connect', (socket) => {
     }
   });
   // setInterval(() => {
-  // 	socket.broadcast.emit('updateSliderIndexEmit', { sliderIndex: sliderIndex });
-  // 	// console.log('Broadcast SliderId', sliderIndex);
+  //   socket.broadcast.emit('updateSliderIndexEmit', { sliderIndex: sliderIndex });
+  //   socket.broadcast.emit('sayHiLoginEmit', userList.size);
+  //   // console.log('Broadcast SliderId', sliderIndex);
   // }, 4000);
+
   // let counter = 0;
   // setInterval(() => {
   // 	++counter;

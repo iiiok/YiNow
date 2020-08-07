@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Collapse, List, Divider, Card, Row, Col, PageHeader, Modal } from 'antd';
+import { Collapse, List, Divider, Card, Row, Col, PageHeader } from 'antd';
 import { Doughnut, HorizontalBar, Bar } from 'react-chartjs-2';
 import OpenALink from '../OpenALink';
 import { socket } from '../../service/socket';
@@ -10,18 +10,51 @@ const { Panel } = Collapse;
 const bulletPoint = [ 25, 26, 27, 28, 29, 30, 31, 32 ];
 const MyAccordion = () => {
   const [ accordionIndex, setAccordionIndex ] = useState([]);
-  const [ showModal, setShowModal ] = useState(false);
+  const [ _data3, set_data3 ] = useState(data3);
+  const [ _data4, set_data4 ] = useState(data4);
+  const [ _data5, set_data5 ] = useState(data5);
   useEffect(() => {
     socket.on('updateAccordionIndexEmit', (key) => {
       console.log('updateAccordionIndexEmit', key.accordionIndex);
       setAccordionIndex(key.accordionIndex);
     });
   }, []);
+  useEffect(() => {
+    socket.on('dataShowntoggleEmit', (key) => {
+      dataShowntogglt(key);
+    });
+  }, []);
 
   const onAccordionChange = (key) => {
     setAccordionIndex(key);
+    // console.log('setAccordionIndex', key);
     if (key) {
       socket.emit('updateAccordionIndex', key);
+    }
+  };
+  const onDataShowAll = (n) => {
+    dataShowntogglt(n);
+    socket.emit('dataShowntoggle', n);
+  };
+  const dataShowntogglt = (n) => {
+    console.log('dataShowntoggleEmit', n);
+    let v;
+    switch (n) {
+      case 3:
+        v = { ...data3 };
+        data3.datasets[1].hidden = !data3.datasets[1].hidden;
+        set_data3(v);
+        break;
+      case 4:
+        v = { ...data4 };
+        data4.datasets[1].hidden = !data4.datasets[1].hidden;
+        set_data4(v);
+        break;
+      case 5:
+        v = { ...data5 };
+        data5.datasets[1].hidden = !data5.datasets[1].hidden;
+        set_data5(v);
+        break;
     }
   };
 
@@ -35,11 +68,8 @@ const MyAccordion = () => {
             <Row gutter={16}>
               <Col span={8}>
                 <Card title="Webinars">
-                  <p>
-                    <strong>A webinar</strong> is an online meeting or presentation held via the Internet in real-time.
-                    To put it simply, it is an <strong>online event</strong>, which connects individuals with viewers
-                    across the world.
-                  </p>
+                  <img src="images/webinar.png" width="180px" />
+                  <hr />
                   <a href="https://myownconference.com/blog/en/index.php/what-is-a-webinar/" target="wwnow">
                     What is a Webinar and How Does it Work?
                   </a>
@@ -70,13 +100,15 @@ const MyAccordion = () => {
           <h2> Network Nightmare </h2>
           <ul>
             <li>Let's say, we have 2 people having a online meeting</li>
-            <li>And supposed that the "Desktop Sharing Video" will consume 2M's network traffic every second</li>
-            <li>Meanwhile it will consume 0.2M for audio meeting + 5M's web content for audio+web meeting</li>
+            <li>
+              And supposed that the "Desktop Sharing" Video + Audio broadcast will consume 2M's network traffic / second
+            </li>
+            <li>Meanwhile it will consume 0.2M for audio meeting + web content(5M) for audio+web meeting</li>
           </ul>
           <Row>
             <Col span={2}> </Col>
             <Col span={20}>
-              <Bar data={data3} options={options} />
+              <Bar data={_data3} options={options} onElementsClick={() => onDataShowAll(3)} />
             </Col>
           </Row>
           <Divider />
@@ -89,7 +121,7 @@ const MyAccordion = () => {
           <Divider />
           <Row gutter={60}>
             <Col span={20}>
-              <Bar data={data4} options={options} />
+              <Bar data={_data4} options={options} onElementsClick={() => onDataShowAll(4)} />
             </Col>
           </Row>
           <Divider />
@@ -97,16 +129,16 @@ const MyAccordion = () => {
           <Divider />
           <Row gutter={16}>
             <Col span={12}>
-              <PopImage picUrl="/images/lecture_laptop.jpg" title="Seminar 1" />
+              <PopImage picUrl="/images/lecture_laptop.jpg" title="Onsite Seminar 1" />
             </Col>
             <Col span={12}>
-              <PopImage picUrl="/images/lecture_laptop2.jpg" title="Seminar 2" />
+              <PopImage picUrl="/images/lecture_laptop2.jpg" title="Onsite Seminar 2" />
             </Col>
           </Row>
           <Divider />
           <h2>Here is the traffic comparison</h2>
           <Divider />
-          <Bar data={data5} options={options} />
+          <Bar data={_data5} options={options} onElementsClick={() => onDataShowAll(5)} />
         </Panel>
         <Panel header="Other shortcommings" key="3">
           <List

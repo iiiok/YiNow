@@ -20,6 +20,7 @@ function MySteps() {
       console.log('got a setCurrentStepEmit', key);
       setCurrentStep(key);
     });
+    return () => socket.off('setCurrentStepEmit');
   }, []);
 
   return (

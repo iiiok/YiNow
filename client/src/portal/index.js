@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useContext, createContext } from 'react';
-import { Layout, Menu, Breadcrumb, Switch, Tag } from 'antd';
+import { Layout, Menu, Breadcrumb } from 'antd';
 import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
 import './index.css';
 import Ending from '../pages/Ending';
@@ -28,13 +28,8 @@ import Resource from '../pages/Resource';
 import Chat from '../components/Chat/Chat';
 import { observer, useObservable, useLocalStore } from 'mobx-react';
 // import { observer } from 'mobx-react-lite';
-import { random } from 'lodash';
 import UserStore from '../service/UserStore';
-import { SmileOutlined } from '@ant-design/icons';
-const justSayHi = (userName) => {
-  console.log('sendNotice', userName);
-  socket.emit('sendNotice', { userName: userName, message: 'Just say hi.' }, () => {});
-};
+
 const { Header, Content, Footer } = Layout;
 const components = {
   1: Wellcome,
@@ -55,12 +50,16 @@ const components = {
   36: WebSocketAccordion
 };
 
-const UserInfoConText = createContext();
+// const UserInfoConText = createContext();
+const x = 99; //上限
+const y = 10; //下限
+const rand = parseInt(Math.random() * (x - y + 1) + y);
 
 export const Portal = observer(({ location }) => {
   const store = useContext(UserStore);
-  const { userName } = queryString.parse(location.search);
-  store.userName = userName;
+  // const { userName } = queryString.parse(location.search);
+  if (!store.userName) store.userName = 'John Doe-' + rand;
+  console.log('store.userName', store.userName);
   console.log('store.slideIndex', store.slideIndex);
 
   const [ slideIndex, setSlideIndex ] = useState(1);
@@ -96,57 +95,52 @@ export const Portal = observer(({ location }) => {
   }, []);
   const SpecificComponent = components[slideIndex];
   return (
-    <UserInfoConText.Provider
-      value={{
-        username: userName
-      }}
-    >
-      <Layout id="withBlackGround" className={'BGImage' + BGImage}>
-        <Header className="header">
-          <div className="header_left">
-            <div id="logo">
-              <img alt="logo" src="/images/Epam_Logo.png" />
-            </div>
-            <Menu theme="dark" mode="horizontal" defaultSelectedKeys={[ '1' ]}>
-              <Menu.Item key="1">Next Genaration of Meeting and Event</Menu.Item>
-            </Menu>
+    // <UserInfoConText.Provider
+    //   value={{
+    //     username: userName
+    //   }}
+    // >
+    <Layout id="withBlackGround" className={'BGImage' + BGImage}>
+      <Header className="header">
+        <div className="header_left">
+          <div id="logo">
+            <img alt="logo" src="/images/Epam_Logo.png" />
           </div>
-          <MyStatus
-            style={{ width: '60%' }}
-            asHost={store.asHost}
-            userCount={store.userList.length}
-            userName={userName}
-            onSwitch={store.switchAsHost}
-          />
-        </Header>
-        <Content className="main-content">
-          <Breadcrumb style={{ margin: '16px 0' }}>
-            <Breadcrumb.Item>Home</Breadcrumb.Item>
-            <Breadcrumb.Item>Next Genaration of Meeting</Breadcrumb.Item>
-            <Breadcrumb.Item>OnAir</Breadcrumb.Item>
-          </Breadcrumb>
-          <Layout className="site-layout-background" style={{ padding: '24px 0' }}>
-            {(store.asHost || store.isMenuOn) && (
-              <Links
-                onMenuChange={onMenuChange}
-                selectedKeys={[ slideIndex.toString() ]}
-                userName={store.userName}
-                swithcMenu={store.swithcMenu}
-                asHost={store.asHost}
-                isMenuOn={store.isMenuOn}
-              />
-            )}
-            <Content className="main-content__left">
-              {slideIndex && <SpecificComponent name={userName} />}
-              <Tag icon={<SmileOutlined />} color="#55acee" onClick={() => justSayHi(userName)}>
-                Say Hi
-              </Tag>
-            </Content>
-          </Layout>
-          <YiFooter userName={store.userName} />
-        </Content>
-        <Footer className="main_footer">WWNow.com - ©2020 Created by EPAM System, inc.</Footer>
-      </Layout>
-    </UserInfoConText.Provider>
+          <Menu theme="dark" mode="horizontal" defaultSelectedKeys={[ '1' ]}>
+            <Menu.Item key="1">WebSocket Web App to Support Full-duplex Event Broadcast</Menu.Item>
+          </Menu>
+        </div>
+        <MyStatus
+          style={{ width: '60%' }}
+          asHost={store.asHost}
+          userCount={store.userList.length}
+          userName={store.userName}
+          onSwitch={store.switchAsHost}
+        />
+      </Header>
+      <Content className="main-content">
+        <Breadcrumb style={{ margin: '16px 0' }}>
+          <Breadcrumb.Item>Home</Breadcrumb.Item>
+          <Breadcrumb.Item>Next Genaration of Meeting</Breadcrumb.Item>
+          <Breadcrumb.Item>OnAir</Breadcrumb.Item>
+        </Breadcrumb>
+        <Layout className="site-layout-background" style={{ padding: '24px 0' }}>
+          {(store.asHost || store.isMenuOn) && (
+            <Links
+              onMenuChange={onMenuChange}
+              selectedKeys={[ slideIndex.toString() ]}
+              userName={store.userName}
+              swithcMenu={store.swithcMenu}
+              asHost={store.asHost}
+              isMenuOn={store.isMenuOn}
+            />
+          )}
+          <Content className="main-content__left">{slideIndex && <SpecificComponent name={store.userName} />}</Content>
+        </Layout>
+        <YiFooter userName={store.userName} />
+      </Content>
+      <Footer className="main_footer">WWNow.com - ©2020 Created by EPAM System, inc.</Footer>
+    </Layout>
+    // </UserInfoConText.Provider>
   );
 });

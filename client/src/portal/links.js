@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Layout, Menu } from 'antd';
-import { Button, Divider, Switch, Card } from 'antd';
+import { Button, Divider, Switch, Card, Tag } from 'antd';
 import { socket } from '../service/socket';
 import menuConfig from '../service/menuConfig';
 import {
@@ -13,7 +13,9 @@ import {
   ToolOutlined,
   SafetyOutlined,
   EnvironmentOutlined,
+  PictureOutlined,
   BarcodeOutlined,
+  FullscreenOutlined,
   WechatOutlined,
   GlobalOutlined,
   QuestionCircleOutlined,
@@ -25,8 +27,10 @@ import {
   ReadOutlined,
   AudioOutlined,
   YoutubeOutlined,
+  SmileOutlined,
   LineChartOutlined
 } from '@ant-design/icons';
+import SharedInfo from '../components/SharedInfo';
 const Components = {
   11: EnvironmentOutlined,
   13: LaptopOutlined
@@ -34,10 +38,15 @@ const Components = {
 
 const { SubMenu } = Menu;
 const { Sider } = Layout;
+const justSayHi = (userName) => {
+  console.log('sendNotice', userName);
+  socket.emit('sendNotice', { userName: userName, message: 'Just say hi.' }, () => {});
+};
 
 function Links({ onMenuChange, selectedKeys, userName, swithcMenu, isMenuOn, asHost }) {
   console.log('selectedKeys', selectedKeys);
   const [ currentMenu, setCurrentMent ] = useState(selectedKeys);
+  const [ isSharedInfo, setSharedInfo ] = useState(false);
   const [ openKeys, setOpenKeys ] = useState([ '' ]);
   // const [ linksSwitch, setLinksSwitch ] = useState(isMenuOn);
   useEffect(
@@ -57,6 +66,10 @@ function Links({ onMenuChange, selectedKeys, userName, swithcMenu, isMenuOn, asH
     console.log('updateSubmenuOpen', openKeys);
     socket.emit('updateSubmenuOpen', openKeys, () => {});
     setOpenKeys(openKeys);
+  };
+  const changeBackground = () => {
+    console.log('changeBackground');
+    socket.emit('changeBackground');
   };
   const recursionMenu = (menuList) => {
     return menuList.map((menu, index) => {
@@ -111,9 +124,6 @@ function Links({ onMenuChange, selectedKeys, userName, swithcMenu, isMenuOn, asH
           <Menu.Item key="32" icon={<ClusterOutlined />}>
             Architecture
           </Menu.Item>
-          <Menu.Item key="35" icon={<GlobalOutlined />}>
-            Iframe Pages
-          </Menu.Item>
         </SubMenu>
         <SubMenu key="sub1" icon={<CarryOutOutlined />} title="Playground">
           <Menu.Item key="14" icon={<SafetyOutlined />}>
@@ -131,6 +141,9 @@ function Links({ onMenuChange, selectedKeys, userName, swithcMenu, isMenuOn, asH
           <Menu.Item key="6" icon={<YoutubeOutlined />}>
             Videos
           </Menu.Item>
+          <Menu.Item key="35" icon={<GlobalOutlined />}>
+            Iframe Pages
+          </Menu.Item>
         </SubMenu>
         <Menu.Item key="13" icon={<FundProjectionScreenOutlined />}>
           Business Scenarios Event Syncing
@@ -146,6 +159,20 @@ function Links({ onMenuChange, selectedKeys, userName, swithcMenu, isMenuOn, asH
         </Menu.Item>
         {/* {recursionMenu(menuConfig)} */}
       </Menu>
+      <Divider />
+      <Card size="small" title="Playground">
+        <Tag icon={<SmileOutlined />} color="#55acee" onClick={() => justSayHi(userName)}>
+          Say Hi
+        </Tag>
+        <Tag icon={<FullscreenOutlined />} color="#55acee" onClick={changeBackground}>
+          Change Background
+        </Tag>
+        <Tag icon={<PictureOutlined />} color="#55acee" onClick={() => setSharedInfo(!isSharedInfo)}>
+          Share screen
+        </Tag>
+        <SharedInfo isOpen={isSharedInfo} onClose={() => setSharedInfo(false)} userName={userName} />
+      </Card>
+      <div className="centet_block" />
     </Sider>
   );
 }

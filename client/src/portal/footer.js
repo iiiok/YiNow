@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Layout, Input } from 'antd';
 
 import { socket } from '../service/socket';
-import { observer, useObservable, useLocalStore } from 'mobx-react';
+import { observer } from 'mobx-react';
 
 import UserStore from '../service/UserStore';
 import { AudioOutlined } from '@ant-design/icons';
@@ -35,7 +35,7 @@ export default observer(({ userName }) => {
         placeholder="Sent a notification message to @All"
         enterButton="Sent"
         size="large"
-        style={{ width: '70%', margin: '0 auto 0 auto' }}
+        style={{ width: '70%', margin: '0 auto 10px auto' }}
         suffix={suffix}
         value={message}
         onChange={(value) => setMessage(value.value)}
