@@ -108,6 +108,7 @@ blockquote {
   margin: 0;
   position: relative;
   transition: font 0.3s ease;
+  color: #000000;
 }
 blockquote h3 {
   color: #455a64;

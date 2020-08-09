@@ -5,8 +5,10 @@ const { Search } = Input;
 
 export default ({ isOpen, onClose, userName }) => {
   // const [ showDrawer, setDrawer ] = useState(isOpen);
+  // const imgArr = [];
+  const [ imgArr, setImgArr ] = useState([]);
   const [ imgUrl, setImgUrl ] = useState(undefined);
-  const [ sender, setSender ] = useState(undefined);
+  // const [ sender, setSender ] = useState(undefined);
   const [ showChildrenDrawer, setChildrenDrawer ] = useState(false);
   // const [ picUrl, setPicUrl ] = useState('/images/lecture_laptop.jpg');
 
@@ -19,8 +21,9 @@ export default ({ isOpen, onClose, userName }) => {
       console.log('got a sendAImageEmit Emit', user, imgUrl);
       setChildrenDrawer(true);
       isOpen = true;
-      setImgUrl(imgUrl);
-      setSender(user);
+      setImgArr(imgArr.push(user,imgUrl));
+      // setImgUrl(imgUrl);
+      // setSender(user);
       // picUrl === url && setShowModal(setVisible);
     });
   }, []);
@@ -34,11 +37,16 @@ export default ({ isOpen, onClose, userName }) => {
     }
   };
   return (
-    <Drawer title="Multi-level drawer" width={320} onClose={onClose} visible={isOpen}>
-      <Button type="primary" onClick={() => setChildrenDrawer(!showChildrenDrawer)}>
-        Upload an image
-      </Button>
-      <Divider />
+    <Drawer title="Image sharing" width={320} onClose={onClose} visible={isOpen}>
+      length={imgArr.length}
+       {
+imgArr.map((sender, imgUrl)=><div>
+
+    <h3><u><i>{sender}</i></u>post a picture: </h3>
+          {imgUrl && <img src={imgUrl} />}{imgUrl && <img src={imgUrl} />}
+  </div>
+)
+        }
       <Search
         placeholder="Or enter a pic address"
         enterButton="Sent"
@@ -48,16 +56,27 @@ export default ({ isOpen, onClose, userName }) => {
         onChange={(value) => setImgUrl(value.value)}
         onSearch={sendPic}
       />
-
+      <Divider />
+<Button type="primary" onClick={() => setChildrenDrawer(!showChildrenDrawer)}>
+        Upload an image
+      </Button>
       <Drawer
         title="Shared Screen"
-        width={800}
+        width={'80%'}
         closable={false}
         onClose={() => setChildrenDrawer(false)}
         visible={showChildrenDrawer}
-      >
-        <h3>{sender} send you a picture: </h3>
-        {imgUrl && <img src={imgUrl} />}
+      >length={imgArr.length}
+        {
+imgArr.map((sender, imgUrl)=><div>
+
+    <h3><u><i>{sender}</i></u>post a picture: </h3>
+          {imgUrl && <img src={imgUrl} />}{imgUrl && <img src={imgUrl} />}
+  </div>
+)
+        }
+        
+
       </Drawer>
     </Drawer>
   );
