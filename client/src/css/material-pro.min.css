@@ -5,7 +5,15 @@
 }
 .social {
   display: flex;
-  justify-content: space-evenly;
+  /* justify-content: space-evenly; */
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+}
+.social:before,
+.social:after {
+  content: '';
+  display: block;
 }
 .center-title {
   color: white;

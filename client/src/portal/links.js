@@ -18,9 +18,11 @@ import {
   FullscreenOutlined,
   WechatOutlined,
   GlobalOutlined,
+  MenuFoldOutlined,
   QuestionCircleOutlined,
   LaptopOutlined,
   FundProjectionScreenOutlined,
+  FileAddOutlined,
   IssuesCloseOutlined,
   FastForwardOutlined,
   CarryOutOutlined,
@@ -31,6 +33,7 @@ import {
   LineChartOutlined
 } from '@ant-design/icons';
 import SharedInfo from '../components/SharedInfo';
+import SharedInfoShow from '../components/SharedInfo-show';
 const Components = {
   11: EnvironmentOutlined,
   13: LaptopOutlined
@@ -47,6 +50,7 @@ function Links({ onMenuChange, selectedKeys, userName, swithcMenu, isMenuOn, asH
   console.log('selectedKeys', selectedKeys);
   const [ currentMenu, setCurrentMent ] = useState(selectedKeys);
   const [ isSharedInfo, setSharedInfo ] = useState(false);
+  const [ isSharedInfoShow, setSharedInfoShow ] = useState(false);
   const [ openKeys, setOpenKeys ] = useState([ '' ]);
   // const [ linksSwitch, setLinksSwitch ] = useState(isMenuOn);
   useEffect(
@@ -161,16 +165,20 @@ function Links({ onMenuChange, selectedKeys, userName, swithcMenu, isMenuOn, asH
       </Menu>
       <Divider />
       <Card size="small" title="Playground">
-        <Tag icon={<SmileOutlined />} color="#55acee" onClick={() => justSayHi(userName)}>
+        <Tag icon={<SmileOutlined />} color="#2db7f5" onClick={() => justSayHi(userName)}>
           Say Hi
         </Tag>
         <Tag icon={<FullscreenOutlined />} color="#55acee" onClick={changeBackground}>
           Change Background
         </Tag>
-        <Tag icon={<PictureOutlined />} color="#55acee" onClick={() => setSharedInfo(!isSharedInfo)}>
-          Share screen
+        <Tag icon={<FileAddOutlined />} color="#87d068" onClick={() => setSharedInfo(!isSharedInfo)}>
+          Post a screen
+        </Tag>
+        <Tag icon={<MenuFoldOutlined />} color="#55acee" onClick={() => setSharedInfoShow(!isSharedInfoShow)}>
+          Show screen posts
         </Tag>
         <SharedInfo isOpen={isSharedInfo} onClose={() => setSharedInfo(false)} userName={userName} />
+        <SharedInfoShow isOpen={isSharedInfoShow} onSwitch={(v) => setSharedInfoShow(v)} />
       </Card>
       <div className="centet_block" />
     </Sider>

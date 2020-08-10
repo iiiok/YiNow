@@ -94,7 +94,9 @@ td {
   list-style: none;
   padding-left: 10px;
 }
-.yi-Ul li {
+.ant-tag {
+  cursor: pointer;
+  margin-top: 6px;
 }
 blockquote {
   border: 1px solid rgba(0, 0, 0, 0.2);
