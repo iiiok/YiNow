@@ -50,7 +50,7 @@ io.on('connect', (socket) => {
   socket.on('sendAImage', (message, callback) => {
     // console.log(socket.id);
     console.log(message.userName, 'send a picture', message.imgUrl);
-    socket.broadcast.emit('sendAImageEmit', { user: message.userName, imgUrl: message.imgUrl });
+    io.emit('sendAImageEmit', { user: message.userName, imgUrl: message.imgUrl });
 
     callback();
   });
@@ -166,7 +166,7 @@ io.on('connect', (socket) => {
     socket.broadcast.emit('closeALinkEmit');
   });
   socket.on('changeBackground', () => {
-    bgImgVal = bgImgVal < 10 ? ++bgImgVal : 0;
+    bgImgVal = bgImgVal < 15 ? ++bgImgVal : 0;
     console.log('changeBackground:', bgImgVal);
     io.emit('changeBackgroundEmit', bgImgVal);
   });

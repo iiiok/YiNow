@@ -197,6 +197,21 @@ blockquote.isHighlighted::before {
 #withBlackGround.BGImage10 {
   background-image: url(/ppt/bg10.jpg);
 }
+#withBlackGround.BGImage11 {
+  background-image: url(/ppt/bg11.jpg);
+}
+#withBlackGround.BGImage12 {
+  background-image: url(/ppt/bg12.jpg);
+}
+#withBlackGround.BGImage13 {
+  background-image: url(/ppt/bg13.jpg);
+}
+#withBlackGround.BGImage14 {
+  background-image: url(/ppt/bg14.jpg);
+}
+#withBlackGround.BGImage15 {
+  background-image: url(/ppt/bg15.jpg);
+}
 
 .popup_image {
   max-width: 1700px;
