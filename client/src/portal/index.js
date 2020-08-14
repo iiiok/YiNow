@@ -3,7 +3,6 @@ import { Layout, Menu, Breadcrumb } from 'antd';
 import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
 import './index.css';
 import Ending from '../pages/Ending';
-import YiChart from '../pages/YiChart';
 import RightList from '../pages/RightList';
 import MySteps from '../components/SliderShow/MySteps';
 // import HostScript from '../components/TextView/HostScript';
@@ -38,7 +37,7 @@ const components = {
   7: IXLContent,
   8: Ending,
   11: ExamplePPT,
-  12: YiChart,
+  // 12: YiChart,
   13: ExampleEventSync,
   15: Resource,
   14: VotingSample,

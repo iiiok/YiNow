@@ -242,7 +242,8 @@ blockquote.isHighlighted::before {
     /* min-height: 780px; */
   }
   .main-content__left {
-    padding: 0 0 0 5%;
+    margin: 0 0 0 3%;
+    background: #fff;
   }
 }
 
@@ -287,4 +288,7 @@ blockquote.isHighlighted::before {
 .centet_block {
   text-align: center;
   margin: 0px auto 12px;
+}
+.ant-card {
+  width: 100%;
 }

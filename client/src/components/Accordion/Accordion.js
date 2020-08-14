@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Collapse, List, Divider, Card, Row, Col, PageHeader } from 'antd';
-import { Doughnut, HorizontalBar, Bar } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
 import OpenALink from '../OpenALink';
 import { socket } from '../../service/socket';
 import { data3, options, data4, data5 } from '../../service/dummyDate';
@@ -27,7 +27,6 @@ const MyAccordion = () => {
 
   const onAccordionChange = (key) => {
     setAccordionIndex(key);
-    // console.log('setAccordionIndex', key);
     if (key) {
       socket.emit('updateAccordionIndex', key);
     }
@@ -103,7 +102,7 @@ const MyAccordion = () => {
             <li>
               And supposed that the "Desktop Sharing" Video + Audio broadcast will consume 2M's network traffic / second
             </li>
-            <li>Meanwhile it will consume 0.2M for audio meeting + web content(5M) for audio+web meeting</li>
+            <li>Meanwhile, for audio+web meeting, it will consume 0.2M for audio meeting + (5M)'s web content </li>
           </ul>
           <Row>
             <Col span={2}> </Col>
@@ -140,7 +139,7 @@ const MyAccordion = () => {
           <Divider />
           <Bar data={_data5} options={options} onElementsClick={() => onDataShowAll(5)} />
         </Panel>
-        <Panel header="Other shortcommings" key="3">
+        <Panel header="List of shortcommings" key="3">
           <List
             grid={{ gutter: 16, column: 2 }}
             dataSource={bulletPoint}

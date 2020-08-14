@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "react-syntax-highlighter": "^13.3.1"
+  }
+}

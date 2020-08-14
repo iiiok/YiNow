@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Collapse, Button, Divider, Card, Row, Col, PageHeader, Modal } from 'antd';
 import { socket } from '../../service/socket';
 import HighLight from '../../components/TextView/HighLight';
+import SayHi from '../SayHi/sayhi';
 import List from '../List';
 const { Panel } = Collapse;
 const list1 = [
@@ -31,23 +32,36 @@ const PPTFuture = () => {
   };
   return (
     <div className="accordion">
-      <PageHeader className="site-page-header" title="What can we do " subTitle="Pros and Cons" />
+      <PageHeader className="site-page-header" title="This system can do lots more then sharing PPT " />
 
       <Collapse onChange={onAccordionChange} activeKey={accordionIndex} destroyInactivePanel={true} accordion>
-        <Panel header="Support most Web-base Media, Resource and widget" key="1">
+        <Panel header="Support all kind of Web-base Media, Resource and widget" key="1">
           <ul className="yi-Ul">
             <li>
-              <HighLight scriptId={33} header={'Sharing Original'} />
+              <HighLight scriptId={33} header={'Share the Original Resource'} />
             </li>
+            <li />
             <li>
-              <HighLight scriptId={34} header={'Interaction'} />
-            </li>
-            <li>
-              <HighLight scriptId={35} header={"It'll be a Before, During and After the 'Meeting' Seminar"} />
+              <HighLight scriptId={35} header={'Lasting Effect'} />
             </li>
           </ul>
         </Panel>
-
+        <Panel header="Interaction & Participation" key="5">
+          <HighLight scriptId={3} header={'Participation'} />
+          <HighLight scriptId={34} header={'Interaction'} />
+          <Divider />
+          <HighLight scriptId={2} header={'Interaction'} />
+          {/* <HighLight scriptId={35} header={'Involvement'} /> */}
+          <h2>Support all kinds of web-base interactions</h2>
+          <ul>
+            <li>Pop-up message, Answer Sheet, Voting, Chat, Game,Message Board etc. </li>
+            <li>Shopping (A direction link to shop while the product is showing on TV)</li>
+          </ul>
+          <Divider />
+          <Card>
+            <SayHi />
+          </Card>
+        </Panel>
         <Panel header="More Than Just a Meeting-assistant System" key="2">
           <List listArry={list1} listId={'l13'} />
 

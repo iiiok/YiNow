@@ -139,9 +139,6 @@ function Links({ onMenuChange, selectedKeys, userName, swithcMenu, isMenuOn, asH
           <Menu.Item key="2" icon={<WechatOutlined />}>
             Chat Room
           </Menu.Item>
-          <Menu.Item key="12" icon={<LineChartOutlined />}>
-            Business Meeting
-          </Menu.Item>
           <Menu.Item key="6" icon={<YoutubeOutlined />}>
             Videos
           </Menu.Item>

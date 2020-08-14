@@ -33,8 +33,13 @@ const resource = [
     url: 'https://www.valentinog.com/blog/socket-react/'
   },
   {
-    title: 'Create stunning animations presentations',
-    url: 'https://slides.com/'
+    title: 'Slides.com',
+    url: 'https://slides.com/',
+    desc: 'Create stunning animations presentations'
+  },
+  {
+    title: 'Download the PPT',
+    url: '/ppt/websocket.pptx'
   }
 ];
 

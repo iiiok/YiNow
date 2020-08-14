@@ -23,7 +23,7 @@ const { TabPane } = Tabs;
 
 const { Content } = Layout;
 const paragraph1 =
-  "Here is a example of sharing your ppt sliders with the participants. The first page is the welcome page ...\
+  "Here is a Typical example of sharing PPT sliders with the participants. The first page is the aboutus page , business plan...\
 What is special about this PPT functionalities? 1. The presentr'll be about to navigate the pages easily. \
 2. 0 pixal transfer lost, the attendees have a clear view as the  presenter. \
 3.The audience may navigate the content when there is a need. 4.The host may write some speech here but not showing to the audience...";
@@ -217,9 +217,7 @@ function YiTab({ slideIndex, selectTab }) {
         }
         key="5"
       />
-      <TabPane tab="Indiviual Skill" key="6">
-        {' '}
-      </TabPane>
+      <TabPane tab="Indiviual Skill" key="6" />
       <TabPane
         tab={
           <span>
@@ -228,45 +226,7 @@ function YiTab({ slideIndex, selectTab }) {
           </span>
         }
         key="7"
-      >
-        {' '}
-      </TabPane>
-      <TabPane tab="Time Line Plan" key="8">
-        {' '}
-      </TabPane>
-      <TabPane
-        tab={
-          <span>
-            <LineChartOutlined />
-            Predition in 2021
-          </span>
-        }
-        key="9"
-      >
-        {' '}
-      </TabPane>
-      <TabPane
-        tab={
-          <span>
-            <SendOutlined />
-            Current Progress
-          </span>
-        }
-        key="10"
-      >
-        {' '}
-      </TabPane>
-      <TabPane
-        tab={
-          <span>
-            <SmileOutlined />
-            The End
-          </span>
-        }
-        key="11"
-      >
-        {' '}
-      </TabPane>
+      />
     </Tabs>
   );
 }

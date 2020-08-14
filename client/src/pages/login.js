@@ -18,7 +18,7 @@ export default observer(({}) => {
   const onHandleLogin = (event) => {
     event.preventDefault();
     console.log('onHandleLogin', userName);
-    socket.emit('sendNotice', { userName: userName, message: 'Just login.' }, () => {});
+    socket.emit('sendNotice', { userName: userName, message: 'Just join in.' }, () => {});
     setIsSuccess(true);
   };
 

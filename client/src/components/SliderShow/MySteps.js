@@ -33,7 +33,7 @@ function MySteps() {
         className="site-navigation-steps"
       >
         <Step title="Traditional Online Meeting" />
-        <Step title="Why webSocket?" />
+        <Step title="Why webSocket APP?" />
         <Step title="More than a PPT" />
       </Steps>
       {currentStep === 0 && <MyAccordion />}
