@@ -5,7 +5,6 @@ import {
   LineChartOutlined,
   LaptopOutlined,
   ConsoleSqlOutlined,
-  LoadingOutlined,
   SmileOutlined,
   GlobalOutlined,
   TeamOutlined,
@@ -16,8 +15,8 @@ import {
 import { socket } from '../service/socket';
 import HostScript from '../components/TextView/HostScript';
 import { observer } from 'mobx-react';
-import { options2, data2, data3, plugins, options } from '../service/dummyDate';
-import { Doughnut, HorizontalBar, Bar } from 'react-chartjs-2';
+import { options2, data2 } from '../service/dummyDate';
+import {  HorizontalBar } from 'react-chartjs-2';
 import UserStore from '../service/UserStore';
 const { TabPane } = Tabs;
 
@@ -42,7 +41,7 @@ const settings = {
   swipeToSlide: true
 };
 
-export default observer(({}) => {
+export default observer(() => {
   const store = useContext(UserStore);
   const sliderId = 'ab1';
   const [ slideIndex, setSlideIndex ] = useState(1);

@@ -5,7 +5,7 @@ import { observer } from 'mobx-react';
 import HostScript from '../components/TextView/HostScript';
 import { paragraph1 } from '../service/dummyDate';
 
-export default observer(({}) => {
+export default observer(() => {
   const store = useContext(UserStore);
 
   return (

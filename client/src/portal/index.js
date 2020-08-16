@@ -118,11 +118,11 @@ export const Portal = observer(({ location }) => {
         />
       </Header>
       <Content className="main-content">
-        <Breadcrumb style={{ margin: '16px 0' }}>
+        {/* <Breadcrumb style={{ margin: '16px 0' }}>
           <Breadcrumb.Item>Home</Breadcrumb.Item>
           <Breadcrumb.Item>Next Genaration of Meeting</Breadcrumb.Item>
           <Breadcrumb.Item>OnAir</Breadcrumb.Item>
-        </Breadcrumb>
+        </Breadcrumb> */}
         <Layout className="site-layout-background" style={{ padding: '24px 0' }}>
           {(store.asHost || store.isMenuOn) && (
             <Links
