@@ -42,7 +42,7 @@ body {
   /* max-width: 900px; */
 }
 .ant-carousel .slick-slide h3 {
-  color: #fff;
+  color: #01c0c8; /*#1e88e5;*/
 }
 .slick-dots li {
   background: #364d79;
@@ -224,7 +224,7 @@ blockquote.isHighlighted::before {
   z-index: 99;
 }
 .ant-modal {
-  top: 40px;
+  top: 30px;
 }
 /* @media only screen and (max-width: 768px) { */
 .main-content {
