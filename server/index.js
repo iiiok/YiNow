@@ -179,11 +179,11 @@ io.on('connect', (socket) => {
       io.to(user.room).emit('roomData', { room: user.room, users: getUsersInRoom(user.room) });
     }
   });
-  // setInterval(() => {
-  //   socket.broadcast.emit('updateSliderIndexEmit', { sliderIndex: sliderIndex });
-  //   socket.broadcast.emit('sayHiLoginEmit', userList.size);
-  //   // console.log('Broadcast SliderId', sliderIndex);
-  // }, 4000);
+  setInterval(() => {
+    socket.broadcast.emit('updateSliderIndexEmit', { sliderIndex: sliderIndex });
+    socket.broadcast.emit('sayHiLoginEmit', userList.size);
+    // console.log('Broadcast SliderId', sliderIndex);
+  }, 4000);
 
   // let counter = 0;
   // setInterval(() => {

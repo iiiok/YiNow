@@ -22,13 +22,13 @@ const list1 = [
 const list2 = [
   {
     id: 1,
-    value: 'TV'
+    value: '1. A synchronized schedule of the TV channel.'
   },
-  { id: 2, value: 'The WebApp keep broadcasting related information synchronized with what’s on the TV channel.' },
+  { id: 2, value: '2. The WebApp keep broadcasting related information synchronized with what’s showing on the TV.' },
+  { id: 3, value: '3. Read detailed report of a certain news, Learn more about the character, ect.' },
   {
-    id: 3,
-    value:
-      'Whenever there is an advertisements, the audiences can learn more about it on his/her phone and purchase it in one click. '
+    id: 4,
+    value: '4. Whenever there is an advertisements, the audiences can [learn more] about it or link to place an order. '
   }
 ];
 const { TabPane } = Tabs;
@@ -130,7 +130,7 @@ function Slider({ slideIndex }) {
 
       <div>
         <Divider>
-          <h3>As a TV Remote Controller</h3>
+          <h3>As a TV Remote Controller(No APP)</h3>
         </Divider>
         <p>
           <img src="/images/smartphone-to-tv.jpg" alt="" />
@@ -138,10 +138,10 @@ function Slider({ slideIndex }) {
       </div>
       <div>
         <Divider>
-          <h3>Use Smartphone as the Car Stereo's Control Panel</h3>
+          <h3>Use your phone as the Car Stereo's Control Panel</h3>
         </Divider>
         <p>
-          <img src="/images/smartphone-to-stereo.jpg" alt="" />
+          <img src="/images/smartphone-to-stereo.jpg" alt="(Again, Just Web)" />
         </p>
       </div>
       <div>
@@ -185,19 +185,41 @@ function Slider({ slideIndex }) {
 
         <Row gutter={16}>
           <Col span={12}>
-            <PopImage picUrl="/images/TVChannel.jpg" title="" />
+            <PopImage
+              picUrl="/images/live-streaming-tv.jpg"
+              title="Read more about a certain news, Learn more about the character, ect. Related infor are ready for you, Don't need to google it."
+            />
           </Col>
           <Col span={12}>
-            <PopImage picUrl="/images/TVChannel.jpg" title="" />
+            <PopImage
+              picUrl="/images/TVChannel.jpg"
+              title="Whenever there is an advertisements, the audiences can [learn more] about it or link to place an order. "
+            />
           </Col>
         </Row>
       </div>
       <div>
         <Divider>
-          <h3>Sport event synchronous broadcast</h3>
+          <h3>Other Event synchronous broadcast & Intraction (Movies,Sport Game, Concerts, Theme Party,)</h3>
         </Divider>
 
-        <PopImage picUrl="/images/football-stadium.jpg" title="" />
+        <Row gutter={16}>
+          <Col span={12}>
+            <PopImage picUrl="/images/movie-intract.jpg" title="Intractive Movies" />
+          </Col>
+          <Col span={12}>
+            <PopImage picUrl="/images/football-stadium.jpg" title="Sport event" />
+          </Col>
+        </Row>
+        <Divider />
+        <Row gutter={16}>
+          <Col span={12}>
+            <PopImage picUrl="/images/Concert.jpg" title="Festivals, Concerts and Live Events" />
+          </Col>
+          <Col span={12}>
+            <PopImage picUrl="/images/ThemeParty.jpg" title="Theme Party" />
+          </Col>
+        </Row>
       </div>
     </Carousel>
   );
@@ -215,7 +237,7 @@ function YiTab({ slideIndex, selectTab }) {
       <TabPane tab={<span>Car Stereo Controller</span>} key="5" />
       <TabPane tab={<span>Shopping Mall Guiding System</span>} key="6" />
       <TabPane tab={<span>TV synchronous broadcast</span>} key="7" />
-      <TabPane tab={<span>Sport Event Sync</span>} key="8" />
+      <TabPane tab={<span>Other Event Sync</span>} key="8" />
     </Tabs>
   );
 }
