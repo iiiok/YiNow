@@ -128,10 +128,10 @@ const MyAccordion = () => {
           <Divider />
           <Row gutter={16}>
             <Col span={12}>
-              <PopImage picUrl="/images/lecture_laptop.jpg" title="Onsite Seminar 1" />
+              <PopImage picUrl="/images/lecture_laptop.jpg" title="On-site Seminar 1" />
             </Col>
             <Col span={12}>
-              <PopImage picUrl="/images/lecture_laptop2.jpg" title="Onsite Seminar 2" />
+              <PopImage picUrl="/images/lecture_laptop2.jpg" title="On-site Seminar 2" />
             </Col>
           </Row>
           <Divider />

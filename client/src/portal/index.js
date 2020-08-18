@@ -10,7 +10,7 @@ import MySteps from '../components/SliderShow/MySteps';
 import YoutubeVideo from '../components/SliderShow/YoutubeVideo.js';
 
 import { socket } from '../service/socket';
-import queryString from 'query-string';
+// import queryString from 'query-string';
 import IXLContent from '../pages/IXLContent';
 import RightList_next from '../pages/RightList_next';
 import RightList_arch from '../pages/RightList_arch';

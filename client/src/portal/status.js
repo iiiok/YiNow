@@ -13,17 +13,24 @@ const scrollUpdate = debounce(sentScrollUpdate, 1);
 
 function MyStatus({ asHost, userName, onSwitch }) {
   const [ isOnAir, setIsOnAir ] = useState(true);
-  const [ alreadySayHi, setAlreadySayHi ] = useState(false);
   const [ userCount, setUserCount ] = useState(1);
   const [ asScroller, setAsScroller ] = useState(false);
 
   const key = 'sayHiMsg';
   const triggerNote = (user, text) => {
     console.log('triggerNote ');
-    notification.open({
-      key,
-      message: 'Message from (' + user + ')',
-      description: text
+    let duration = 12;
+    if (text==="I like this idea!") {
+      text = "I ◕‿◕ this idea!"
+      duration=2;
+    } else {
+      text = '°☆ ' + text+' ☆°';
+    }
+    notification.info({
+      // key,
+      message: '(' + user + ') says: ',
+      description: text,
+      duration:duration
     });
   };
 
@@ -105,11 +112,7 @@ function MyStatus({ asHost, userName, onSwitch }) {
       // triggerNote('New joiner');
     });
   }, []);
-  // const justSayHi = () => {
-  // 	console.log('sendNotice', userName);
-  // 	setAlreadySayHi(true);
-  // 	socket.emit('sendNotice', { userName: userName, message: 'Just say hi.' }, () => {});
-  // };
+
   return (
     <div>
       <Switch

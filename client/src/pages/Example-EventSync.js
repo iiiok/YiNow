@@ -22,13 +22,17 @@ const list1 = [
 const list2 = [
   {
     id: 1,
-    value: '1. A synchronized schedule of the TV channel.'
+    value: '1. Start with a synchronized schedule of the TV channel.'
   },
   { id: 2, value: '2. The WebApp keep broadcasting related information synchronized with what’s showing on the TV.' },
-  { id: 3, value: '3. Read detailed report of a certain news, Learn more about the character, ect.' },
+  { id: 3, value: '3. You can read [detailed report] of a certain news, [Learn more] about this character, ect.' },
   {
     id: 4,
-    value: '4. Whenever there is an advertisements, the audiences can [learn more] about it or link to place an order. '
+    value: '4. During the advertise moment, the audiences can [learn more] about the product or just [Click] to order. '
+  },
+  {
+    id: 5,
+    value: '5. (What is see is what you get.)'
   }
 ];
 const { TabPane } = Tabs;
@@ -138,10 +142,10 @@ function Slider({ slideIndex }) {
       </div>
       <div>
         <Divider>
-          <h3>Use your phone as the Car Stereo's Control Panel</h3>
+          <h3>Use your phone as the Control Panel of Car's Stereo </h3>
         </Divider>
         <p>
-          <img src="/images/smartphone-to-stereo.jpg" alt="(Again, Just Web)" />
+          <img src="/images/smartphone-to-stereo.png" alt="(Again, Just Web)" />
         </p>
       </div>
       <div>
@@ -159,7 +163,7 @@ function Slider({ slideIndex }) {
           <Col span={12}>
             <PopImage
               picUrl="/images/shoppingmall_01.gif"
-              title="The best user input interface is also on your phone"
+              title="The best user input interface is also on your phone(Especially, the Chinese Char)"
             />
           </Col>
           <Col span={12}>
@@ -174,7 +178,7 @@ function Slider({ slideIndex }) {
         </Divider>
         <PopImage
           picUrl="/images/shoppingmall.jpg"
-          title="It could support lots of people to participate (security issues? Every participant just the proxy of this app)"
+          title="It could support lots of people to participate (Security issues? Every participant just the proxy of this app)"
         />
       </div>
       <div>
@@ -208,16 +212,16 @@ function Slider({ slideIndex }) {
             <PopImage picUrl="/images/movie-intract.jpg" title="Intractive Movies" />
           </Col>
           <Col span={12}>
-            <PopImage picUrl="/images/football-stadium.jpg" title="Sport event" />
+            <PopImage picUrl="/images/ThemeParty.jpg" title="Theme Party" />
           </Col>
         </Row>
         <Divider />
         <Row gutter={16}>
           <Col span={12}>
-            <PopImage picUrl="/images/Concert.jpg" title="Festivals, Concerts and Live Events" />
+            <PopImage picUrl="/images/Concert.jpg" title="Festivals, Concerts and Live Events (A system to support 10,000 people? Web is the anwser)" />
           </Col>
           <Col span={12}>
-            <PopImage picUrl="/images/ThemeParty.jpg" title="Theme Party" />
+          <PopImage picUrl="/images/football-stadium.jpg" title="Sport event" />
           </Col>
         </Row>
       </div>

@@ -10,7 +10,7 @@ import {
   CheckOutlined,
   SplitCellsOutlined,
   RadarChartOutlined,
-  ToolOutlined,
+  ToolOutlined,SmileTwoTone, HeartTwoTone, CheckCircleTwoTone,
   SafetyOutlined,
   EnvironmentOutlined,
   PictureOutlined,
@@ -43,7 +43,7 @@ const { SubMenu } = Menu;
 const { Sider } = Layout;
 const justSayHi = (userName) => {
   console.log('sendNotice', userName);
-  socket.emit('sendNotice', { userName: userName, message: 'Just say hi.' }, () => {});
+  socket.emit('sendNotice', { userName: userName, message: 'I like this idea!' }, () => {});
 };
 
 function Links({ onMenuChange, selectedKeys, userName, swithcMenu, isMenuOn, asHost }) {
@@ -162,8 +162,8 @@ function Links({ onMenuChange, selectedKeys, userName, swithcMenu, isMenuOn, asH
       </Menu>
       <Divider />
       <Card size="small" title="Playground">
-        <Tag icon={<SmileOutlined />} color="#2db7f5" onClick={() => justSayHi(userName)}>
-          Say Hi
+        <Tag icon={<HeartTwoTone twoToneColor="#eb2f96" />} color="#f50" onClick={() => justSayHi(userName)}>
+          I like this idea!
         </Tag>
         <Tag icon={<FullscreenOutlined />} color="#55acee" onClick={changeBackground}>
           Change Background

@@ -96,7 +96,11 @@ td {
 }
 .ant-tag {
   cursor: pointer;
-  margin-top: 6px;
+  margin-top: 8px;
+  font-size: 14px;padding: 2px 7px;
+}
+.anticon {
+  vertical-align: 0;
 }
 blockquote {
   border: 1px solid rgba(0, 0, 0, 0.2);
@@ -180,7 +184,7 @@ blockquote.isHighlighted::before {
   background-image: url(/images/car-long-road-field-sky-clouds.jpg);
 }
 #withBlackGround.BGImage5 {
-  background-image: url(/ppt/bg5.png);
+  background-image: url(/ppt/bg5.jpg);
 }
 #withBlackGround.BGImage6 {
   background-image: url(/ppt/bg6.jpg);
@@ -200,18 +204,7 @@ blockquote.isHighlighted::before {
 #withBlackGround.BGImage11 {
   background-image: url(/ppt/bg11.jpg);
 }
-#withBlackGround.BGImage12 {
-  background-image: url(/ppt/bg12.jpg);
-}
-#withBlackGround.BGImage13 {
-  background-image: url(/ppt/bg13.jpg);
-}
-#withBlackGround.BGImage14 {
-  background-image: url(/ppt/bg14.jpg);
-}
-#withBlackGround.BGImage15 {
-  background-image: url(/ppt/bg15.jpg);
-}
+
 
 .popup_image {
   max-width: 1700px;
@@ -291,4 +284,17 @@ blockquote.isHighlighted::before {
 }
 .ant-card {
   width: 100%;
+}
+.sent_mess_box {
+  padding-bottom: 50px;
+}
+.ant-notification-notice-message {
+  font-size: 14px;
+}
+.ant-notification-notice-description {
+  font-size: 16px;
+  background-color: #f6ffed;
+    border: 1px solid #b7eb8f;
+    padding: 8px 15px;border-radius: 4px;margin-left:0 !important;
+    margin-top: 8px;;
 }

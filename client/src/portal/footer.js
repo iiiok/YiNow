@@ -30,7 +30,7 @@ export default observer(({ userName }) => {
     }
   };
   return (
-    <Layout>
+    <Layout className="sent_mess_box">
       <Search
         placeholder="Sent a notification message to @All"
         enterButton="Sent"

@@ -64,10 +64,10 @@ const WhyWebSocket = () => {
           <HighLight scriptId={4} />
         </Panel>
         <Panel header="Present the content in the best Clarity" key="4">
-          <h2> One big screen for all? </h2>
+          <h2> An even bigger screen for all? </h2>
           <img src="/images/big_screen.jpg" title="Even bigger screen?" />
 
-          <h2>Or, lots of small screens on hand!</h2>
+          <h2>Or, lots of small screens on hand! And my answer is: the best screen is on your hand.</h2>
           <img src="/images/screen-time-iOS-12-02.jpg" title="Small but with best clarity" />
         </Panel>
       </Collapse>

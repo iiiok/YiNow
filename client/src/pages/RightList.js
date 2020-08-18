@@ -55,6 +55,12 @@ io.on('connect', (socket) => {
 /**Run the NodeJs server */
 server.listen(process.env.PORT || 5000, () => console.log('Server has started.'));
 `;
+
+const BECodeString2 = `setInterval(() => {
+  socket.broadcast.emit('updateSliderIndexEmit', { sliderIndex: sliderIndex });
+}, 4000);
+`
+
 const WSCodeString = `0                   1                   2                   3
 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
 +-+-+-+-+-------+-+-------------+-------------------------------+
@@ -75,7 +81,7 @@ const WSCodeString = `0                   1                   2                 
 const list6 = [
   {
     id: 1,
-    value: 'Websockets have four states: connecting, open, closing and closed.'
+    value: 'Websockets have four states: [connecting, open, closing and closed].'
   },
   { id: 2, value: 'All communication between clients and servers takes place though the use of the websocket frame.' },
   {
@@ -152,6 +158,12 @@ export default observer(({ userName }) => {
             </Divider>
             <SyntaxHighlighter language="javascript" style={a11yDark} showLineNumbers>
               {BECodeString}
+            </SyntaxHighlighter>
+            <Divider orientation="left">
+              <h3>Make sure every one is at the same page</h3>
+            </Divider>
+            <SyntaxHighlighter language="javascript" style={a11yDark} showLineNumbers>
+              {BECodeString2}
             </SyntaxHighlighter>
           </TabPane>
           <TabPane tab="WebSocket in a nutshell" key="7">
