@@ -33,7 +33,8 @@ const script = {
   32: 'Hard to check involvement (What are the students doing)',
   33: 'Video, Audio, Image, Web Link, Chart, etc. Reuseable content(i.e. The code shared here can be easily copied.)',
   34: 'Voting, Bidding, Games,...',
-  35: "It'll be a Before, During and After the 'Meeting' Seminar. "
+  35: "It'll be a Before, During and After the 'Meeting' Seminar. ",
+  99: ''
 };
 
 export default script;

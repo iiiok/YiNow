@@ -14,26 +14,32 @@ import { a11yDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 const { TabPane } = Tabs;
 const FECodeString = `import React, { useState, useEffect } from 'react';
 import { socket } from '../service/socket';
+/** Import the WebSocket library**/
+
 export default observer(() => {
   const [ tabIndex, setTabIndex ] = useState('1');
+
   const selectTab = (index) => {
     socket.emit('syncShowingTab', index);
+    /** Send this event to the Node server**/
     setTabIndex(index);
   };
 
   useEffect(() => {
     socket.on('syncShowingTabEmit', (key) => {
+      /** Receive this event from0 the Node server**/
       setTabIndex(key);
     });
   }, []);
+
   return (
-
     <Tabs onChange={(TabIndex) => selectTab(TabIndex)} activeKey={tabIndex}>
-    </Tbas>
 
+    /** Inside of the Component */
+
+    </Tbas>
     )
   });
-
 `;
 const BECodeString = `const http = require('http');
 const express = require('express');
@@ -43,13 +49,13 @@ const server = http.createServer(app);
 
 const socketio = require('socket.io');
 const io = socketio(server);
+/** Init the WebSocket  **/
 
 io.on('connect', (socket) => {
-
   socket.on('syncShowingTab', (key) => {
+    /** Receive this event for one client, so broadcast to every one else==> **/
     socket.broadcast.emit('syncShowingTabEmit', key);
   });
-
 });
 
 /**Run the NodeJs server */
@@ -59,7 +65,7 @@ server.listen(process.env.PORT || 5000, () => console.log('Server has started.')
 const BECodeString2 = `setInterval(() => {
   socket.broadcast.emit('updateSliderIndexEmit', { sliderIndex: sliderIndex });
 }, 4000);
-`
+`;
 
 const WSCodeString = `0                   1                   2                   3
 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
@@ -136,37 +142,29 @@ export default observer(({ userName }) => {
               {WSCodeString}
             </SyntaxHighlighter>
           </TabPane>
-          <TabPane tab="Front-End Code - ReactJs" key="4">
+          <TabPane tab="Front-End : ReactJs" key="4">
             <Divider orientation="left">
-              <h3>Front-End Code - ReactJs</h3>
+              <h3>Front-End Code - ReactJs + Hooks</h3>
             </Divider>
             <SyntaxHighlighter language="javascript" style={a11yDark} showLineNumbers>
               {FECodeString}
             </SyntaxHighlighter>
           </TabPane>
-          <TabPane tab="[FE] - ReactJs + MobX + AntD" key="5">
-            <Divider orientation="left">
-              <h3>[FE] - ReactJs + MobX + AntD</h3>
-            </Divider>
-            <SyntaxHighlighter language="javascript" style={a11yDark} showLineNumbers>
-              {FECodeString}
-            </SyntaxHighlighter>
-          </TabPane>
-          <TabPane tab="Back-End Code" key="6">
+          <TabPane tab="Back-End Code" key="5">
             <Divider orientation="left">
               <h3>Back-End Code -- Node.js</h3>
             </Divider>
             <SyntaxHighlighter language="javascript" style={a11yDark} showLineNumbers>
               {BECodeString}
             </SyntaxHighlighter>
-            <Divider orientation="left">
+            {/* <Divider orientation="left">
               <h3>Make sure every one is at the same page</h3>
             </Divider>
             <SyntaxHighlighter language="javascript" style={a11yDark} showLineNumbers>
               {BECodeString2}
-            </SyntaxHighlighter>
+            </SyntaxHighlighter> */}
           </TabPane>
-          <TabPane tab="WebSocket in a nutshell" key="7">
+          <TabPane tab="WebSocket in a nutshell" key="6">
             <Divider orientation="left">
               <h3>WebSocket in a nutshell</h3>
             </Divider>
@@ -186,10 +184,6 @@ export default observer(({ userName }) => {
               )}
             />
           </TabPane>
-          {/* <TabPane tab="The Conclusion" key="9">
-            <h2>That is all, Thanks</h2>
-            <img src="/images/1600w-wl2DiGq9Lj4.jpg" width="100%" />
-          </TabPane> */}
         </Tabs>
         <Divider />
 

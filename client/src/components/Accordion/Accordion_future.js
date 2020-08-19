@@ -47,17 +47,14 @@ const PPTFuture = () => {
           </ul>
         </Panel>
         <Panel header="Interaction & Participation" key="5">
-          <HighLight scriptId={3} header={'Participation'} />
-          <HighLight scriptId={34} header={'Interaction'} />
-          <Divider />
-          <HighLight scriptId={2} header={'Interaction'} />
           {/* <HighLight scriptId={35} header={'Involvement'} /> */}
           <h2>Support all kinds of web-base interactions</h2>
-          <ul>
-            <li>Pop-up message, Answer Sheet, Voting, Chat, Game,Message Board etc. </li>
-            <li>Shopping (A direction link to shop while the product is showing on TV)</li>
-          </ul>
-          <Divider />
+          <HighLight scriptId={99} header={'Voting, Bidding, Games, Pop-up message'} />
+          <br />
+          <HighLight scriptId={99} header={'Answer Sheet, Chat Room, Message Board'} />
+          <br />
+          <HighLight scriptId={99} header={'Give instant feedback, Like, Change background, etc.'} />
+          {/* <HighLight scriptId={2} header={'Interaction'} /> */}
           <Card>
             <SayHi />
           </Card>

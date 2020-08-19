@@ -18,6 +18,10 @@ app.use(cors());
 app.use(router);
 
 io.on('connect', (socket) => {
+  const keepItUp = () => {
+    socket.broadcast.emit('updateSliderIndexEmit', { sliderIndex: sliderIndex });
+    socket.broadcast.emit('sayHiLoginEmit', userList.size);
+  };
   socket.removeAllListeners(); //no use
   socket.on('join', ({ name, room }, callback) => {
     const { error, user } = addUser({ id: socket.id, name, room });
@@ -43,7 +47,7 @@ io.on('connect', (socket) => {
   socket.on('sendNotice', (message, callback) => {
     // console.log(socket.id);
     console.log(message.userName, 'send message', message.message);
-    socket.broadcast.emit('sendNoticeEmit', { user: message.userName, text: message.message });
+    io.emit('sendNoticeEmit', { user: message.userName, text: message.message });
 
     callback();
   });
@@ -58,13 +62,16 @@ io.on('connect', (socket) => {
     // const user = getUser(socket.id);
     // console.log('object', key, new Date().getTime());
     // io.to('react').emit('message', { user: 'user.name', text: 'message' });
-    socket.broadcast.emit('updateSliderIndexEmit', { sliderIndex: key });
-    sliderIndex = key;
+    if (sliderIndex !== key) {
+      socket.broadcast.emit('updateSliderIndexEmit', { sliderIndex: key });
+      sliderIndex = key;
+    }
     callback();
   });
 
   socket.on('updateAccordionIndex', (key) => {
     console.log('accordionIndex', key);
+    keepItUp();
     // io.to('react').emit('message', { user: 'user.name', text: 'message' });
     io.emit('updateAccordionIndexEmit', { accordionIndex: key });
   });
@@ -82,6 +89,7 @@ io.on('connect', (socket) => {
     // callback();
   });
   socket.on('syncSlider', (obj) => {
+    keepItUp();
     // io.to('react').emit('message', { user: 'user.name', text: 'message' });
     socket.broadcast.emit('syncSliderEmit-' + obj.sliderId, { index: obj.index });
     console.log('syncSlider', 'syncSliderEmit-' + obj.sliderId, obj.index);
@@ -94,6 +102,7 @@ io.on('connect', (socket) => {
     socket.broadcast.emit('sayHiEmit', {});
   });
   socket.on('setShowModal', (value) => {
+    keepItUp();
     console.log('setShowModal to', value);
     socket.broadcast.emit('setShowModalEmit', value);
   });
@@ -108,10 +117,12 @@ io.on('connect', (socket) => {
   });
   socket.on('swithcMenu', (type) => {
     console.log('swithcMenu', type);
+    keepItUp();
     socket.broadcast.emit('swithcMenuEmit', type);
   });
   socket.on('setCurrentStep', (key) => {
     console.log('setCurrentStep');
+    keepItUp();
     // io.to('react').emit('message', { user: 'user.name', text: 'message' });
     socket.broadcast.emit('setCurrentStepEmit', key);
   });
@@ -138,12 +149,14 @@ io.on('connect', (socket) => {
     socket.broadcast.emit('syncVideoVolumeEmit', val);
   });
   socket.on('sayHiLogin', (val) => {
+    keepItUp();
     userList.add(val);
     console.log('userList', userList);
     socket.broadcast.emit('sayHiLoginEmit', userList.size);
   });
   socket.on('syncShowingTab', (key) => {
     console.log('syncShowingTab:', key);
+    keepItUp();
     // io.to('react').emit('message', { user: 'user.name', text: 'message' });
     socket.broadcast.emit('syncShowingTabEmit', key);
   });
@@ -179,11 +192,28 @@ io.on('connect', (socket) => {
       io.to(user.room).emit('roomData', { room: user.room, users: getUsersInRoom(user.room) });
     }
   });
-  setInterval(() => {
-    socket.broadcast.emit('updateSliderIndexEmit', { sliderIndex: sliderIndex });
-    socket.broadcast.emit('sayHiLoginEmit', userList.size);
-    // console.log('Broadcast SliderId', sliderIndex);
-  }, 4000);
+
+  // setInterval(() => {
+  //   // socket.broadcast.emit('updateSliderIndexEmit', { sliderIndex: sliderIndex });
+  //   keepItUp();
+  //   console.log('Broadcast SliderId', sliderIndex);
+  // }, 5000);
+
+  // setInterval(() => {
+  //   socket.broadcast.emit('sayHiLoginEmit', userList.size);
+  // }, 12000);
+
+  // let executeTimes = 0;
+  // const intervalTime = 4000;
+  // function timeOutFun() {
+  //   executeTimes++;
+  //   socket.broadcast.emit('updateSliderIndexEmit', { sliderIndex: sliderIndex });
+  //   console.log('doTimeOutFun——' + executeTimes);
+  //   if (executeTimes < 5) {
+  //     setTimeout(arguments.callee, intervalTime);
+  //   }
+  // }
+  // timeOutFun();
 
   // let counter = 0;
   // setInterval(() => {

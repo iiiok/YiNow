@@ -78,9 +78,9 @@ function YiTab() {
   }, []);
   return (
     <div>
-      <Modal title="W.2 Interpret food webs I" visible={showModal} onOk={handleOk} onCancel={handleOk}>
+      <Modal title="W.2 Interpret food webs I" visible={showModal} onOk={handleOk} onCancel={handleOk} width="50%">
         <p>
-          <img src="/images/eClass.png" heigh="393" width="491" alt="Loading" />
+          <img src="/images/eClass.png" width="95%" alt="Loading" />
         </p>
       </Modal>
       <Tabs onTabClick={onTabClick}>

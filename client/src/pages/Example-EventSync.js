@@ -204,7 +204,9 @@ function Slider({ slideIndex }) {
       </div>
       <div>
         <Divider>
-          <h3>Other Event synchronous broadcast & Intraction (Movies,Sport Game, Concerts, Theme Party,)</h3>
+          <h3>
+            Other Event synchronous broadcast & Intraction examples (Movies,Sport Game, Concerts, Theme Party, ect.)
+          </h3>
         </Divider>
 
         <Row gutter={16}>
@@ -218,10 +220,13 @@ function Slider({ slideIndex }) {
         <Divider />
         <Row gutter={16}>
           <Col span={12}>
-            <PopImage picUrl="/images/Concert.jpg" title="Festivals, Concerts and Live Events (A system to support 10,000 people? Web is the anwser)" />
+            <PopImage
+              picUrl="/images/Concert.jpg"
+              title="Festivals, Concerts and Live Events (A system to support 10,000 people? Web is the anwser)"
+            />
           </Col>
           <Col span={12}>
-          <PopImage picUrl="/images/football-stadium.jpg" title="Sport event" />
+            <PopImage picUrl="/images/football-stadium.jpg" title="Sport event" />
           </Col>
         </Row>
       </div>
