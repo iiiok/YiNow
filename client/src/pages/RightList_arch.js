@@ -24,8 +24,7 @@ useEffect(() => {
   });
 }, []);`;
 
-const codeString3 = `
-import React, { useState, useEffect } from 'react';
+const codeString3 = `import React, { useState, useEffect } from 'react';
 import { Steps } from 'antd';
 import { Divider, Card } from 'antd';
 import { socket } from '../../service/socket';

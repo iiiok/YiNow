@@ -9,6 +9,7 @@
   flex-flow: row nowrap;
   align-items: center;
   justify-content: space-between;
+  filter: grayscale(80%);
 }
 .social:before,
 .social:after {

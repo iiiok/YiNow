@@ -10,6 +10,7 @@ export default ({ url, title }) => {
   useEffect(() => {
     socket.on('openALinkEmit', (url) => {
       setIsOpen(true);
+      console.log('Got a openALink Emit');
       window.openedWindow = window.open(url, 'wwnow');
     });
     socket.on('closeALinkEmit', () => {
