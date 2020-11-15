@@ -1,0 +1,13 @@
+.pending_block {
+    /* border: 1px solid chocolate; */
+}
+.pending_block .ant-switch {
+    background-color: #1890ff;
+}
+.pending_block .ant-switch.ant-switch-checked {
+    background-color: chocolate;
+}
+.block_list {
+    display: flex;
+    justify-content: space-around;
+}
